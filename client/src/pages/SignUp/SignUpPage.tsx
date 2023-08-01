@@ -1,7 +1,7 @@
-import NoHeaderFooterLayout from 'components/Layout/NoHeaderFooterLayout';
-import SignUpForm from 'components/SignUp/SignUpForm';
+import NoHeaderFooterLayout from 'components/Layouts/NoHeaderFooterLayout';
+import SignUpForm from 'components/SignUps/SignUpForm';
 
-function SignUp() {
+function SignUpPage() {
   return (
     <NoHeaderFooterLayout>
       <SignUpForm />
@@ -9,4 +9,4 @@ function SignUp() {
   );
 }
 
-export default SignUp;
+export default SignUpPage;
