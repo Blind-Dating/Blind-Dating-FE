@@ -1,17 +1,16 @@
 import { useForm, SubmitHandler } from 'react-hook-form';
 
-type FormValues = {
-  [name: string]: string | number;
-};
-
-export default function useHookForm() {
+export default function useHookForm<T extends object>() {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormValues>();
+    watch,
+  } = useForm<T>();
 
-  const onSubmit: SubmitHandler<FormValues> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<T> = (data) => {
+    console.log(data);
+  };
 
-  return { register, handleSubmit, errors, onSubmit };
+  return { register, handleSubmit, errors, onSubmit, watch };
 }
