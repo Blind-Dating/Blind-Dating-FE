@@ -1,5 +1,5 @@
-import NoHeaderFooterLayout from 'components/Layouts/NoHeaderFooterLayout';
-import SignUpForm from 'components/SignUps/SignUpForm';
+import NoHeaderFooterLayout from 'components/layout/NoHeaderFooterLayout';
+import SignUpForm from 'components/sign-up/SignUpForm';
 
 function SignUpPage() {
   return (
