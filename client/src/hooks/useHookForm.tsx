@@ -1,6 +1,6 @@
-import { useForm, SubmitHandler } from 'react-hook-form';
+import { useForm, SubmitHandler, FieldValues } from 'react-hook-form';
 
-export default function useHookForm<T extends object>() {
+export default function useHookForm<T extends FieldValues>() {
   const {
     register,
     handleSubmit,
