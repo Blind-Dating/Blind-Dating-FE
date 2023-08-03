@@ -1,6 +1,7 @@
+import InputField from 'components/ui/InputField';
 import useHookForm from 'hooks/useHookForm';
 
-type SignUpFormValues = {
+export type SignUpFormValues = {
   userId: string;
   userPassword: string | number;
   passwordCheck: string | number;
@@ -15,12 +16,14 @@ export default function SignUpForm() {
   return (
     <div className="flex flex-col items-center justify-center">
       <form className="flex flex-col max-w-sm" onSubmit={handleSubmit(onSubmit)}>
-        <label htmlFor="userId">ID</label>
-        <input
+        <InputField
           className="input-container"
           type="text"
+          label="ID"
           id="userId"
           placeholder="아이디를 입력해주세요"
+          error={errors.userId?.message}
+          register={register}
           {...register('userId', {
             required: 'This field is required',
             maxLength: { value: 20, message: '20글자 이하 입력해주세요' },
@@ -34,14 +37,15 @@ export default function SignUpForm() {
             },
           })}
         />
-        {errors.userId && <p>{errors.userId.message}</p>}
 
-        <label htmlFor="userPassword">Password</label>
-        <input
+        <InputField
           className="input-container"
           type="password"
           id="userPassword"
+          label="Password"
           placeholder="*****"
+          error={errors.userPassword?.message}
+          register={register}
           {...register('userPassword', {
             required: 'This field is required',
             minLength: { value: 5, message: '5글자 이상 입력해주세요' },
@@ -52,27 +56,29 @@ export default function SignUpForm() {
             },
           })}
         />
-        {errors.userPassword && <p>{errors.userPassword.message}</p>}
 
-        <label htmlFor="passwordCheck">Repeat password</label>
-        <input
+        <InputField
           className="input-container"
-          id="passwordCheck"
           type="password"
+          id="passwordCheck"
+          label="Password Check"
+          register={register}
+          error={errors.passwordCheck?.message}
           placeholder="*****"
           {...register('passwordCheck', {
             validate: (passwordCheck) =>
               passwordCheck === userPassword || '비밀번호가 일치하지 않습니다',
           })}
         />
-        {errors.passwordCheck && <p>{errors.passwordCheck.message}</p>}
 
-        <label htmlFor="nickname">Nickname</label>
-        <input
+        <InputField
           className="input-container"
           type="text"
           id="nickname"
+          label="Nickname"
+          register={register}
           placeholder="nickname"
+          error={errors.nickname?.message}
           {...register('nickname', {
             required: 'This field is required',
             maxLength: { value: 20, message: '20글자 이하 입력해주세요' },
@@ -86,7 +92,6 @@ export default function SignUpForm() {
             },
           })}
         />
-        {errors.nickname && <p>{errors.nickname.message}</p>}
 
         <label htmlFor="region">Region</label>
         <input
