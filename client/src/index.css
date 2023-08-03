@@ -4,6 +4,14 @@
 
 @layer components {
   .input-container {
-    @apply border-solid border-2 border-red text-red;
+    @apply border-solid border w-72 h-14 py-4 px-8 rounded-2xl  border-whiteSmoke text-redAmaranth text-[16px];
+  }
+
+  .btn-white {
+    @apply border-solid border w-72 h-14 py-4 px-8 rounded-2xl  border-whiteSmoke text-redAmaranth text-md font-extrabold leading-4;
+  }
+
+  .label {
+    @apply text-sm text-labelColor;
   }
 }
