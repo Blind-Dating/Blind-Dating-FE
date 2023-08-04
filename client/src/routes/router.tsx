@@ -1,6 +1,6 @@
 import App from 'App';
 import Home from 'pages/HomePage';
-import SignUpPage from 'pages/SignUp/SignUpPage';
+import SignUpPage from 'pages/SignUpPage';
 import { createBrowserRouter } from 'react-router-dom';
 
 const router = createBrowserRouter([
