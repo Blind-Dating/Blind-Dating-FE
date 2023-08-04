@@ -1,17 +1,51 @@
+import React from 'react';
 import InputField from 'components/ui/InputField';
 import useHookForm from 'hooks/useHookForm';
+import usePostCheckName from 'hooks/usePostCheckName';
+import usePostSignUpData from 'hooks/usePostSignUpData';
+import { SubmitHandler } from 'react-hook-form';
+import { UserInfo } from 'pages/SignUpPage';
+
+type ProfileFormProps = {
+  onNext: () => void;
+  setUserInfo: React.Dispatch<React.SetStateAction<UserInfo | null>>;
+};
 
 export type SignUpFormValues = {
   userId: string;
   userPassword: string | number;
-  passwordCheck: string | number;
+  passwordCheck?: string | number;
   nickname: string;
   region: string;
 };
-
-export default function SignUpForm() {
-  const { register, handleSubmit, errors, onSubmit, watch } = useHookForm<SignUpFormValues>();
+export default function ProfileForm({ onNext, setUserInfo }: ProfileFormProps) {
+  const { register, handleSubmit, errors, watch } = useHookForm<SignUpFormValues>();
   const userPassword = watch('userPassword');
+  const userId = watch('userId');
+
+  const { postSignUpDataFn } = usePostSignUpData();
+  const { postCheckNameFn } = usePostCheckName();
+
+  const onSubmit: SubmitHandler<SignUpFormValues> = (userData) => {
+    const dataToSend: SignUpFormValues = {
+      ...userData,
+      score: 0,
+      mbti: 'string',
+      gender: 'string',
+      deleted: true,
+    };
+    delete dataToSend.passwordCheck;
+
+    postSignUpDataFn(dataToSend);
+    setUserInfo(dataToSend);
+    onNext();
+  };
+
+  const onClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+
+    postCheckNameFn(userId);
+  };
 
   return (
     <div className="flex flex-col items-center justify-center">
@@ -37,6 +71,7 @@ export default function SignUpForm() {
             },
           })}
         />
+        <button onClick={onClick}>아이디 체크</button>
 
         <InputField
           className="input-container"
@@ -96,7 +131,7 @@ export default function SignUpForm() {
         <label htmlFor="region">Region</label>
         <input
           className="input-container"
-          type="checkbox"
+          type="text"
           id="region"
           {...register('region', {
             required: 'This field is required',
@@ -106,7 +141,7 @@ export default function SignUpForm() {
         {errors.nickname && <p>{errors.nickname.message}</p>}
 
         <button className="input-container" type="submit">
-          button
+          제출하기
         </button>
       </form>
     </div>
