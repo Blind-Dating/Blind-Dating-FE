@@ -14,10 +14,15 @@ export default {
     fontFamily: {
       sans: ['sans-serif'],
       serif: ['serif'],
+      Lobster: ['Lobster', 'sans-serif'],
+      NotoSans: ['Noto Sans', 'sans-serif'],
+      Lora: ['Lora Variable', 'sans-serif'],
     },
     fontSize: {
-      sm: ['12px', '18px'],
-      base: ['16px', '24px'],
+      xs: ['0.75rem', '1rem'] /* 12px */,
+      sm: ['0.875rem', '1.25rem'] /* 14px */,
+      base: ['1rem', '1.5rem'] /* 16px */,
+      '8xl': ['6rem', '1'],
     },
     extend: {
       spacing: {
