@@ -1,23 +1,46 @@
 import { useMutation } from '@tanstack/react-query';
 import { LoginFormValues } from 'components/login/LoginForm';
 import axiosClient from 'apis/axiosClient';
+import { useNavigate } from 'react-router-dom';
 
-const postLoginFetcher = async (loginInfo: LoginFormValues) => {
-  const { data } = await axiosClient.post('api/login', loginInfo);
+type Token = {
+  accessToken: string;
+  refreshToken: string;
+};
+
+type LoginResponse = {
+  data: {
+    token: Token;
+    nickname: string;
+  };
+};
+
+const postLoginFetcher = async (loginInfo: LoginFormValues): Promise<LoginResponse> => {
+  const { data } = await axiosClient.post<LoginResponse>('api/login', loginInfo);
   return data;
 };
 
 export const usePostLogin = () => {
-  const { mutate, isSuccess, isLoading, isError } = useMutation(postLoginFetcher);
+  const navigate = useNavigate();
+
+  const { mutate, isLoading } = useMutation<LoginResponse, Error, LoginFormValues>(
+    postLoginFetcher,
+    {
+      onSuccess: () => {
+        navigate('/discover');
+      },
+      onError: () => {
+        alert('Login Error');
+      },
+    }
+  );
 
   const postLoginFn = (loginInfo: LoginFormValues) => {
     mutate(loginInfo);
   };
 
   return {
-    isSuccess,
     isLoading,
-    isError,
     postLoginFn,
   };
 };

@@ -3,12 +3,12 @@ import React, { FormEvent, useState } from 'react';
 
 export type LoginFormValues = {
   userId: string;
-  userPassword: string | number;
+  userPassword: string;
 };
 
 export const LoginForm = () => {
   const [loginInfo, setLoginInfo] = useState<LoginFormValues>({ userId: '', userPassword: '' });
-  const { postLoginFn } = usePostLogin();
+  const { postLoginFn, isLoading } = usePostLogin();
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -25,6 +25,8 @@ export const LoginForm = () => {
           type="text"
           placeholder="Id"
           value={loginInfo.userId}
+          autoFocus
+          required
           onChange={(event) =>
             setLoginInfo((prev) => ({
               ...prev,
@@ -37,6 +39,7 @@ export const LoginForm = () => {
           type="password"
           placeholder="Password"
           value={loginInfo.userPassword}
+          required
           onChange={(event) =>
             setLoginInfo((prev) => ({
               ...prev,
@@ -47,8 +50,9 @@ export const LoginForm = () => {
         <button
           type="submit"
           className=" hover:shadow-xl transition duration-300 px-8 py-4 mt-3 text-base font-bold text-center rounded-2xl w-[295px] h-14 font-NotoSans text-whiteSmoke bg-redAmaranth"
+          disabled={isLoading || !loginInfo.userId || !loginInfo.userPassword}
         >
-          Login
+          {isLoading ? 'Logging in...' : 'Login'}
         </button>
       </form>
     </>

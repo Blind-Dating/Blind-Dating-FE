@@ -1,6 +1,7 @@
 import App from 'App';
 import LoginPage from 'pages/LoginPage';
 import SignUpPage from 'pages/SignUpPage';
+import DateDiscoverPage from 'pages/DateDiscoverPage';
 import { createBrowserRouter } from 'react-router-dom';
 
 const router = createBrowserRouter([
@@ -10,6 +11,7 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <LoginPage /> },
       { path: '/signup', element: <SignUpPage /> },
+      { path: '/discover', element: <DateDiscoverPage /> },
     ],
   },
 ]);
