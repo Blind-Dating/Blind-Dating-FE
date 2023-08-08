@@ -1,5 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
-import axiosClient from 'apis/axios';
+import axiosClient from 'axios';
 import { SignUpFormValues } from 'components/sign-up/ProfileForm';
 
 const postSignUpFetcher = async (userData: SignUpFormValues) => {
@@ -7,7 +7,7 @@ const postSignUpFetcher = async (userData: SignUpFormValues) => {
   return data;
 };
 
-const usePostSignUpData = () => {
+export const usePostSignUpData = () => {
   const { mutate, isSuccess, isLoading, isError } = useMutation(postSignUpFetcher);
 
   const postSignUpDataFn = (userData: SignUpFormValues) => {
@@ -21,5 +21,3 @@ const usePostSignUpData = () => {
     postSignUpDataFn,
   };
 };
-
-export default usePostSignUpData;

@@ -1,11 +1,12 @@
 import NoHeaderFooterLayout from 'components/layout/NoHeaderFooterLayout';
-import ProfileForm from 'components/sign-up/ProfileForm';
-import ProfileDetailsForm from 'components/sign-up/ProfileDetailsForm';
+import { ProfileDetailsForm } from 'components/sign-up/ProfileDetailsForm';
+import { ProfileForm } from 'components/sign-up/ProfileForm';
 import { useState } from 'react';
 
 export type UserInfo = {
   [name: string]: string | number;
 };
+
 type Step = 'profileForm' | 'profileDetailsForm' | 'InterestForm';
 
 function SignUpPage() {

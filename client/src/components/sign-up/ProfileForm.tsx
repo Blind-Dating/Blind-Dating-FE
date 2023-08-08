@@ -1,8 +1,8 @@
 import React from 'react';
 import InputField from 'components/ui/InputField';
-import useHookForm from 'hooks/useHookForm';
-import usePostCheckName from 'hooks/usePostCheckName';
-import usePostSignUpData from 'hooks/usePostSignUpData';
+import { useHookForm } from 'hooks/useHookForm';
+import { usePostCheckName } from 'hooks/api/usePostCheckName';
+import { usePostSignUpData } from 'hooks/api/usePostSignUpData';
 import { SubmitHandler } from 'react-hook-form';
 import { UserInfo } from 'pages/SignUpPage';
 
@@ -18,7 +18,7 @@ export type SignUpFormValues = {
   nickname: string;
   region: string;
 };
-export default function ProfileForm({ onNext, setUserInfo }: ProfileFormProps) {
+export const ProfileForm = ({ onNext, setUserInfo }: ProfileFormProps) => {
   const { register, handleSubmit, errors, watch } = useHookForm<SignUpFormValues>();
   const userPassword = watch('userPassword');
   const userId = watch('userId');
@@ -146,4 +146,4 @@ export default function ProfileForm({ onNext, setUserInfo }: ProfileFormProps) {
       </form>
     </div>
   );
-}
+};
