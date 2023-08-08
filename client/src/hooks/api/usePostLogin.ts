@@ -1,6 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
-import axiosClient from 'axios';
 import { LoginFormValues } from 'components/login/LoginForm';
+import axiosClient from 'apis/axiosClient';
 
 const postLoginFetcher = async (loginInfo: LoginFormValues) => {
   const { data } = await axiosClient.post('api/login', loginInfo);

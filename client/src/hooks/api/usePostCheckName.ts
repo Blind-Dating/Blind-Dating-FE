@@ -1,5 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
-import axiosClient from 'axios';
+import axiosClient from 'apis/axiosClient';
 
 const postNameCheckFetcher = async (userName: string) => {
   const { data } = await axiosClient.post('api/signup', userName);
