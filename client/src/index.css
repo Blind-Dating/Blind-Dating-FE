@@ -8,10 +8,10 @@
   }
 
   .btn-white {
-    @apply border-solid border w-72 h-14 py-4 px-8 rounded-2xl  border-whiteSmoke text-redAmaranth text-md font-extrabold leading-4;
+    @apply px-8 py-4 font-extrabold leading-4 border border-solid w-72 h-14 rounded-2xl border-whiteSmoke text-redAmaranth text-md;
   }
 
   .label {
-    @apply text-sm text-labelColor;
+    @apply text-xs font-NotoSans text-labelColor;
   }
 }

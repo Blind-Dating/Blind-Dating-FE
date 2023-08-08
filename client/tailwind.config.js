@@ -3,10 +3,6 @@ export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     colors: {
-      red: '#E94057',
-      lightBlue: 'hsl(233, 100%, 69%)',
-      darkGrayishBlue: 'hsl(210, 10%, 33%)',
-      grayishBlue: 'hsl(201, 11%, 66%)',
       whiteSmoke: '#F3F3F3',
       redAmaranth: '#E94057',
       labelColor: 'rgba(0, 0, 0, 0.40)',
@@ -22,6 +18,7 @@ export default {
       xs: ['0.75rem', '1rem'] /* 12px */,
       sm: ['0.875rem', '1.25rem'] /* 14px */,
       base: ['1rem', '1.5rem'] /* 16px */,
+      lg: ['1.125rem', '1.75rem'] /* 18px */,
       '8xl': ['6rem', '1'],
     },
     extend: {
