@@ -1,7 +1,5 @@
 import React from 'react';
 
-function ProfileDetailsForm() {
+export const ProfileDetailsForm = () => {
   return <div>ProfileDetatilsForm</div>;
-}
-
-export default ProfileDetailsForm;
+};
