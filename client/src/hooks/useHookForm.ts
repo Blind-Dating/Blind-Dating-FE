@@ -1,6 +1,6 @@
 import { useForm, FieldValues } from 'react-hook-form';
 
-export default function useHookForm<T extends FieldValues>() {
+export const useHookForm = <T extends FieldValues>() => {
   const {
     register,
     handleSubmit,
@@ -9,4 +9,4 @@ export default function useHookForm<T extends FieldValues>() {
   } = useForm<T>();
 
   return { register, handleSubmit, errors, watch };
-}
+};

@@ -1,12 +1,12 @@
 import { useMutation } from '@tanstack/react-query';
-import axiosClient from 'apis/axios';
+import axiosClient from 'axios';
 
 const postNameCheckFetcher = async (userName: string) => {
   const { data } = await axiosClient.post('api/signup', userName);
   return data;
 };
 
-const usePostCheckName = () => {
+export const usePostCheckName = () => {
   const { mutate, isSuccess, isLoading, isError } = useMutation(postNameCheckFetcher);
 
   const postCheckNameFn = (userName: string) => {
@@ -15,5 +15,3 @@ const usePostCheckName = () => {
 
   return { isSuccess, isLoading, isError, postCheckNameFn };
 };
-
-export default usePostCheckName;
