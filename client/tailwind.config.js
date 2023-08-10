@@ -3,7 +3,9 @@ export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     colors: {
-      whiteSmoke: '#F3F3F3',
+      white: '#FFFFFF',
+      whiteSmoke: '#F3F3F3' /* */,
+      whiteLilac: '#E8E6EA' /* input border */,
       redAmaranth: '#E94057',
       labelColor: 'rgba(0, 0, 0, 0.40)',
     },
@@ -15,10 +17,12 @@ export default {
       Lora: ['Lora Variable', 'sans-serif'],
     },
     fontSize: {
-      xs: ['0.75rem', '1rem'] /* 12px */,
+      xs: ['0.625rem', '1rem'] /* 10px */,
+      s: ['0.75rem', '1rem'] /* 12px */,
       sm: ['0.875rem', '1.25rem'] /* 14px */,
       base: ['1rem', '1.5rem'] /* 16px */,
       lg: ['1.125rem', '1.75rem'] /* 18px */,
+      '2xl': ['2.125rem', '3.125rem'] /* 32px*/,
       '8xl': ['6rem', '1'],
     },
     extend: {
