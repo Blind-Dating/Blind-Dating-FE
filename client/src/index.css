@@ -3,15 +3,27 @@
 @tailwind utilities;
 
 @layer components {
-  .input-container {
-    @apply border-solid border w-72 h-14 py-4 px-8 rounded-2xl  border-whiteSmoke text-redAmaranth text-[16px];
+  .input-md {
+    @apply w-56 py-4 pl-4 text-sm border border-solid h-14 rounded-2xl border-whiteLilac text-redAmaranth font-NotoSans hover:border-redAmaranth focus:border-redAmaranth focus:outline-none;
+  }
+
+  .input-lg {
+    @apply py-4 pl-4 text-sm border border-solid w-72 h-14 rounded-2xl border-whiteLilac text-redAmaranth font-NotoSans hover:border-redAmaranth;
   }
 
   .btn-white {
     @apply px-8 py-4 font-extrabold leading-4 border border-solid w-72 h-14 rounded-2xl border-whiteSmoke text-redAmaranth text-md;
   }
 
+  .btn-red {
+    @apply px-8 text-base font-bold transition duration-300 border font-NotoSans text-redAmaranth border-whiteLilac hover:text-white w-72 h-14 hover:bg-redAmaranth hover:shadow-xl rounded-2xl;
+  }
+
+  .btn-check {
+    @apply h-12 text-xs font-semibold text-center transition duration-300 border border-whiteLilac w-14 font-NotoSans rounded-2xl text-redAmaranth hover:bg-redAmaranth hover:text-white hover:shadow-xl;
+  }
+
   .label {
-    @apply text-xs font-NotoSans text-labelColor;
+    @apply text-s font-NotoSans text-labelColor;
   }
 }
