@@ -9,6 +9,7 @@ type InputProps<T extends FieldValues> = {
   register: UseFormRegister<T>;
   rules?: RegisterOptions;
   error?: string;
+  autoFocus?: boolean;
 };
 
 const InputField = <T extends FieldValues>({
@@ -20,10 +21,11 @@ const InputField = <T extends FieldValues>({
   register,
   rules,
   error,
+  autoFocus,
 }: InputProps<T>) => {
   return (
-    <div className="flex flex-col mb-5">
-      <label className="label" htmlFor={id}>
+    <div className="flex flex-col mb-2.5">
+      <label className="mb-1.5 pl-2 label" htmlFor={id}>
         {label}
       </label>
       <input
@@ -31,9 +33,10 @@ const InputField = <T extends FieldValues>({
         type={type}
         id={id}
         placeholder={placeholder}
+        autoFocus={autoFocus}
         {...register(id, rules)}
       />
-      {error && <p>{error}</p>}
+      {error && <p className="pt-2 pl-2 text-s font-NotoSans text-redAmaranth">{error}</p>}
     </div>
   );
 };
