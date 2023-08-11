@@ -1,11 +1,11 @@
-import NoHeaderFooterLayout from 'components/layout/NoHeaderFooterLayout';
+import Layout from 'components/layout/Layout';
 import MessageList from 'components/messages/MessageList';
 
 function MessagesPage() {
   return (
-    <NoHeaderFooterLayout>
+    <Layout title="Messages">
       <MessageList />
-    </NoHeaderFooterLayout>
+    </Layout>
   );
 }
 

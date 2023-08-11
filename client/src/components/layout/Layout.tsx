@@ -2,11 +2,11 @@ import React from 'react';
 import Navbar from './Navbar';
 import Footer from './Footer';
 
-function Layout({ children }: { children: React.ReactNode }) {
+function Layout({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <div className="container max-w-[812px] mx-auto pt-16 ">
-      <div className="flex flex-col items-center justify-center">
-        <Navbar />
+    <div className="flex items-center justify-center h-screen">
+      <div className="container w-[375px] h-[812px]">
+        <Navbar title={title} />
         <main>{children}</main>
         <Footer />
       </div>
