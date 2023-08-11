@@ -23,6 +23,10 @@
     @apply h-12 text-xs font-semibold text-center transition duration-300 border border-whiteLilac w-14 font-NotoSans rounded-2xl text-redAmaranth hover:bg-redAmaranth hover:text-white hover:shadow-xl;
   }
 
+  .btn-checkSuccess {
+    @apply h-12 text-xs font-semibold text-center text-white transition duration-300 border bg-redAmaranth border-redAmaranth w-14 font-NotoSans rounded-2xl;
+  }
+
   .label {
     @apply text-s font-NotoSans text-labelColor;
   }
