@@ -8,13 +8,14 @@ function LoginPage() {
 
   return (
     <NoHeaderFooterLayout>
-      <h1 className="font-Lobster text-8xl text-redAmaranth ">blind</h1>
-
+      <header>
+        <h1 className="mt-32 font-Lobster text-8xl text-redAmaranth ">blind</h1>
+      </header>
       {isModalOpen ? (
         <LoginForm />
       ) : (
         <>
-          <Link className="mt-32 text-lg font-bold font-Lora " to="/signup">
+          <Link className="mt-56 text-lg font-bold font-Lora " to="/signup">
             Sign up to continue
           </Link>
 
