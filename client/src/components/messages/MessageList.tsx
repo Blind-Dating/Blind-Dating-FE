@@ -18,7 +18,7 @@ const dummy = [
 function MessageList() {
   return (
     <>
-      <ul className="flex flex-col gap-4 w-full max-h-144 px-8 overflow-auto">
+      <ul className="flex flex-col w-full gap-2 px-8 overflow-auto max-h-144">
         {dummy.map((data) => (
           <MessageItem key={data.id} {...data} />
         ))}
