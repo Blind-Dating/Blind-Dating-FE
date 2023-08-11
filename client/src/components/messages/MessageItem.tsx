@@ -18,11 +18,13 @@ const MessageItem = (props: Props) => {
         <b>{user}</b>
         <p>{comment}</p>
       </div>
-      <div className="flex flex-col items-end">
+      <div className="flex flex-col justify-between items-end">
         <span className="font-bold text-xs text-labelColor">{updated}</span>
-        <div className="rounded-full bg-redAmaranth w-5 h-5 flex items-end justify-center">
-          <span className="text-whiteSmoke text-xs">{count}</span>
-        </div>
+        {!!count && (
+          <div className="rounded-full bg-redAmaranth w-5 h-5 flex items-end justify-center">
+            <span className="text-whiteSmoke text-xs">{count}</span>
+          </div>
+        )}
       </div>
     </li>
   );
