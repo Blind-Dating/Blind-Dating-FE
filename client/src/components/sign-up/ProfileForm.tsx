@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import InputField from 'components/ui/InputField';
 import { useHookForm } from 'hooks/useHookForm';
-import { usePostCheckId } from 'hooks/api/usePostCheckId';
-import { usePostSignUpData } from 'hooks/api/usePostSignUpData';
 import { SubmitHandler } from 'react-hook-form';
 import { UserInfo } from 'pages/SignUpPage';
-import { usePostCheckNickname } from 'hooks/api/useGetNickNameCheck';
+import { usePostCheckNickname } from 'hooks/api/usePostCheckNickname';
+import { usePostCheckId } from 'hooks/api/usePostCheckId';
+import { ReactComponent as Dot } from '/public/icons/dot.svg';
 
 type ProfileFormProps = {
   onNext: () => void;
@@ -18,29 +18,37 @@ export type SignUpFormValues = {
   userPassword: string;
   passwordCheck?: string;
 };
+
 export const ProfileForm = ({ onNext, setUserInfo }: ProfileFormProps) => {
+  const [isDuplicatedId, setIsDuplicated] = useState<boolean>(false);
+  const [isDuplicatedNickname, setIsDuplicatedNickname] = useState<boolean>(false);
+
   const { register, handleSubmit, errors, watch } = useHookForm<SignUpFormValues>();
+  const { postCheckIdFn } = usePostCheckId(setIsDuplicated);
+  const { postCheckNicknameFn } = usePostCheckNickname(setIsDuplicatedNickname);
+
   const userPassword = watch('userPassword');
   const userId = watch('userId');
-  const nickname = watch('nickname');
+  const userNickname = watch('nickname');
 
-  const { postCheckIdFn } = usePostCheckId();
-  const { postCheckNicknameFn } = usePostCheckNickname();
+  const onSubmit: SubmitHandler<SignUpFormValues> = (signUpFormValues) => {
+    if (!isDuplicatedId) return alert('아이디 중복체크를 해주세요');
+    if (!isDuplicatedNickname) return alert('닉네임 중복체크를 해주세요');
 
-  const onSubmit: SubmitHandler<SignUpFormValues> = (userData) => {
-    setUserInfo(userData);
+    setUserInfo(signUpFormValues);
     onNext();
   };
 
-  const handleCheckIdClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleCheckId = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
     postCheckIdFn(userId);
   };
-  const handleNickNameClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+
+  const handleNickname = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
-    postCheckNicknameFn(nickname);
+    postCheckNicknameFn(userNickname);
   };
 
   return (
@@ -49,16 +57,20 @@ export const ProfileForm = ({ onNext, setUserInfo }: ProfileFormProps) => {
         <h1 className="mb-10 text-2xl font-bold font-Lora">Profile</h1>
       </header>
 
-      <div className="dot-slide"></div>
+      <div className="dot-slide flex mb-10 mx-auto gap-1.5">
+        <Dot opacity="10" />
+        <Dot opacity="0.1" />
+        <Dot opacity="0.1" />
+      </div>
 
       <form className="flex flex-col max-w-sm" onSubmit={handleSubmit(onSubmit)}>
-        <div className="flex">
+        <section className="flex">
           <InputField
             className="input-md"
             type="text"
             label="아이디"
             id="userId"
-            placeholder="아이디"
+            placeholder="id"
             autoFocus={true}
             error={errors.userId?.message}
             register={register}
@@ -75,19 +87,23 @@ export const ProfileForm = ({ onNext, setUserInfo }: ProfileFormProps) => {
               },
             })}
           />
-          <button className="mt-6 ml-4 btn-check" onClick={handleCheckIdClick}>
-            중복확인
+          <button
+            className={`mt-6 ml-4 btn-check ${isDuplicatedId ? 'btn-checkSuccess' : ''}`}
+            onClick={handleCheckId}
+            disabled={!!errors?.userId}
+          >
+            {isDuplicatedId ? '확인' : '중복확인'}
           </button>
-        </div>
+        </section>
 
-        <div className="flex">
+        <section className="flex">
           <InputField
             className="input-md"
             type="text"
             id="nickname"
             label="닉네임"
             register={register}
-            placeholder="닉네임"
+            placeholder="nickname"
             error={errors.nickname?.message}
             {...register('nickname', {
               required: '닉네임을 입력해주세요',
@@ -103,43 +119,52 @@ export const ProfileForm = ({ onNext, setUserInfo }: ProfileFormProps) => {
             })}
           />
 
-          <button className="mt-6 ml-4 btn-check" onClick={handleNickNameClick}>
-            중복확인
+          <button
+            className={`mt-6 ml-4 btn-check ${isDuplicatedNickname ? 'btn-checkSuccess' : ''}`}
+            onClick={handleNickname}
+            disabled={!!errors?.userId}
+          >
+            {isDuplicatedNickname ? '확인' : '중복확인'}
           </button>
-        </div>
-        <InputField
-          className="input-md"
-          type="password"
-          id="userPassword"
-          label="비밀번호"
-          placeholder="*****"
-          error={errors.userPassword?.message}
-          register={register}
-          {...register('userPassword', {
-            required: '비밀번호를 입력해주세요',
-            minLength: { value: 5, message: '5글자 이상 입력해주세요' },
-            maxLength: { value: 20, message: '20글자 이하 입력해주세요' },
-            pattern: {
-              value: /^[A-za-z0-9가-힣]{5,20}$/,
-              message: '가능한 문자: 영문 대소문자, 글자 단위 한글, 숫자',
-            },
-          })}
-        />
+        </section>
 
-        <InputField
-          className="input-md"
-          type="password"
-          id="passwordCheck"
-          label="비밀번호 확인"
-          register={register}
-          error={errors.passwordCheck?.message}
-          placeholder="*****"
-          {...register('passwordCheck', {
-            required: '비밀번호를 다시 입력해주세요',
-            validate: (passwordCheck) =>
-              passwordCheck === userPassword || '비밀번호가 일치하지 않습니다',
-          })}
-        />
+        <section>
+          <InputField
+            className="input-md"
+            type="password"
+            id="userPassword"
+            label="비밀번호"
+            placeholder="*****"
+            error={errors.userPassword?.message}
+            register={register}
+            {...register('userPassword', {
+              required: '비밀번호를 입력해주세요',
+              minLength: { value: 8, message: '8글자 이상 입력해주세요' },
+              maxLength: { value: 20, message: '20글자 이하 입력해주세요' },
+              pattern: {
+                value: /^[A-za-z0-9가-힣]{5,20}$/,
+                message: '가능한 문자: 영문 대소문자, 글자 단위 한글, 숫자',
+              },
+            })}
+          />
+        </section>
+
+        <section>
+          <InputField
+            className="input-md"
+            type="password"
+            id="passwordCheck"
+            label="비밀번호 확인"
+            register={register}
+            error={errors.passwordCheck?.message}
+            placeholder="*****"
+            {...register('passwordCheck', {
+              required: '비밀번호를 다시 입력해주세요',
+              validate: (passwordCheck) =>
+                passwordCheck === userPassword || '비밀번호가 일치하지 않습니다',
+            })}
+          />
+        </section>
 
         <button className="mt-20 btn-red" type="submit">
           Continue

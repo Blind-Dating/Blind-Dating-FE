@@ -15,11 +15,8 @@ export const LoginForm = () => {
     postLoginFn(loginInfo);
   };
   return (
-    <>
-      <form
-        className="mt-[44px] flex flex-col justify-center items-center gap-3"
-        onSubmit={handleSubmit}
-      >
+    <div className="mt-36">
+      <form className="flex flex-col items-center justify-center gap-3" onSubmit={handleSubmit}>
         <input
           className="border border-whiteSmoke rounded-2xl w-[295px] h-14 text-center font-NotoSans placeholder:italic focus:border-redAmaranth focus:outline-none"
           type="text"
@@ -55,6 +52,6 @@ export const LoginForm = () => {
           {isLoading ? 'Logging in...' : 'Login'}
         </button>
       </form>
-    </>
+    </div>
   );
 };
