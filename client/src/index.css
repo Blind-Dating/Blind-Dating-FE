@@ -30,4 +30,9 @@
   .label {
     @apply text-s font-NotoSans text-labelColor;
   }
+
+  .tag {
+    @apply h-12 px-4 py-3.5 rounded-2xl text-center border border-whiteLilac font-NotoSans text-sm  text-redAmaranth
+    hover:border-redAmaranth hover:font-bold hover:shadow-md;
+  }
 }
