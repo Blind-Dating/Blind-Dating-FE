@@ -1,5 +1,5 @@
 import NoHeaderFooterLayout from 'components/layout/NoHeaderFooterLayout';
-import { ProfileDetailsForm } from 'components/sign-up/ProfileDetailsForm';
+import { ProfileDetailsForm } from 'components/sign-up/profile-details/ProfileDetailsForm';
 import { ProfileForm } from 'components/sign-up/ProfileForm';
 import { useState } from 'react';
 
