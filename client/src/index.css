@@ -19,6 +19,10 @@
     @apply px-8 text-base font-bold transition duration-300 border font-NotoSans text-redAmaranth border-whiteLilac hover:text-white w-72 h-14 hover:bg-redAmaranth hover:shadow-xl rounded-2xl;
   }
 
+  .btn-red-checkSuccess {
+    @apply px-8 text-base font-bold text-white transition duration-300 border shadow-xl font-NotoSans bg-redAmaranth w-72 h-14 rounded-2xl;
+  }
+
   .btn-check {
     @apply h-12 text-xs font-semibold text-center transition duration-300 border border-whiteLilac w-14 font-NotoSans rounded-2xl text-redAmaranth hover:bg-redAmaranth hover:text-white hover:shadow-xl;
   }
@@ -32,7 +36,10 @@
   }
 
   .tag {
-    @apply h-12 px-4 py-3.5 rounded-2xl text-center border border-whiteLilac font-NotoSans text-sm  text-redAmaranth
-    hover:border-redAmaranth hover:font-bold hover:shadow-md;
+    @apply px-3 py-3 text-sm text-center border rounded-2xl border-whiteLilac font-NotoSans text-redAmaranth hover:border-redAmaranth hover:font-bold hover:shadow-md;
+  }
+
+  .tag-clicked {
+    @apply px-3 py-3 text-sm font-bold text-center text-white border shadow-md rounded-2xl font-NotoSans border-redAmaranth bg-redAmaranth;
   }
 }
