@@ -5,7 +5,7 @@ import { SubmitHandler } from 'react-hook-form';
 import { UserInfo } from 'pages/SignUpPage';
 import { usePostCheckNickname } from 'hooks/api/usePostCheckNickname';
 import { usePostCheckId } from 'hooks/api/usePostCheckId';
-import { ReactComponent as Dot } from '/public/icons/dot.svg';
+import { ReactComponent as Dot } from 'assets/icons/dot.svg';
 
 type ProfileFormProps = {
   onNext: () => void;
