@@ -3,6 +3,7 @@ export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     colors: {
+      black: '#000000',
       white: '#FFFFFF',
       whiteSmoke: '#F3F3F3' /* */,
       whiteLilac: '#E8E6EA' /* input border */,
