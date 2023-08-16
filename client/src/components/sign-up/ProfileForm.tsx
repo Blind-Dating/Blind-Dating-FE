@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import InputField from 'components/ui/InputField';
 import { useHookForm } from 'hooks/useHookForm';
 import { SubmitHandler } from 'react-hook-form';
-import { UserInfo } from 'pages/SignUpPage';
+import { SignUpAllValues } from 'pages/SignUpPage';
 import { usePostCheckNickname } from 'hooks/api/usePostCheckNickname';
 import { usePostCheckId } from 'hooks/api/usePostCheckId';
 import { ReactComponent as Dot } from 'assets/icons/dot.svg';
 
 type ProfileFormProps = {
   onNext: () => void;
-  setUserInfo: React.Dispatch<React.SetStateAction<UserInfo | null>>;
+  setSignUpAllValues: React.Dispatch<React.SetStateAction<SignUpAllValues | null>>;
 };
 
 export type SignUpFormValues = {
@@ -19,7 +19,7 @@ export type SignUpFormValues = {
   passwordCheck?: string;
 };
 
-export const ProfileForm = ({ onNext, setUserInfo }: ProfileFormProps) => {
+export const ProfileForm = ({ onNext, setSignUpAllValues }: ProfileFormProps) => {
   const [isDuplicatedId, setIsDuplicatedId] = useState<boolean>(false);
   const [isDuplicatedNickname, setIsDuplicatedNickname] = useState<boolean>(false);
 
@@ -35,7 +35,7 @@ export const ProfileForm = ({ onNext, setUserInfo }: ProfileFormProps) => {
     if (!isDuplicatedId) return alert('아이디 중복체크를 해주세요');
     if (!isDuplicatedNickname) return alert('닉네임 중복체크를 해주세요');
 
-    setUserInfo(signUpFormValues);
+    setSignUpAllValues(signUpFormValues);
     onNext();
   };
 
