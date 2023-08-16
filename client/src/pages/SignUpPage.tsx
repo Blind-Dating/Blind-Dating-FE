@@ -3,23 +3,32 @@ import { ProfileDetailsForm } from 'components/sign-up/profile-details/ProfileDe
 import { ProfileForm } from 'components/sign-up/ProfileForm';
 import { useState } from 'react';
 
-export type UserInfo = {
-  [name: string]: string | number;
+export type SignUpAllValues = {
+  [key: string]: string | string[];
 };
 
-type Step = 'profileForm' | 'profileDetailsForm' | 'InterestForm';
+type Step = 'profileForm' | 'profileDetailsForm' | 'personalityTestForm';
 
 function SignUpPage() {
   const [step, setStep] = useState<Step>('profileForm');
-  const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
+  const [signUpAllValues, setSignUpAllValues] = useState<SignUpAllValues | null>(null);
 
   return (
     <NoHeaderFooterLayout>
       <>
         {step === 'profileForm' && (
-          <ProfileForm onNext={() => setStep('profileDetailsForm')} setUserInfo={setUserInfo} />
+          <ProfileForm
+            onNext={() => setStep('profileDetailsForm')}
+            setSignUpAllValues={setSignUpAllValues}
+          />
         )}
-        {step === 'profileDetailsForm' && <ProfileDetailsForm />}
+        {step === 'profileDetailsForm' && (
+          <ProfileDetailsForm
+            onNext={() => setStep('personalityTestForm')}
+            setSignUpAllValues={setSignUpAllValues}
+          />
+        )}
+        {step === 'personalityTestForm' && <>personalityTestForm</>}
       </>
     </NoHeaderFooterLayout>
   );
