@@ -37,8 +37,8 @@ export const MoreModal = (props: Props) => {
   return (
     <>
       {isModalOpen && (
-        <div className="modal-overlay absolute w-[375px] h-[812px] -translate-x-1/2 -translate-y-1/2 bg-black/5 opacity-1 top-1/2 left-1/2 ">
-          <div className="modal-container my-auto fixed w-[375px] h-[700px] px-10 py-20 -translate-x-1/2 -translate-y-1/2 bg-white border top-1/2 left-1/2 z-1 rounded-2xl">
+        <div className="absolute inset-0 bg-black bg-opacity-50 z-1 backdrop-blur-sm modal-overlay">
+          <div className="modal-container my-auto  fixed w-[375px] h-[700px] px-10 py-20 -translate-x-1/2 -translate-y-1/2 bg-white border top-1/2 left-1/2 z-1 rounded-2xl">
             <div className="flex flex-col items-center justify-center gap-10 ">
               <header>
                 <h1 className="text-lg font-bold font-Lora">{title}</h1>
