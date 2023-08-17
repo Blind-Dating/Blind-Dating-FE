@@ -52,7 +52,7 @@ export const ProfileDetailsForm = ({ onNext, setSignUpAllValues }: ProfileDetail
       </div>
 
       <form className="flex flex-col max-w-sm" onSubmit={handleSubmit}>
-        <main className="flex flex-col gap-4 ">
+        <main className="flex flex-col gap-5 ">
           <section className="flex flex-col gap-1">
             <label className="pl-2 label" htmlFor="성별">
               성별
@@ -136,7 +136,16 @@ export const ProfileDetailsForm = ({ onNext, setSignUpAllValues }: ProfileDetail
           </section>
         </main>
 
-        <button className="mt-24 btn-red" type="submit">
+        <button
+          className="mt-24 btn-red"
+          type="submit"
+          disabled={
+            !collectValues.gender ||
+            !collectValues.region ||
+            !collectValues.mbti ||
+            collectValues.interests.length < 3
+          }
+        >
           Continue
         </button>
       </form>
