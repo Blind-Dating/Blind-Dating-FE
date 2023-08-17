@@ -8,8 +8,8 @@ type ApiResponse = {
   data: boolean;
 };
 
-const postNicknameCheckFetcher = async (nickname: string): Promise<ApiResponse> => {
-  const { data } = await axiosClient.post('api/check-nickname', { nickname: nickname });
+const postNicknameCheckFetcher = async (userNickname: string): Promise<ApiResponse> => {
+  const { data } = await axiosClient.post('api/check-nickname', { nickname: userNickname });
   return data;
 };
 

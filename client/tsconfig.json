@@ -17,6 +17,6 @@
     "jsx": "react-jsx",
     "baseUrl": "src"
   },
-  "include": ["src", "svg.d.ts"],
+  "include": ["src", "svg.d.ts", "public", "src/assets/config"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

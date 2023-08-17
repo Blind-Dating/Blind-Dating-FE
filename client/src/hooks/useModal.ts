@@ -2,15 +2,17 @@ import { useState } from 'react';
 
 type ModalHookReturnType = {
   isModalOpen: boolean;
-  toggleModal: () => void;
+  handleToggleModal: (e: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
 export const useModal = (): ModalHookReturnType => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
-  const toggleModal = (): void => {
-    setIsModalOpen((prevIsModalOpen) => !prevIsModalOpen);
+  const handleToggleModal = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (e.target === e.currentTarget) {
+      setIsModalOpen((prevIsModalOpen) => !prevIsModalOpen);
+    }
   };
 
-  return { isModalOpen, toggleModal };
+  return { isModalOpen, handleToggleModal };
 };
