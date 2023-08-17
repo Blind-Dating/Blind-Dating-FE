@@ -6,7 +6,7 @@ type Props = { id: number; name: string; image: string; status: string };
 const ChatUser = (props: Props) => {
   const { name, image, status } = props;
   return (
-    <section className="flex items-center w-full gap-2 px-10 py-8">
+    <section className="flex items-center w-full gap-2 px-10 py-8 max-h-[15%]">
       <div className="w-12 h-12 rounded-full bg-labelColor">{image}</div>
       <div className="flex flex-col flex-1">
         <h2 className="text-xl font-bold font-Lora">{name}</h2>

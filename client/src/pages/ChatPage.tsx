@@ -14,32 +14,32 @@ const chatDummy = {
       content:
         "I got my peaches out in Georgia (oh, yeah, sh*t) I get my weed from California (that's that sh*t)",
       senderId: 0,
-      created: '2023. 8. 16.',
+      created: '2023. 8. 16. 오후 9:24:57',
     },
     {
       messageId: 1,
       content:
         "I took my chick up to the North, yeah (badass b*tch)      I get my light right from the source, yeah (yeah, that's it)",
       senderId: 1,
-      created: '2023. 8. 16.',
+      created: '2023. 8. 16. 오후 9:26:57',
     },
     {
       messageId: 2,
       content: "And I see you (oh), the way I breathe you in (in), it's the texture of your skin",
       senderId: 0,
-      created: new Date().toLocaleDateString(),
+      created: new Date().toLocaleString(),
     },
     {
       messageId: 3,
       content: 'I wanna wrap my arms around you, baby, never let you go, oh',
       senderId: 1,
-      created: new Date().toLocaleDateString(),
+      created: new Date().toLocaleString(),
     },
     {
       messageId: 4,
-      content: "And I say, oh, there's nothing like your touch",
+      content: 'And I say, oh',
       senderId: 0,
-      created: new Date().toLocaleDateString(),
+      created: new Date().toLocaleString(),
     },
   ],
 };
@@ -48,7 +48,7 @@ const ChatPage = () => {
   return (
     <NoHeaderFooterLayout>
       <ChatUser {...chatDummy.user} />
-      <ChatMessages key={chatDummy.id} messages={chatDummy.messages} />
+      <ChatMessages key={chatDummy.id} user={chatDummy.user.id} messages={chatDummy.messages} />
       <ChatForm />
     </NoHeaderFooterLayout>
   );
