@@ -4,11 +4,11 @@
 
 @layer components {
   .input-md {
-    @apply w-56 py-4 pl-4 text-sm border border-solid h-14 rounded-2xl border-whiteLilac text-redAmaranth font-NotoSans hover:border-redAmaranth focus:border-redAmaranth focus:outline-none;
+    @apply w-56 py-4 pl-4 text-sm border border-solid h-14 rounded-2xl border-whiteLilac text-graySlate font-NotoSans hover:border-redAmaranth focus:border-redAmaranth focus:outline-none;
   }
 
   .input-lg {
-    @apply py-4 pl-4 text-sm border border-solid w-72 h-14 rounded-2xl border-whiteLilac text-redAmaranth font-NotoSans hover:border-redAmaranth;
+    @apply py-4 pl-4 text-sm border border-solid w-72 h-14 rounded-2xl border-whiteLilac text-graySlate font-NotoSans hover:border-redAmaranth;
   }
 
   .btn-white {
@@ -36,10 +36,10 @@
   }
 
   .tag {
-    @apply px-3 py-3 text-sm text-center border rounded-2xl border-whiteLilac font-NotoSans text-redAmaranth hover:border-redAmaranth hover:font-bold hover:shadow-md;
+    @apply px-3 py-3 text-sm text-center border rounded-2xl border-whiteLilac font-NotoSans text-graySlate hover:border-redAmaranth hover:font-bold hover:shadow-md;
   }
 
   .tag-clicked {
-    @apply px-3 py-3 text-sm font-bold text-center text-white border shadow-md rounded-2xl font-NotoSans border-redAmaranth bg-redAmaranth;
+    @apply px-3 py-3 text-sm font-bold text-center border shadow-md text-redAmaranth rounded-2xl font-NotoSans border-redAmaranth;
   }
 }
