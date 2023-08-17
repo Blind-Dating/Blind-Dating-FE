@@ -8,6 +8,7 @@ export default {
       whiteSmoke: '#F3F3F3' /* */,
       whiteLilac: '#E8E6EA' /* input border */,
       redAmaranth: '#E94057',
+      graySlate: '#505965' /* tag text */,
       labelColor: 'rgba(0, 0, 0, 0.40)',
     },
     fontFamily: {
