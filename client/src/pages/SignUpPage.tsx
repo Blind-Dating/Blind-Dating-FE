@@ -1,4 +1,5 @@
 import NoHeaderFooterLayout from 'components/layout/NoHeaderFooterLayout';
+import PersonalityTestForm from 'components/sign-up/personality-test/PersonalityTestForm';
 import { ProfileDetailsForm } from 'components/sign-up/profile-details/ProfileDetailsForm';
 import { ProfileForm } from 'components/sign-up/ProfileForm';
 import { useState } from 'react';
@@ -28,7 +29,12 @@ function SignUpPage() {
             setSignUpAllValues={setSignUpAllValues}
           />
         )}
-        {step === 'personalityTestForm' && <>personalityTestForm</>}
+        {step === 'personalityTestForm' && (
+          <PersonalityTestForm
+            onNext={() => setStep('personalityTestForm')}
+            setSignUpAllValues={setSignUpAllValues}
+          />
+        )}
       </>
     </NoHeaderFooterLayout>
   );
