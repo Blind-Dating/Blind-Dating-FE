@@ -25,8 +25,6 @@ const ChatMessages = ({ user, messages }: Props) => {
 
   for (let i = 0; i < messages.length; i++) {
     if (messageDates[messageDates.length - 1] !== messages[i].created.slice(0, 11)) {
-      console.log(messages[i].created.slice(0, 11));
-      console.log(messageDates[messageDates.length - 1]);
       messageDates.push(messages[i].created.slice(0, 11));
       dataWithDate.push(<ChatMessageDate key={messages[i].created} date={messages[i].created} />);
     }
