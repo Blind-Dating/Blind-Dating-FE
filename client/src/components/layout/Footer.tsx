@@ -1,12 +1,12 @@
 import React from 'react';
-import { ReactComponent as Cards } from '/public/icons/cards.svg';
-import { ReactComponent as Likes } from '/public/icons/likes.svg';
-import { ReactComponent as Messages } from '/public/icons/messages.svg';
-import { ReactComponent as User } from '/public/icons/user.svg';
+import { ReactComponent as Cards } from 'assets/icons/cards.svg';
+import { ReactComponent as Likes } from 'assets/icons/likes.svg';
+import { ReactComponent as Messages } from 'assets/icons/messages.svg';
+import { ReactComponent as User } from 'assets/icons/user.svg';
 
 const FooterBtn = ({ icon }: { icon: React.ReactNode }) => {
   return (
-    <button type="button" className="w-16 h-12 flex justify-center items-center">
+    <button type="button" className="flex items-center justify-center w-16 h-12">
       {icon}
     </button>
   );
@@ -14,7 +14,7 @@ const FooterBtn = ({ icon }: { icon: React.ReactNode }) => {
 
 function Footer() {
   return (
-    <footer className="flex justify-around bg-whiteLilac pb-8 mt-8">
+    <footer className="flex justify-around pb-8 mt-8 bg-whiteLilac">
       <FooterBtn icon={<Cards />} />
       <FooterBtn icon={<Likes />} />
       <FooterBtn icon={<Messages />} />
