@@ -1,5 +1,5 @@
 import React from 'react';
-import { ReactComponent as More } from '/public/icons/more.svg';
+import { ReactComponent as More } from 'assets/icons/more.svg';
 
 type Props = { id: number; name: string; image: string; status: string };
 

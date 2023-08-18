@@ -1,5 +1,5 @@
 import React from 'react';
-import { ReactComponent as Setting } from '/public/icons/setting-config.svg';
+import { ReactComponent as Setting } from 'assets/icons/setting-config.svg';
 
 type Props = {
   title?: string;
