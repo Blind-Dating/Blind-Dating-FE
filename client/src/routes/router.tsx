@@ -4,6 +4,7 @@ import SignUpPage from 'pages/SignUpPage';
 import DateDiscoverPage from 'pages/DateDiscoverPage';
 import { createBrowserRouter } from 'react-router-dom';
 import MessagesPage from 'pages/MessagesPage';
+import ChatPage from 'pages/ChatPage';
 
 const router = createBrowserRouter([
   {
@@ -14,6 +15,7 @@ const router = createBrowserRouter([
       { path: '/signup', element: <SignUpPage /> },
       { path: '/discover', element: <DateDiscoverPage /> },
       { path: '/messages', element: <MessagesPage /> },
+      { path: '/messages/:messageId', element: <ChatPage /> },
     ],
   },
 ]);
