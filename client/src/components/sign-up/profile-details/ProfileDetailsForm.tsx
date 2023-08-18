@@ -4,7 +4,7 @@ import { MoreModal } from './MoreModal';
 import { MBTIS, INTERESTINGS, REGIONS } from 'assets/config';
 import { SignUpAllValues } from 'pages/SignUpPage';
 
-type ProfileDetailsFormProps = {
+type Props = {
   onNext: () => void;
   setSignUpAllValues: React.Dispatch<React.SetStateAction<SignUpAllValues | null>>;
 };
@@ -16,7 +16,7 @@ export type CheckFormValues = {
   interests: string[];
 };
 
-export const ProfileDetailsForm = ({ onNext, setSignUpAllValues }: ProfileDetailsFormProps) => {
+export const ProfileDetailsForm = ({ onNext, setSignUpAllValues }: Props) => {
   const [collectValues, setCollectValues] = useState<CheckFormValues>({
     gender: '',
     region: '',

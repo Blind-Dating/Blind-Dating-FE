@@ -7,7 +7,7 @@ import { usePostCheckNickname } from 'hooks/api/usePostCheckNickname';
 import { usePostCheckId } from 'hooks/api/usePostCheckId';
 import { ReactComponent as Dot } from 'assets/icons/dot.svg';
 
-type ProfileFormProps = {
+type Props = {
   onNext: () => void;
   setSignUpAllValues: React.Dispatch<React.SetStateAction<SignUpAllValues | null>>;
 };
@@ -19,7 +19,7 @@ export type SignUpFormValues = {
   passwordCheck?: string;
 };
 
-export const ProfileForm = ({ onNext, setSignUpAllValues }: ProfileFormProps) => {
+export const ProfileForm = ({ onNext, setSignUpAllValues }: Props) => {
   const [isDuplicatedId, setIsDuplicatedId] = useState<boolean>(false);
   const [isDuplicatedNickname, setIsDuplicatedNickname] = useState<boolean>(false);
 
