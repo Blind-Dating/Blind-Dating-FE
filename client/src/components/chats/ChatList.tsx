@@ -1,27 +1,41 @@
-import React from 'react';
+import { useEffect, useState } from 'react';
 import ChatItem from './ChatItem';
-
-const dummy = [
-  { id: 0, user: '시베리아', image: '', comment: '안녕 콜록콜록', updated: '1 hour', count: 1 },
-  { id: 1, user: '히죽이', image: '', comment: '안녕~~ 고양이~~', updated: '2 hour', count: 2 },
-  { id: 2, user: '뽀야미', image: '', comment: '안녕하세요 뽀드득', updated: '3 hour', count: 0 },
-  { id: 3, user: '시베리아', image: '', comment: '안녕 콜록콜록', updated: '5 hour', count: 1 },
-  { id: 4, user: '히죽이', image: '', comment: '안녕~~ 고양이~~', updated: '6 hour', count: 2 },
-  { id: 5, user: '뽀야미', image: '', comment: '안녕하세요 뽀드득', updated: '7 hour', count: 0 },
-  { id: 6, user: '시베리아', image: '', comment: '안녕 콜록콜록', updated: '8 hour', count: 1 },
-  { id: 7, user: '히죽이', image: '', comment: '안녕~~ 고양이~~', updated: '9 hour', count: 2 },
-  { id: 8, user: '뽀야미', image: '', comment: '안녕하세요 뽀드득', updated: '10 hour', count: 0 },
-  { id: 9, user: '히죽이', image: '', comment: '안녕~~ 고양이~~', updated: '10 hour', count: 2 },
-  { id: 10, user: '뽀야미', image: '', comment: '안녕하세요 뽀드득', updated: '10 hour', count: 0 },
-];
+import { useGetChatRooms } from 'hooks/api/useGetChatRooms';
 
 function ChatList() {
+  const [chatList, setChatList] = useState([]);
+  const { isLoading, data } = useGetChatRooms();
+  useEffect(() => {
+    if (!isLoading) {
+      setChatList(data.data.content);
+    }
+  }, [isLoading]);
+
   return (
     <>
-      <ul className="flex flex-col w-full gap-2 px-8 overflow-auto max-h-144">
-        {dummy.map((data) => (
-          <ChatItem key={data.id} {...data} />
-        ))}
+      <ul className="flex flex-col w-full gap-2 px-8 overflow-auto h-144">
+        {isLoading ? (
+          <div
+            className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+            role="status"
+          >
+            <span className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">
+              Loading...
+            </span>
+          </div>
+        ) : (
+          <>
+            {chatList.length ? (
+              <>
+                {chatList.map((chat, idx) => (
+                  <ChatItem key={idx} {...chat} />
+                ))}
+              </>
+            ) : (
+              <li>No data</li>
+            )}
+          </>
+        )}
       </ul>
     </>
   );

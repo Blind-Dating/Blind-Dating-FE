@@ -26,7 +26,9 @@ export const usePostLogin = () => {
   const { mutate, isLoading } = useMutation<LoginResponse, Error, LoginFormValues>(
     postLoginFetcher,
     {
-      onSuccess: () => {
+      onSuccess: ({ data }) => {
+        // localStorage 임시저장
+        localStorage.setItem('token', JSON.stringify(data.token.accessToken));
         navigate('/discover');
       },
       onError: () => {
