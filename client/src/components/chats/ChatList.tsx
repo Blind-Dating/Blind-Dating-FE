@@ -1,5 +1,5 @@
 import React from 'react';
-import MessageItem from './MessageItem';
+import ChatItem from './ChatItem';
 
 const dummy = [
   { id: 0, user: '시베리아', image: '', comment: '안녕 콜록콜록', updated: '1 hour', count: 1 },
@@ -15,16 +15,16 @@ const dummy = [
   { id: 10, user: '뽀야미', image: '', comment: '안녕하세요 뽀드득', updated: '10 hour', count: 0 },
 ];
 
-function MessageList() {
+function ChatList() {
   return (
     <>
       <ul className="flex flex-col w-full gap-2 px-8 overflow-auto max-h-144">
         {dummy.map((data) => (
-          <MessageItem key={data.id} {...data} />
+          <ChatItem key={data.id} {...data} />
         ))}
       </ul>
     </>
   );
 }
 
-export default MessageList;
+export default ChatList;

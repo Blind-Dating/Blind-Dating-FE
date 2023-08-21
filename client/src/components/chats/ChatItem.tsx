@@ -9,7 +9,7 @@ interface Props {
   count?: number;
 }
 
-const MessageItem = (props: Props) => {
+const ChatItem = (props: Props) => {
   const { user, image, comment, updated, count } = props;
   return (
     <>
@@ -35,4 +35,4 @@ const MessageItem = (props: Props) => {
   );
 };
 
-export default MessageItem;
+export default ChatItem;
