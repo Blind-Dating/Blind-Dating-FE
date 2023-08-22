@@ -62,7 +62,7 @@ export const ProfileDetailsForm = ({ onNext, setSignUpAllValues }: Props) => {
                 type="button"
                 name="gender"
                 value="남성"
-                className={`${collectValues?.gender === '남성' ? 'tag-clicked' : 'tag'}`}
+                className={`${collectValues?.gender === '남성' ? 'tag-selected' : 'tag'}`}
                 onClick={handleClick}
               >
                 남성
@@ -71,7 +71,7 @@ export const ProfileDetailsForm = ({ onNext, setSignUpAllValues }: Props) => {
                 type="button"
                 name="gender"
                 value="여성"
-                className={`${collectValues?.gender === '여성' ? 'tag-clicked' : 'tag'}`}
+                className={`${collectValues?.gender === '여성' ? 'tag-selected' : 'tag'}`}
                 onClick={handleClick}
               >
                 여성
@@ -90,7 +90,9 @@ export const ProfileDetailsForm = ({ onNext, setSignUpAllValues }: Props) => {
                 title="지역"
                 setCollectValues={setCollectValues}
               />
-              {collectValues?.region && <span className="tag-clicked">{collectValues.region}</span>}
+              {collectValues?.region && (
+                <span className="tag-selected">{collectValues.region}</span>
+              )}
             </div>
           </section>
 
@@ -105,7 +107,7 @@ export const ProfileDetailsForm = ({ onNext, setSignUpAllValues }: Props) => {
                 title="MBTI"
                 setCollectValues={setCollectValues}
               />
-              {collectValues?.mbti && <span className="tag-clicked">{collectValues.mbti}</span>}
+              {collectValues?.mbti && <span className="tag-selected">{collectValues.mbti}</span>}
             </div>
           </section>
 
@@ -127,7 +129,7 @@ export const ProfileDetailsForm = ({ onNext, setSignUpAllValues }: Props) => {
               {collectValues?.interests.length === 3 &&
                 collectValues.interests.map((value) => {
                   return (
-                    <span key={value} className="tag-clicked">
+                    <span key={value} className="tag-selected">
                       {value}
                     </span>
                   );
