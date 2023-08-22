@@ -5,7 +5,7 @@ import { ProfileForm } from 'components/sign-up/ProfileForm';
 import { useState } from 'react';
 
 export type SignUpAllValues = {
-  [key: string]: string | string[];
+  [key: string]: string | string[] | (boolean | null)[];
 };
 
 type Step = 'profileForm' | 'profileDetailsForm' | 'personalityTestForm';
