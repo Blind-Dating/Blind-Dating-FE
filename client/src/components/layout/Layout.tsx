@@ -4,10 +4,10 @@ import Footer from './Footer';
 
 function Layout({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <div className="flex items-center justify-center h-screen">
-      <div className="container w-[375px] h-[812px]">
+    <div className="flex items-center justify-center ">
+      <div className="container w-[375px] h-[812px] flex flex-col">
         <Navbar title={title} />
-        <main>{children}</main>
+        <main className="flex-auto">{children}</main>
         <Footer />
       </div>
     </div>

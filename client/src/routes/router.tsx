@@ -3,7 +3,7 @@ import LoginPage from 'pages/LoginPage';
 import SignUpPage from 'pages/SignUpPage';
 import DateDiscoverPage from 'pages/DateDiscoverPage';
 import { createBrowserRouter } from 'react-router-dom';
-import MessagesPage from 'pages/MessagesPage';
+import ChatsPage from 'pages/ChatsPage';
 import ChatPage from 'pages/ChatPage';
 
 const router = createBrowserRouter([
@@ -14,8 +14,8 @@ const router = createBrowserRouter([
       { index: true, element: <LoginPage /> },
       { path: '/signup', element: <SignUpPage /> },
       { path: '/discover', element: <DateDiscoverPage /> },
-      { path: '/messages', element: <MessagesPage /> },
-      { path: '/messages/:messageId', element: <ChatPage /> },
+      { path: '/chats', element: <ChatsPage /> },
+      { path: '/chats/:chatId', element: <ChatPage /> },
     ],
   },
 ]);
