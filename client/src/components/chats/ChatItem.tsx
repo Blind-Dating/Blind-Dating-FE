@@ -1,16 +1,25 @@
-import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 interface Props {
   user2Nickname: string;
   updatedAt: string;
+  roomId: string;
 }
 
 const ChatItem = (props: Props) => {
-  const { user2Nickname: user, updatedAt } = props;
+  const { user2Nickname: user, updatedAt, roomId } = props;
+  const navigate = useNavigate();
+
   const updated = new Date(updatedAt).toLocaleDateString();
+
   return (
     <>
-      <li className="flex items-center gap-4 ">
+      <li
+        className="flex items-center gap-4 hover:cursor-pointer"
+        onClick={() => {
+          navigate(`/chats/${roomId}`);
+        }}
+      >
         <div className="flex items-center justify-center flex-none w-12 h-12 rounded-full bg-labelColor">
           {user.slice(0, 1)}
         </div>
