@@ -48,7 +48,7 @@ export const MoreModal = (props: Props) => {
                 {tags.map((tag) => {
                   return (
                     <button
-                      className={`m-1 ${clickedValue.includes(tag) ? 'tag-clicked' : 'tag'} `}
+                      className={`m-1 ${clickedValue.includes(tag) ? 'tag-selected' : 'tag'} `}
                       key={tag}
                       type="button"
                       value={tag}
