@@ -14,7 +14,7 @@ const FooterBtn = ({ icon }: { icon: React.ReactNode }) => {
 
 function Footer() {
   return (
-    <footer className="flex justify-around pb-8 mt-8 bg-whiteLilac">
+    <footer className="flex justify-around flex-none pb-8 mt-8 bg-whiteLilac">
       <FooterBtn icon={<Cards />} />
       <FooterBtn icon={<Likes />} />
       <FooterBtn icon={<Messages />} />
