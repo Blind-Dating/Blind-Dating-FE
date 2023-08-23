@@ -1,4 +1,5 @@
 import { Header } from 'components/layout/Header';
+import { SignUpAllValues } from 'pages/SignUpPage';
 import React from 'react';
 
 type Props = {
