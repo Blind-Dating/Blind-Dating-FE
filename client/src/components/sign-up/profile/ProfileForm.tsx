@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import InputField from 'components/ui/InputField';
+import InputField from 'components/sign-up/profile/InputField';
 import { useHookForm } from 'hooks/useHookForm';
 import { SubmitHandler } from 'react-hook-form';
 import { SignUpAllValues } from 'pages/SignUpPage';

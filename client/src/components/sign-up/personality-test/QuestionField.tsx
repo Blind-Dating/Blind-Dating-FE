@@ -24,7 +24,7 @@ export const QuestionField = ({ question, index, setCollectAnswers }: Props) => 
   };
 
   return (
-    <section className="space-y-4">
+    <section className="space-y-6">
       <p className="font-medium text-start text-s text-black/80 font-Lora">
         {index}. {question}
       </p>

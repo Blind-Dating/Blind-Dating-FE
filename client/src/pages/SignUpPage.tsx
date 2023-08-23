@@ -1,14 +1,15 @@
 import NoHeaderFooterLayout from 'components/layout/NoHeaderFooterLayout';
 import PersonalityTestForm from 'components/sign-up/personality-test/PersonalityTestForm';
 import { ProfileDetailsForm } from 'components/sign-up/profile-details/ProfileDetailsForm';
-import { ProfileForm } from 'components/sign-up/ProfileForm';
+import { ProfileForm } from 'components/sign-up/profile/ProfileForm';
+import { YourInterestForm } from 'components/sign-up/your-interest/YourInterestForm';
 import { useState } from 'react';
 
 export type SignUpAllValues = {
   [key: string]: string | string[] | (boolean | null)[];
 };
 
-type Step = 'profileForm' | 'profileDetailsForm' | 'personalityTestForm';
+type Step = 'profileForm' | 'profileDetailsForm' | 'personalityTestForm' | 'yourInterestForm';
 
 function SignUpPage() {
   const [step, setStep] = useState<Step>('profileForm');
@@ -31,7 +32,13 @@ function SignUpPage() {
         )}
         {step === 'personalityTestForm' && (
           <PersonalityTestForm
-            onNext={() => setStep('personalityTestForm')}
+            onNext={() => setStep('yourInterestForm')}
+            setSignUpAllValues={setSignUpAllValues}
+          />
+        )}
+        {step === 'yourInterestForm' && (
+          <YourInterestForm
+            onNext={() => setStep('yourInterestForm')}
             setSignUpAllValues={setSignUpAllValues}
           />
         )}

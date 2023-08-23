@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ReactComponent as Dot } from 'assets/icons/dot.svg';
 import { MoreModal } from './MoreModal';
-import { MBTIS, INTERESTINGS, REGIONS } from 'assets/config';
+import { MBTIS, REGIONS, INTERESTINGS_SPORTS } from 'assets/config';
 import { SignUpAllValues } from 'pages/SignUpPage';
 
 type Props = {
@@ -118,7 +118,7 @@ export const ProfileDetailsForm = ({ onNext, setSignUpAllValues }: Props) => {
             <div className="mb-5 space-x-2">
               <MoreModal
                 name="interests"
-                tags={INTERESTINGS}
+                tags={INTERESTINGS_SPORTS}
                 title="관심사"
                 setCollectValues={setCollectValues}
                 selectableCount={3}
