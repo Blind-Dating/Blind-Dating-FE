@@ -20,7 +20,7 @@ const PersonalityTestForm = ({ onNext, setSignUpAllValues }: Props) => {
 
   return (
     <div className="w-full h-full">
-      <Header progressWidth="3/4" title="Personality test" />
+      <Header progressWidth="3/5" title="Personality test" />
 
       <p className="w-full pr-16 mt-3 font-medium text-s h-9 pl-11 text-grayIsh">
         질문에 대한 답변은 상대방에게 내가 어떤 사람인지 알리는데 많은 도움이 됩니다.
