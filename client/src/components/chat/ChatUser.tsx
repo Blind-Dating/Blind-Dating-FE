@@ -1,16 +1,17 @@
-import React from 'react';
 import { ReactComponent as More } from 'assets/icons/more.svg';
 
-type Props = { id: number; name: string; image: string; status: string };
+type Props = { name: string };
 
 const ChatUser = (props: Props) => {
-  const { name, image, status } = props;
+  const { name } = props;
   return (
     <section className="flex items-center w-full gap-2 px-10 py-8 max-h-[15%]">
-      <div className="w-12 h-12 rounded-full bg-labelColor">{image}</div>
+      <div className="flex items-center justify-center w-12 h-12 rounded-full bg-labelColor">
+        {name.slice(0, 1)}
+      </div>
       <div className="flex flex-col flex-1">
         <h2 className="text-xl font-bold font-Lora">{name}</h2>
-        <b className="mx-1 text-xs text-labelColor">{status}</b>
+        {/* <b className="mx-1 text-xs text-labelColor">{status}</b> */}
       </div>
       <button
         type="button"

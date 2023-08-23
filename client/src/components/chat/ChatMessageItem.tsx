@@ -1,30 +1,28 @@
-import React from 'react';
-
 type Props = {
   user: number;
-  messageId: number;
-  content: string;
-  senderId: number;
-  created: string;
+  id: number;
+  message: string;
+  writerId: number;
+  createdAt: string;
 };
 
 const ChatMessageItem = (props: Props) => {
-  const { content, senderId, user, created } = props;
+  const { message, writerId, user, createdAt } = props;
   return (
     <li
       className={`flex flex-col font-Lora max-w-[80%] ${
-        senderId === user ? 'justify-self-end ' : 'justify-self-start'
+        writerId === user ? 'justify-self-end ' : 'justify-self-start'
       }`}
     >
       <p
-        className={`p-4 text-sm rounded-lg ${
-          senderId === user ? 'bg-whiteSmoke rounded-br-none' : 'bg-redAmaranth/10 rounded-bl-none'
+        className={`p-4 text-sm rounded-lg break-all ${
+          writerId === user ? 'bg-whiteSmoke rounded-br-none' : 'bg-redAmaranth/10 rounded-bl-none'
         }`}
       >
-        {content}
+        {message}
       </p>
-      <span className={`text-xs text-labelColor ${senderId === user ? 'text-right' : ''}`}>
-        {created.slice(12, 20)}
+      <span className={`text-xs text-labelColor ${writerId === user ? 'text-right' : ''}`}>
+        {createdAt.slice(12, 21)}
       </span>
     </li>
   );

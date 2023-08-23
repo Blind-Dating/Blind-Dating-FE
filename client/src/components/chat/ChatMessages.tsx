@@ -1,4 +1,3 @@
-import React from 'react';
 import ChatMessageItem from './ChatMessageItem';
 
 const ChatMessageDate = ({ date }: { date: string }) => {
@@ -15,20 +14,22 @@ const ChatMessageDate = ({ date }: { date: string }) => {
 };
 
 type Props = {
-  user: number;
-  messages: { messageId: number; content: string; senderId: number; created: string }[];
+  messages: { id: number; writerId: number; message: string; createdAt: string }[];
 };
 
-const ChatMessages = ({ user, messages }: Props) => {
+const ChatMessages = ({ messages }: Props) => {
   const messageDates: string[] = [];
   const dataWithDate = [];
 
   for (let i = 0; i < messages.length; i++) {
-    if (messageDates[messageDates.length - 1] !== messages[i].created.slice(0, 11)) {
-      messageDates.push(messages[i].created.slice(0, 11));
-      dataWithDate.push(<ChatMessageDate key={messages[i].created} date={messages[i].created} />);
+    const created = new Date(messages[i].createdAt).toLocaleString();
+    if (messageDates[messageDates.length - 1] !== created.slice(0, 11)) {
+      messageDates.push(created.slice(0, 11));
+      dataWithDate.push(<ChatMessageDate key={messages[i].createdAt} date={created} />);
     }
-    dataWithDate.push(<ChatMessageItem key={messages[i].messageId} user={user} {...messages[i]} />);
+    dataWithDate.push(
+      <ChatMessageItem key={messages[i].id} user={3} {...messages[i]} createdAt={created} />
+    );
   }
 
   return (
