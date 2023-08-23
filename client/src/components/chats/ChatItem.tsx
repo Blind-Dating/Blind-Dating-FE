@@ -1,13 +1,13 @@
 import { useNavigate } from 'react-router-dom';
 
 interface Props {
-  user2Nickname: string;
+  otherUserNickname: string;
   updatedAt: string;
   roomId: string;
 }
 
 const ChatItem = (props: Props) => {
-  const { user2Nickname: user, updatedAt, roomId } = props;
+  const { otherUserNickname: user, updatedAt, roomId } = props;
   const navigate = useNavigate();
 
   const updated = new Date(updatedAt).toLocaleDateString();

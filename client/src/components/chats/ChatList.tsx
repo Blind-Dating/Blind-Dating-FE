@@ -2,9 +2,9 @@ import ChatItem from './ChatItem';
 import { useGetChatRooms } from 'hooks/api/useGetChatRooms';
 
 function ChatList() {
-  const { isLoading, data } = useGetChatRooms();
+  const { isLoading, isError, data } = useGetChatRooms();
 
-  if (isLoading) {
+  if (isLoading || isError) {
     return (
       <ul className="flex flex-col flex-1 w-full gap-2 px-8 overflow-auto">
         <div
