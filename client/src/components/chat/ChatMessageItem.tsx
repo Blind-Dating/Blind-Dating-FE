@@ -22,7 +22,7 @@ const ChatMessageItem = (props: Props) => {
         {message}
       </p>
       <span className={`text-xs text-labelColor ${writerId === user ? 'text-right' : ''}`}>
-        {createdAt.slice(12, 21)}
+        {createdAt.slice(-11, -3)}
       </span>
     </li>
   );
