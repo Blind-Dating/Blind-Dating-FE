@@ -20,7 +20,7 @@ const PersonalityTestForm = ({ onNext, setSignUpAllValues }: Props) => {
 
   return (
     <div className="w-full h-full">
-      <Header progressWidth="3/4" title="Profile details" />
+      <Header progressWidth="3/4" title="Personality test" />
 
       <p className="w-full pr-16 mt-3 font-medium text-s h-9 pl-11 text-grayIsh">
         질문에 대한 답변은 상대방에게 내가 어떤 사람인지 알리는데 많은 도움이 됩니다.
@@ -28,7 +28,7 @@ const PersonalityTestForm = ({ onNext, setSignUpAllValues }: Props) => {
 
       <main className="mt-10 mb-[38px] px-7">
         <form className="flex flex-col items-center justify-center w-full " onSubmit={handleSubmit}>
-          <main className="space-y-8 h-[480px] overflow-y-auto no-scrollbar">
+          <main className="space-y-10 h-[480px] overflow-y-auto no-scrollbar">
             {QUESTIONS.map((question, index) => {
               return (
                 <QuestionField
