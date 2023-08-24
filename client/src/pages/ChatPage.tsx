@@ -4,16 +4,19 @@ import ChatUser from 'components/chat/ChatUser';
 import NoHeaderFooterLayout from 'components/layout/NoHeaderFooterLayout';
 import { useGetChatData } from 'hooks/api/useGetChat';
 import useHandleChat from 'hooks/useHandleChat';
+import { useParams } from 'react-router-dom';
 
 const ChatPage = () => {
-  const { data, isError, isLoading } = useGetChatData(1, 3);
-  const { connectHandler } = useHandleChat();
+  const { chatId } = useParams();
+
+  const { connectHandler, key } = useHandleChat();
+  const { data, isError, isLoading } = useGetChatData(chatId, 1, key);
 
   if (isError || isLoading) {
     return <></>;
   }
 
-  connectHandler('', 1, 3);
+  connectHandler('nickname', chatId, 1);
 
   return (
     <NoHeaderFooterLayout>
