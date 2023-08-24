@@ -19,7 +19,7 @@ type Step =
 
 function SignUpPage() {
   const [step, setStep] = useState<Step>('profileForm');
-  const [signUpAllValues, setSignUpAllValues] = useState<SignUpAllValues | null>(null);
+  const [signUpAllValues, setSignUpAllValues] = useState<SignUpAllValues>({});
 
   return (
     <NoHeaderFooterLayout>
@@ -52,6 +52,7 @@ function SignUpPage() {
           <IntroductionForm
             onNext={() => setStep('introduction')}
             setSignUpAllValues={setSignUpAllValues}
+            signUpAllValues={signUpAllValues}
           />
         )}
       </>

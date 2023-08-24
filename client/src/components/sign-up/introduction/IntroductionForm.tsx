@@ -1,13 +1,30 @@
 import { Header } from 'components/layout/Header';
+import { usePostSignUpData } from 'hooks/api/usePostSignUpData';
 import { SignUpAllValues } from 'pages/SignUpPage';
-import React from 'react';
+import React, { useState } from 'react';
 
 type Props = {
   onNext: () => void;
-  setSignUpAllValues: React.Dispatch<React.SetStateAction<SignUpAllValues | null>>;
+  signUpAllValues: SignUpAllValues;
+  setSignUpAllValues: React.Dispatch<React.SetStateAction<SignUpAllValues>>;
 };
 
-export const IntroductionForm = ({ onNext, setSignUpAllValues }: Props) => {
+export const IntroductionForm = ({ onNext, signUpAllValues, setSignUpAllValues }: Props) => {
+  const [textValue, setTextValue] = useState<string>('');
+  const { postSignUpDataFn } = usePostSignUpData();
+
+  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const { value } = e.currentTarget;
+
+    setTextValue(value);
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setSignUpAllValues((prev) => ({ ...prev, selfIntroduction: textValue }));
+    postSignUpDataFn(signUpAllValues);
+  };
+
   return (
     <div className="w-full h-full">
       <Header progressWidth="1" title="Introduction" />
@@ -17,8 +34,8 @@ export const IntroductionForm = ({ onNext, setSignUpAllValues }: Props) => {
       </p>
 
       <main className="mt-10 mb-[38px] px-7">
-        <form className="flex flex-col items-center justify-center w-full">
-          <main className=" w-full space-y-10 h-[480px] overflow-y-auto no-scrollbar">
+        <form className="flex flex-col items-center justify-center" onSubmit={handleSubmit}>
+          <main className=" w-full space-y-10 h-[480px] overflow-hidden">
             <textarea
               className="w-full h-full p-3 text-sm border rounded-lg outline-none resize-none font-NotoSans border-whiteLilac focus:border-black/25 focus:rounded-lg"
               placeholder="자기 소개를 적어주세요"
@@ -28,6 +45,8 @@ export const IntroductionForm = ({ onNext, setSignUpAllValues }: Props) => {
               required
               maxLength={300}
               autoFocus
+              value={textValue}
+              onChange={handleChange}
             />
           </main>
           <button className="mt-16 btn-red">Continue</button>

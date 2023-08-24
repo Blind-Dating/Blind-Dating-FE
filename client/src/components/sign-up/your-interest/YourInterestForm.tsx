@@ -9,7 +9,7 @@ import { interestState } from 'recoil/sign-up/atoms';
 
 type Props = {
   onNext: () => void;
-  setSignUpAllValues: React.Dispatch<React.SetStateAction<SignUpAllValues | null>>;
+  setSignUpAllValues: React.Dispatch<React.SetStateAction<SignUpAllValues>>;
 };
 
 export const YourInterestForm = ({ onNext, setSignUpAllValues }: Props) => {
