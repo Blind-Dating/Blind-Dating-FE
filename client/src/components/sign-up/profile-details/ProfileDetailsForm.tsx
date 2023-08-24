@@ -6,7 +6,7 @@ import { SignUpAllValues } from 'pages/SignUpPage';
 
 type Props = {
   onNext: () => void;
-  setSignUpAllValues: React.Dispatch<React.SetStateAction<SignUpAllValues | null>>;
+  setSignUpAllValues: React.Dispatch<React.SetStateAction<SignUpAllValues>>;
 };
 
 export type CheckFormValues = {

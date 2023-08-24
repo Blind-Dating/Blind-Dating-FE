@@ -9,7 +9,7 @@ import { ReactComponent as Dot } from 'assets/icons/dot.svg';
 
 type Props = {
   onNext: () => void;
-  setSignUpAllValues: React.Dispatch<React.SetStateAction<SignUpAllValues | null>>;
+  setSignUpAllValues: React.Dispatch<React.SetStateAction<SignUpAllValues>>;
 };
 
 export type SignUpFormValues = {
@@ -34,6 +34,8 @@ export const ProfileForm = ({ onNext, setSignUpAllValues }: Props) => {
   const onSubmit: SubmitHandler<SignUpFormValues> = (signUpFormValues) => {
     if (!isDuplicatedId) return alert('아이디 중복체크를 해주세요');
     if (!isDuplicatedNickname) return alert('닉네임 중복체크를 해주세요');
+
+    delete signUpFormValues.passwordCheck;
 
     setSignUpAllValues(signUpFormValues);
     onNext();

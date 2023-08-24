@@ -6,7 +6,7 @@ import { Header } from 'components/layout/Header';
 
 type Props = {
   onNext: () => void;
-  setSignUpAllValues: React.Dispatch<React.SetStateAction<SignUpAllValues | null>>;
+  setSignUpAllValues: React.Dispatch<React.SetStateAction<SignUpAllValues>>;
 };
 
 const PersonalityTestForm = ({ onNext, setSignUpAllValues }: Props) => {
