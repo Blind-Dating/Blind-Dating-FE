@@ -23,7 +23,7 @@ export const YourInterestForm = ({ onNext, setSignUpAllValues }: Props) => {
   };
   return (
     <div className="w-full h-full">
-      <Header progressWidth="1" title="Your interests" />
+      <Header progressWidth="4/5" title="Your interests" />
 
       <p className="w-full pr-16 mt-3 font-medium text-s h-9 pl-11 text-grayIsh">
         관심사 선택은 상대방에게 내가 어떤 관심사를 가진 사람인지 알리는데 많은 도움이 됩니다.
