@@ -24,11 +24,11 @@ const ChatItem = (props: Props) => {
         <div className="flex items-center justify-center flex-none w-12 h-12 rounded-full bg-labelColor">
           {user.slice(0, 1)}
         </div>
-        <div className="flex-1 text-sm">
+        <div className="flex-1 h-10 text-sm truncate ">
           <b>{user}</b>
-          <p>{recentMessage}</p>
+          <p className="mt-0.5">{recentMessage}</p>
         </div>
-        <div className="flex flex-col items-end justify-between">
+        <div className="flex flex-col items-end justify-between h-10">
           <span className="text-xs font-bold text-labelColor">{updated}</span>
         </div>
       </li>
