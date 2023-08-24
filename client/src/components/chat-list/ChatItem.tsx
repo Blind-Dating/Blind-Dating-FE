@@ -4,10 +4,11 @@ interface Props {
   otherUserNickname: string;
   updatedAt: string;
   roomId: string;
+  recentMessage: string;
 }
 
 const ChatItem = (props: Props) => {
-  const { otherUserNickname: user, updatedAt, roomId } = props;
+  const { otherUserNickname: user, updatedAt, roomId, recentMessage } = props;
   const navigate = useNavigate();
 
   const updated = new Date(updatedAt).toLocaleDateString();
@@ -25,7 +26,7 @@ const ChatItem = (props: Props) => {
         </div>
         <div className="flex-1 text-sm">
           <b>{user}</b>
-          <p>{'최근 메세지가 보이는 곳...'}</p>
+          <p>{recentMessage}</p>
         </div>
         <div className="flex flex-col items-end justify-between">
           <span className="text-xs font-bold text-labelColor">{updated}</span>
