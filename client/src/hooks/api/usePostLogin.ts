@@ -1,5 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
-import { axiosClient } from 'apis/axiosClient';
+import { axiosClient, axiosWithAuth } from 'apis/axiosClient';
 import { LoginFormValues } from 'components/login/LoginForm';
 import { useNavigate } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
@@ -29,6 +29,7 @@ export const usePostLogin = () => {
     {
       onSuccess: (res) => {
         setUserState({ token: res.data.accessToken, id: res.data.id, nickname: res.data.nickname });
+        axiosWithAuth.defaults.headers['Authorization'] = `Bearer ${res.data.accessToken}`;
         navigate('/discover');
         alert(res.message);
       },

@@ -16,10 +16,6 @@ export const axiosWithAuth = axios.create({
 
 axiosWithAuth.interceptors.request.use(
   (config) => {
-    const user = useRecoilValue(userState);
-    if (user.token) {
-      config.headers.Authorization = `Bearer ${user.token}`;
-    }
     return config;
   },
 
