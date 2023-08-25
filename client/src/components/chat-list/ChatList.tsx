@@ -21,12 +21,8 @@ function ChatList() {
 
   return (
     <ul className="flex flex-col w-full gap-2 px-8 overflow-auto flex-3">
-      {data.data && data.data.content.length ? (
-        <>
-          {data.data.content.map((chat) => (
-            <ChatItem key={chat.roomId} {...chat} />
-          ))}
-        </>
+      {data.data && data.data?.length ? (
+        <>{data.data?.map((chat) => <ChatItem key={chat.roomId} {...chat} />)}</>
       ) : (
         <li>No data</li>
       )}

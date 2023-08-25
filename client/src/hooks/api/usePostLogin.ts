@@ -10,7 +10,7 @@ type Token = {
 
 type LoginResponse = {
   data: {
-    token: Token;
+    accessToken: Token;
     nickname: string;
   };
 };
@@ -28,7 +28,7 @@ export const usePostLogin = () => {
     {
       onSuccess: ({ data }) => {
         // localStorage 임시저장
-        localStorage.setItem('token', JSON.stringify(data.token.accessToken));
+        localStorage.setItem('token', JSON.stringify(data.accessToken));
         navigate('/discover');
       },
       onError: () => {

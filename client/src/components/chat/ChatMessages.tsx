@@ -21,7 +21,7 @@ const ChatMessages = ({ messages }: Props) => {
   const messageDates: string[] = [];
   const dataWithDate = [];
 
-  for (let i = 0; i < messages.length; i++) {
+  for (let i = messages.length - 1; i >= 0; i--) {
     const created = new Date(messages[i].createdAt).toLocaleString();
     if (messageDates[messageDates.length - 1] !== created.slice(0, 11)) {
       messageDates.push(created.slice(0, 11));
