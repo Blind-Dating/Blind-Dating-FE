@@ -143,11 +143,11 @@ export const ProfileForm = ({ onNext, setSignUpAllValues }: Props) => {
               required: '아이디를 입력해주세요',
               maxLength: { value: 20, message: '20글자 이하 입력해주세요' },
               minLength: {
-                value: 5,
-                message: '5글자 이상 입력해주세요',
+                value: 8,
+                message: '8글자 이상 입력해주세요',
               },
               pattern: {
-                value: /^[A-za-z0-9가-힣]{5,20}$/,
+                value: /^[A-za-z0-9가-힣]{8,20}$/,
                 message: '가능한 문자: 영문 대소문자, 글자 단위 한글, 숫자',
               },
             }}
