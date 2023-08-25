@@ -1,6 +1,4 @@
 import axios from 'axios';
-import { useRecoilValue } from 'recoil';
-import { userState } from 'recoil/user/atoms';
 
 export const axiosClient = axios.create({
   baseURL: import.meta.env.VITE_API_ADDRESS,
