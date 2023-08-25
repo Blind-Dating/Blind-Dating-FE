@@ -1,45 +1,42 @@
 import { useMutation } from '@tanstack/react-query';
+import { axiosClient } from 'apis/axiosClient';
 import { LoginFormValues } from 'components/login/LoginForm';
-import axiosClient from 'apis/axiosClient';
 import { useNavigate } from 'react-router-dom';
+import { useSetRecoilState } from 'recoil';
+import { userState } from 'recoil/user/atoms';
 
-type Token = {
-  accessToken: string;
-  refreshToken: string;
-};
-
-type LoginResponse = {
+type ApiResponse = {
+  message: string;
+  status: string;
   data: {
-    accessToken: Token;
+    accessToken: string;
+    id: number;
     nickname: string;
   };
 };
 
-const postLoginFetcher = async (loginInfo: LoginFormValues): Promise<LoginResponse> => {
-  const { data } = await axiosClient.post<LoginResponse>('api/login', loginInfo);
+const postLoginFetcher = async (loginInfo: LoginFormValues): Promise<ApiResponse> => {
+  const { data } = await axiosClient.post<ApiResponse>('api/login', loginInfo);
   return data;
 };
 
 export const usePostLogin = () => {
   const navigate = useNavigate();
+  const setUserState = useSetRecoilState(userState);
 
-  const { mutate, isLoading } = useMutation<LoginResponse, Error, LoginFormValues>(
+  const { mutate: postLoginFn, isLoading } = useMutation<ApiResponse, Error, LoginFormValues>(
     postLoginFetcher,
     {
-      onSuccess: ({ data }) => {
-        // localStorage 임시저장
-        localStorage.setItem('token', JSON.stringify(data.accessToken));
+      onSuccess: (res) => {
+        setUserState({ token: res.data.accessToken, id: res.data.id, nickname: res.data.nickname });
         navigate('/discover');
+        alert(res.message);
       },
-      onError: () => {
-        alert('Login Error');
+      onError: (res) => {
+        alert(res.message);
       },
     }
   );
-
-  const postLoginFn = (loginInfo: LoginFormValues) => {
-    mutate(loginInfo);
-  };
 
   return {
     isLoading,
