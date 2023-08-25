@@ -4,12 +4,11 @@ import { SignUpAllValues } from 'pages/SignUpPage';
 import React, { useState } from 'react';
 
 type Props = {
-  onNext: () => void;
   signUpAllValues: SignUpAllValues;
   setSignUpAllValues: React.Dispatch<React.SetStateAction<SignUpAllValues>>;
 };
 
-export const IntroductionForm = ({ onNext, signUpAllValues, setSignUpAllValues }: Props) => {
+export const IntroductionForm = ({ signUpAllValues, setSignUpAllValues }: Props) => {
   const [textValue, setTextValue] = useState<string>('');
   const { postSignUpDataFn } = usePostSignUpData();
 
