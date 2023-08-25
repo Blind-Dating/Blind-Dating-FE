@@ -1,8 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
-import axiosClient from 'apis/axiosClient';
+import { axiosWithAuth } from 'apis/axiosClient';
 
 const fetchChatRooms = async () => {
-  const { data } = await axiosClient.get(`api/chatroom`);
+  const { data } = await axiosWithAuth.get(`api/chatroom`);
   return data;
 };
 

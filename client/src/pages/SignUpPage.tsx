@@ -50,7 +50,6 @@ function SignUpPage() {
         )}
         {step === 'introduction' && (
           <IntroductionForm
-            onNext={() => setStep('introduction')}
             setSignUpAllValues={setSignUpAllValues}
             signUpAllValues={signUpAllValues}
           />

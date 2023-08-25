@@ -1,8 +1,7 @@
 import Layout from 'components/layout/Layout';
-import React from 'react';
 
 function DateDiscoverPage() {
-  return <Layout>DateDiscover</Layout>;
+  return <Layout title="DateDiscover">내용</Layout>;
 }
 
 export default DateDiscoverPage;

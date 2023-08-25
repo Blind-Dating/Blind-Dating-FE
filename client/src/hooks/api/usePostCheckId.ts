@@ -1,6 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
+import { axiosClient } from 'apis/axiosClient';
 import { AxiosError } from 'axios';
-import axiosClient from 'apis/axiosClient';
 
 type ApiResponse = {
   status: string;
