@@ -5,7 +5,7 @@ import { SubmitHandler } from 'react-hook-form';
 import { SignUpAllValues } from 'pages/SignUpPage';
 import { usePostCheckNickname } from 'hooks/api/usePostCheckNickname';
 import { usePostCheckId } from 'hooks/api/usePostCheckId';
-import { ReactComponent as Dot } from 'assets/icons/dot.svg';
+import { Header } from 'components/layout/Header';
 
 type Props = {
   onNext: () => void;
@@ -54,127 +54,130 @@ export const ProfileForm = ({ onNext, setSignUpAllValues }: Props) => {
   };
 
   return (
-    <div className="flex flex-col">
-      <header>
-        <h1 className="mb-10 text-2xl font-bold font-Lora">Profile</h1>
-      </header>
+    <div className="w-full h-full">
+      <Header progressWidth="1/5" title="Profile" />
 
-      <div className="dot-slide flex mb-10 mx-auto gap-1.5">
-        <Dot opacity="10" />
-        <Dot opacity="0.1" />
-        <Dot opacity="0.1" />
-      </div>
+      <p className="w-full pr-16 mt-3 font-medium text-s h-9 pl-11 text-grayIsh">
+        닉네임은 타 유저에게 보이는 이름으로 사용됩니다
+      </p>
 
-      <form className="flex flex-col max-w-sm" onSubmit={handleSubmit(onSubmit)}>
-        <section className="flex">
-          <InputField
-            className="input-md"
-            type="text"
-            label="아이디"
-            id="userId"
-            placeholder="id"
-            autoFocus={true}
-            error={errors.userId?.message}
-            register={register}
-            rules={{
-              required: '아이디를 입력해주세요',
-              maxLength: { value: 20, message: '20글자 이하 입력해주세요' },
-              minLength: {
-                value: 5,
-                message: '5글자 이상 입력해주세요',
-              },
-              pattern: {
-                value: /^[A-za-z0-9가-힣]{5,20}$/,
-                message: '가능한 문자: 영문 대소문자, 글자 단위 한글, 숫자',
-              },
-            }}
-          />
-          <button
-            className={`mt-6 ml-4 btn-check ${isDuplicatedId ? 'btn-checkSuccess' : ''}`}
-            onClick={handleCheckId}
-            disabled={!!errors?.userId}
-          >
-            {isDuplicatedId ? '확인' : '중복확인'}
-          </button>
-        </section>
+      <main className="mt-10 mb-[38px] px-7">
+        <form
+          className="flex flex-col items-center justify-between w-full"
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <main className="h-[480px] space-y-2">
+            <section className="flex items-center justify-around gap-3">
+              <InputField
+                className="input-md"
+                type="text"
+                label="아이디"
+                id="userId"
+                placeholder="id"
+                autoFocus={true}
+                error={errors.userId?.message}
+                register={register}
+                rules={{
+                  required: '아이디를 입력해주세요',
+                  maxLength: { value: 20, message: '20글자 이하 입력해주세요' },
+                  minLength: {
+                    value: 5,
+                    message: '5글자 이상 입력해주세요',
+                  },
+                  pattern: {
+                    value: /^[A-za-z0-9가-힣]{5,20}$/,
+                    message: '가능한 문자: 영문 대소문자, 글자 단위 한글, 숫자',
+                  },
+                }}
+              />
+              <button
+                className={`mt-3 btn-check ${isDuplicatedId ? 'btn-checkSuccess' : ''}`}
+                onClick={handleCheckId}
+                disabled={!!errors?.userId}
+              >
+                {isDuplicatedId ? '확인' : '중복확인'}
+              </button>
+            </section>
 
-        <section className="flex">
-          <InputField
-            className="input-md"
-            type="text"
-            id="nickname"
-            label="닉네임"
-            register={register}
-            placeholder="nickname"
-            error={errors.nickname?.message}
-            rules={{
-              required: '닉네임을 입력해주세요',
-              maxLength: { value: 20, message: '20글자 이하 입력해주세요' },
-              minLength: {
-                value: 3,
-                message: '3글자 이상 입력해주세요',
-              },
-              pattern: {
-                value: /^[A-za-z0-9가-힣]{3,20}$/,
-                message: '가능한 문자: 영문 대소문자, 글자 단위 한글, 숫자',
-              },
-            }}
-          />
+            <section className="flex items-center justify-between gap-3">
+              <InputField
+                className="input-md"
+                type="text"
+                id="nickname"
+                label="닉네임"
+                register={register}
+                placeholder="nickname"
+                error={errors.nickname?.message}
+                rules={{
+                  required: '닉네임을 입력해주세요',
+                  maxLength: { value: 20, message: '20글자 이하 입력해주세요' },
+                  minLength: {
+                    value: 3,
+                    message: '3글자 이상 입력해주세요',
+                  },
+                  pattern: {
+                    value: /^[A-za-z0-9가-힣]{3,20}$/,
+                    message: '가능한 문자: 영문 대소문자, 글자 단위 한글, 숫자',
+                  },
+                }}
+              />
 
-          <button
-            className={`mt-6 ml-4 btn-check ${isDuplicatedNickname ? 'btn-checkSuccess' : ''}`}
-            onClick={handleNickname}
-            disabled={!!errors?.nickname}
-          >
-            {isDuplicatedNickname ? '확인' : '중복확인'}
-          </button>
-        </section>
+              <button
+                className={`mt-3 btn-check ${isDuplicatedNickname ? 'btn-checkSuccess' : ''}`}
+                onClick={handleNickname}
+                disabled={!!errors?.nickname}
+              >
+                {isDuplicatedNickname ? '확인' : '중복확인'}
+              </button>
+            </section>
 
-        <section>
-          <InputField
-            className="input-md"
-            type="password"
-            id="userPassword"
-            label="비밀번호"
-            placeholder="*****"
-            error={errors.userPassword?.message}
-            register={register}
-            rules={{
-              required: '아이디를 입력해주세요',
-              maxLength: { value: 20, message: '20글자 이하 입력해주세요' },
-              minLength: {
-                value: 8,
-                message: '8글자 이상 입력해주세요',
-              },
-              pattern: {
-                value: /^[A-za-z0-9가-힣]{8,20}$/,
-                message: '가능한 문자: 영문 대소문자, 글자 단위 한글, 숫자',
-              },
-            }}
-          />
-        </section>
+            <div className="flex flex-col items-start gap-3">
+              <section>
+                <InputField
+                  className="input-md"
+                  type="password"
+                  id="userPassword"
+                  label="비밀번호"
+                  placeholder="*****"
+                  error={errors.userPassword?.message}
+                  register={register}
+                  rules={{
+                    required: '아이디를 입력해주세요',
+                    maxLength: { value: 20, message: '20글자 이하 입력해주세요' },
+                    minLength: {
+                      value: 8,
+                      message: '8글자 이상 입력해주세요',
+                    },
+                    pattern: {
+                      value: /^[A-za-z0-9가-힣]{8,20}$/,
+                      message: '가능한 문자: 영문 대소문자, 글자 단위 한글, 숫자',
+                    },
+                  }}
+                />
+              </section>
 
-        <section>
-          <InputField
-            className="input-md"
-            type="password"
-            id="passwordCheck"
-            label="비밀번호 확인"
-            register={register}
-            error={errors.passwordCheck?.message}
-            placeholder="*****"
-            rules={{
-              required: '비밀번호를 다시 입력해주세요',
-              validate: (passwordCheck) =>
-                passwordCheck === userPassword || '비밀번호가 일치하지 않습니다',
-            }}
-          />
-        </section>
+              <section>
+                <InputField
+                  className="input-md"
+                  type="password"
+                  id="passwordCheck"
+                  label="비밀번호 확인"
+                  register={register}
+                  error={errors.passwordCheck?.message}
+                  placeholder="*****"
+                  rules={{
+                    required: '비밀번호를 다시 입력해주세요',
+                    validate: (passwordCheck) =>
+                      passwordCheck === userPassword || '비밀번호가 일치하지 않습니다',
+                  }}
+                />
+              </section>
+            </div>
+          </main>
 
-        <button className="mt-20 btn-red" type="submit">
-          Continue
-        </button>
-      </form>
+          <button className="mt-14 btn-red">Continue</button>
+        </form>
+      </main>
     </div>
   );
 };
