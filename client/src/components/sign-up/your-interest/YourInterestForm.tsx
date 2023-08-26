@@ -37,7 +37,7 @@ export const YourInterestForm = ({ onNext, setSignUpAllValues }: Props) => {
           </main>
 
           <button
-            className={`mt-16 ${seletedCount < 3 ? 'btn-red' : 'btn-red-checkSuccess'}`}
+            className={`mt-14 ${seletedCount < 3 ? 'btn-red' : 'btn-red-checkSuccess'}`}
             disabled={seletedCount < 3}
           >{`Continue ( ${seletedCount} / 5 )`}</button>
         </form>
