@@ -61,7 +61,7 @@ export const ProfileForm = ({ onNext, setSignUpAllValues }: Props) => {
         닉네임은 타 유저에게 보이는 이름으로 사용됩니다
       </p>
 
-      <main className="mt-10 mb-[38px] px-7">
+      <main className="mt-10 px-9">
         <form
           className="flex flex-col items-center justify-between w-full"
           onSubmit={handleSubmit(onSubmit)}
