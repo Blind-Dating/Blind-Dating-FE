@@ -30,7 +30,7 @@ export const IntroductionForm = ({ signUpAllValues, setSignUpAllValues }: Props)
       <Header progressWidth="1" title="Introduction" />
 
       <p className="w-full pr-16 mt-3 font-medium text-s h-9 pl-11 text-grayIsh">
-        자기소개를 자세히 적어주시면, 타 유저가 자신이 어떤 사람인지 파악하는데 많은 도움이 됩니다.
+        자기소개를 자세히 적어주시면, 상대방에게 자신이 어떤 사람인지 파악하는데 많은 도움이 됩니다.
       </p>
 
       <main className="mt-10 px-7">

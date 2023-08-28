@@ -42,7 +42,7 @@ export const ProfileDetailsForm = ({ onNext, setSignUpAllValues }: Props) => {
       <Header progressWidth="2/5" title="Profile details" />
 
       <p className="w-full pr-16 mt-3 font-medium text-s h-9 pl-11 text-grayIsh">
-        닉네임은 타 유저에게 보이는 이름으로 사용됩니다
+        상세 정보는 상대방에게 나를 알리는데 많은 도움이 됩니다.
       </p>
 
       <main className="mt-10 px-9">
