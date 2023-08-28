@@ -34,9 +34,7 @@ export const InterestField = ({ label, interestings }: Props) => {
       {interestings.map((interest) => {
         return (
           <button
-            className={`${
-              seletedInterest.includes(interest) ? 'tag-selected px-2.5 py-2' : 'tag px-2.5 py-2'
-            }`}
+            className={`${seletedInterest.includes(interest) ? 'tag-selected' : 'tag'}`}
             key={interest}
             type="button"
             value={interest}
