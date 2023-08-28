@@ -65,8 +65,8 @@ export const ProfileDetailsForm = ({ onNext, setSignUpAllValues }: Props) => {
                 <button
                   type="button"
                   name="gender"
-                  value="F"
-                  className={`${collectValues?.gender === 'F' ? 'tag-selected' : 'tag'}`}
+                  value="W"
+                  className={`${collectValues?.gender === 'W' ? 'tag-selected' : 'tag'}`}
                   onClick={handleClick}
                 >
                   여성
