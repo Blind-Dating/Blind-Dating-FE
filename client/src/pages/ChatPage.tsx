@@ -12,13 +12,13 @@ import { userState } from 'recoil/user/atoms';
 
 const ChatPage = () => {
   const { chatId } = useParams();
-  const { id, nickname } = useRecoilValue(userState);
-  const { connectHandler, key } = useHandleChat({ username: nickname, roomId: chatId, userId: id });
+  const { id } = useRecoilValue(userState);
+  const { connectHandler, key } = useHandleChat();
   const { data, isError, isLoading } = useGetChatData(chatId, id, key);
   const queryClient = useQueryClient();
 
   useEffect(() => {
-    connectHandler();
+    connectHandler(chatId);
     queryClient.invalidateQueries(['chatroom', key]);
   }, []);
 

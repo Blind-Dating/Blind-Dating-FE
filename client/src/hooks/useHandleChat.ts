@@ -1,5 +1,8 @@
 import { Stomp } from '@stomp/stompjs';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
+import { userState } from 'recoil/user/atoms';
 import SockJS from 'sockjs-client';
 
 type MessageContent = {
@@ -8,21 +11,16 @@ type MessageContent = {
   message: string;
 };
 
-type SocketConnect = {
-  username: string | number;
-  roomId: string | undefined;
-  userId: string | number;
-};
-
-const useHandleChat = (data: SocketConnect) => {
-  const client = Stomp.over(() => new SockJS(`${import.meta.env.VITE_API_ADDRESS}stomp/chatroom`));
+const useHandleChat = () => {
+  const client = Stomp.over(() => new SockJS(`${import.meta.env.VITE_API_ADDRESS}stomp/chat`));
   const [key, setKey] = useState(false);
+  const { id: userId, nickname: username } = useRecoilValue(userState);
+  const navigate = useNavigate();
 
-  const connectHandler = () => {
-    client.connect(data, () => {
-      client.subscribe('/sub/chat/room/' + data.roomId, (content) => {
+  const connectHandler = (roomId: string | undefined) => {
+    client.connect({ userId, username, roomId }, () => {
+      client.subscribe('/sub/chat/room/' + roomId, (content) => {
         if (content) {
-          console.log(content);
           setKey((prev) => !prev);
         }
       });
@@ -33,13 +31,26 @@ const useHandleChat = (data: SocketConnect) => {
     if (client.connected) {
       client.send('/pub/chat/message', {}, JSON.stringify(content));
     } else {
-      client.connect(data, () => {
+      client.connect({ userId, username, roomId: content.chatRoomId }, () => {
         client.send('/pub/chat/message', {}, JSON.stringify(content));
       });
     }
   };
 
-  return { connectHandler, sendHandler, key };
+  const disconnectHandler = (roomId: string | undefined) => {
+    if (client.connected) {
+      client.send('/pub/chat/disconnect', {}, JSON.stringify({ chatRoomId: roomId }));
+    } else {
+      client.connect({ userId, username, roomId }, () => {
+        client.send('/pub/chat/disconnect', {}, JSON.stringify({ chatRoomId: roomId }));
+      });
+    }
+
+    client.disconnect();
+    navigate('/chats');
+  };
+
+  return { connectHandler, sendHandler, disconnectHandler, key };
 };
 
 export default useHandleChat;
