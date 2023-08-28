@@ -43,12 +43,33 @@ export const ProfileForm = ({ onNext, setSignUpAllValues }: Props) => {
 
   const handleCheckId = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
+    const regex = /^[A-Za-z0-9가-힣]{5,20}$/;
 
+    if (userId === undefined) {
+      alert('아이디를 입력해주세요.');
+      return;
+    }
+
+    if (!regex.test(userId)) {
+      alert('아이디는 영문 대소문자, 글자 단위 한글, 숫자만 가능합니다.');
+      return;
+    }
     postCheckIdFn(userId);
   };
 
   const handleNickname = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
+    const regex = /^[A-Za-z0-9가-힣]{5,20}$/;
+
+    if (userNickname === undefined) {
+      alert('아이디를 입력해주세요.');
+      return;
+    }
+
+    if (!regex.test(userNickname)) {
+      alert('닉네임은 영문 대소문자, 글자 단위 한글, 숫자만 가능합니다.');
+      return;
+    }
 
     postCheckNicknameFn(userNickname);
   };
@@ -58,10 +79,10 @@ export const ProfileForm = ({ onNext, setSignUpAllValues }: Props) => {
       <Header progressWidth="1/5" title="Profile" />
 
       <p className="w-full pr-16 mt-3 font-medium text-s h-9 pl-11 text-grayIsh">
-        닉네임은 타 유저에게 보이는 이름으로 사용됩니다
+        닉네임은 상대방에게 보이는 이름으로 사용됩니다.
       </p>
 
-      <main className="mt-10 mb-[38px] px-7">
+      <main className="mt-10 px-9">
         <form
           className="flex flex-col items-center justify-between w-full"
           onSubmit={handleSubmit(onSubmit)}
@@ -86,12 +107,14 @@ export const ProfileForm = ({ onNext, setSignUpAllValues }: Props) => {
                   },
                   pattern: {
                     value: /^[A-za-z0-9가-힣]{5,20}$/,
-                    message: '가능한 문자: 영문 대소문자, 글자 단위 한글, 숫자',
+                    message: '가능한 문자: 영문 대소문자, 한글, 숫자',
                   },
                 }}
               />
               <button
-                className={`mt-3 btn-check ${isDuplicatedId ? 'btn-checkSuccess' : ''}`}
+                className={`mt-3 btn-check ${isDuplicatedId ? 'btn-checkSuccess' : ''} ${
+                  errors.userId ? 'mb-5' : ''
+                }`}
                 onClick={handleCheckId}
                 disabled={!!errors?.userId}
               >
@@ -117,13 +140,15 @@ export const ProfileForm = ({ onNext, setSignUpAllValues }: Props) => {
                   },
                   pattern: {
                     value: /^[A-za-z0-9가-힣]{3,20}$/,
-                    message: '가능한 문자: 영문 대소문자, 글자 단위 한글, 숫자',
+                    message: '가능한 문자: 영문 대소문자, 한글, 숫자',
                   },
                 }}
               />
 
               <button
-                className={`mt-3 btn-check ${isDuplicatedNickname ? 'btn-checkSuccess' : ''}`}
+                className={`mt-3 btn-check ${isDuplicatedNickname ? 'btn-checkSuccess' : ''} ${
+                  errors.nickname ? 'mb-5' : ''
+                }`}
                 onClick={handleNickname}
                 disabled={!!errors?.nickname}
               >

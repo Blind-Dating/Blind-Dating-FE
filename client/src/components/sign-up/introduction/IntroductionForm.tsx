@@ -20,8 +20,9 @@ export const IntroductionForm = ({ signUpAllValues, setSignUpAllValues }: Props)
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSignUpAllValues((prev) => ({ ...prev, selfIntroduction: textValue }));
-    postSignUpDataFn(signUpAllValues);
+    const updatedValues = { ...signUpAllValues, selfIntroduction: textValue };
+    setSignUpAllValues(updatedValues);
+    postSignUpDataFn(updatedValues);
   };
 
   return (
@@ -29,10 +30,10 @@ export const IntroductionForm = ({ signUpAllValues, setSignUpAllValues }: Props)
       <Header progressWidth="1" title="Introduction" />
 
       <p className="w-full pr-16 mt-3 font-medium text-s h-9 pl-11 text-grayIsh">
-        자기소개를 자세히 적어주시면, 타 유저가 자신이 어떤 사람인지 파악하는데 많은 도움이 됩니다.
+        자기소개를 자세히 적어주시면, 상대방에게 자신이 어떤 사람인지 파악하는데 많은 도움이 됩니다.
       </p>
 
-      <main className="mt-10 mb-[38px] px-7">
+      <main className="mt-10 px-7">
         <form className="flex flex-col items-center justify-center" onSubmit={handleSubmit}>
           <main className=" w-full space-y-10 h-[480px] overflow-hidden">
             <textarea
@@ -42,13 +43,14 @@ export const IntroductionForm = ({ signUpAllValues, setSignUpAllValues }: Props)
               cols={10}
               rows={10}
               required
+              minLength={10}
               maxLength={300}
               autoFocus
               value={textValue}
               onChange={handleChange}
             />
           </main>
-          <button className="mt-16 btn-red">Continue</button>
+          <button className="mt-14 btn-red">Continue</button>
         </form>
       </main>
     </div>

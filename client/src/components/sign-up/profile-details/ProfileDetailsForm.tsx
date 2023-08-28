@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { ReactComponent as Dot } from 'assets/icons/dot.svg';
 import { MoreModal } from './MoreModal';
-import { MBTIS, REGIONS, INTERESTINGS_SPORTS } from 'assets/config';
+import { MBTIS, REGIONS } from 'assets/config';
 import { SignUpAllValues } from 'pages/SignUpPage';
+import { Header } from 'components/layout/Header';
 
 type Props = {
   onNext: () => void;
@@ -13,7 +13,6 @@ export type CheckFormValues = {
   gender: string;
   region: string;
   mbti: string;
-  interests: string[];
 };
 
 export const ProfileDetailsForm = ({ onNext, setSignUpAllValues }: Props) => {
@@ -21,7 +20,6 @@ export const ProfileDetailsForm = ({ onNext, setSignUpAllValues }: Props) => {
     gender: '',
     region: '',
     mbti: '',
-    interests: [],
   });
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -40,117 +38,84 @@ export const ProfileDetailsForm = ({ onNext, setSignUpAllValues }: Props) => {
   };
 
   return (
-    <div className="flex flex-col ">
-      <header>
-        <h1 className="mb-10 text-2xl font-bold font-Lora">Profile details</h1>
-      </header>
+    <div className="w-full h-full">
+      <Header progressWidth="2/5" title="Profile details" />
 
-      <div className="dot-slide flex mb-10 mx-auto gap-1.5">
-        <Dot opacity="0.1" />
-        <Dot opacity="10" />
-        <Dot opacity="0.1" />
-      </div>
+      <p className="w-full pr-16 mt-3 font-medium text-s h-9 pl-11 text-grayIsh">
+        상세 정보는 상대방에게 나를 알리는데 많은 도움이 됩니다.
+      </p>
 
-      <form className="flex flex-col max-w-sm" onSubmit={handleSubmit}>
-        <main className="flex flex-col gap-5 ">
-          <section className="flex flex-col gap-1">
-            <label className="pl-2 label" htmlFor="성별">
-              성별
-            </label>
-            <div className="space-x-2">
-              <button
-                type="button"
-                name="gender"
-                value="남성"
-                className={`${collectValues?.gender === '남성' ? 'tag-selected' : 'tag'}`}
-                onClick={handleClick}
-              >
-                남성
-              </button>
-              <button
-                type="button"
-                name="gender"
-                value="여성"
-                className={`${collectValues?.gender === '여성' ? 'tag-selected' : 'tag'}`}
-                onClick={handleClick}
-              >
-                여성
-              </button>
-            </div>
-          </section>
+      <main className="mt-10 px-9">
+        <form className="flex flex-col items-start justify-between w-full" onSubmit={handleSubmit}>
+          <main className="h-[480px] space-y-5">
+            <section className="flex flex-col gap-1">
+              <label className="pl-2 label" htmlFor="성별">
+                성별
+              </label>
+              <div className="space-x-2">
+                <button
+                  type="button"
+                  name="gender"
+                  value="남성"
+                  className={`${collectValues?.gender === '남성' ? 'tag-selected' : 'tag'}`}
+                  onClick={handleClick}
+                >
+                  남성
+                </button>
+                <button
+                  type="button"
+                  name="gender"
+                  value="여성"
+                  className={`${collectValues?.gender === '여성' ? 'tag-selected' : 'tag'}`}
+                  onClick={handleClick}
+                >
+                  여성
+                </button>
+              </div>
+            </section>
 
-          <section className="flex flex-col gap-1">
-            <label className="pl-2 label" htmlFor="지역">
-              지역
-            </label>
-            <div className="space-x-2">
-              <MoreModal
-                name="region"
-                tags={REGIONS}
-                title="지역"
-                setCollectValues={setCollectValues}
-              />
-              {collectValues?.region && (
-                <span className="tag-selected">{collectValues.region}</span>
-              )}
-            </div>
-          </section>
+            <section className="flex flex-col gap-1">
+              <label className="pl-2 label" htmlFor="지역">
+                지역
+              </label>
+              <div className="space-x-2">
+                <MoreModal
+                  name="region"
+                  tags={REGIONS}
+                  title="지역"
+                  setCollectValues={setCollectValues}
+                />
+                {collectValues?.region && (
+                  <span className="tag-selected">{collectValues.region}</span>
+                )}
+              </div>
+            </section>
 
-          <section className="flex flex-col gap-1">
-            <label className="pl-2 label" htmlFor="MBTI">
-              MBTI
-            </label>
-            <div className="space-x-2">
-              <MoreModal
-                name="mbti"
-                tags={MBTIS}
-                title="MBTI"
-                setCollectValues={setCollectValues}
-              />
-              {collectValues?.mbti && <span className="tag-selected">{collectValues.mbti}</span>}
-            </div>
-          </section>
+            <section className="flex flex-col gap-1">
+              <label className="pl-2 label" htmlFor="MBTI">
+                MBTI
+              </label>
+              <div className="space-x-2">
+                <MoreModal
+                  name="mbti"
+                  tags={MBTIS}
+                  title="MBTI"
+                  setCollectValues={setCollectValues}
+                />
+                {collectValues?.mbti && <span className="tag-selected">{collectValues.mbti}</span>}
+              </div>
+            </section>
+          </main>
 
-          <section className="flex flex-col gap-1">
-            <label className="pl-2 label" htmlFor="관심사">
-              관심사
-            </label>
-            <div className="mb-5 space-x-2">
-              <MoreModal
-                name="interests"
-                tags={INTERESTINGS_SPORTS}
-                title="관심사"
-                setCollectValues={setCollectValues}
-                selectableCount={3}
-              />
-            </div>
-
-            <div className="space-x-2">
-              {collectValues?.interests.length === 3 &&
-                collectValues.interests.map((value) => {
-                  return (
-                    <span key={value} className="tag-selected">
-                      {value}
-                    </span>
-                  );
-                })}
-            </div>
-          </section>
-        </main>
-
-        <button
-          className="mt-24 btn-red"
-          type="submit"
-          disabled={
-            !collectValues.gender ||
-            !collectValues.region ||
-            !collectValues.mbti ||
-            collectValues.interests.length < 3
-          }
-        >
-          Continue
-        </button>
-      </form>
+          <button
+            className="mt-14 btn-red"
+            type="submit"
+            disabled={!collectValues.gender || !collectValues.region || !collectValues.mbti}
+          >
+            Continue
+          </button>
+        </form>
+      </main>
     </div>
   );
 };

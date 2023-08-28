@@ -57,10 +57,10 @@
   }
 
   .tag {
-    @apply px-3 py-2.5 text-sm text-center border rounded-2xl border-whiteLilac font-NotoSans text-graySlate hover:border-redAmaranth hover:font-bold hover:shadow-lg;
+    @apply px-2.5 py-2 text-sm text-center border rounded-2xl border-whiteLilac font-NotoSans text-graySlate hover:border-redAmaranth hover:font-bold hover:shadow-lg;
   }
 
   .tag-selected {
-    @apply px-3 py-2.5 text-sm font-bold text-center border shadow-lg text-redAmaranth rounded-2xl font-NotoSans border-redAmaranth;
+    @apply px-2.5 py-2 text-sm font-bold text-center border shadow-lg text-redAmaranth rounded-2xl font-NotoSans border-redAmaranth;
   }
 }
