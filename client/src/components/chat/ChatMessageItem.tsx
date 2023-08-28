@@ -1,5 +1,5 @@
 type Props = {
-  user: number;
+  user: string | number;
   id: number;
   message: string;
   writerId: number;

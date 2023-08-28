@@ -15,9 +15,10 @@ const ChatMessageDate = ({ date }: { date: string }) => {
 
 type Props = {
   messages: { id: number; writerId: number; message: string; createdAt: string }[];
+  user: string | number;
 };
 
-const ChatMessages = ({ messages }: Props) => {
+const ChatMessages = ({ messages, user }: Props) => {
   const messageDates: string[] = [];
   const dataWithDate = [];
 
@@ -28,7 +29,7 @@ const ChatMessages = ({ messages }: Props) => {
       dataWithDate.push(<ChatMessageDate key={messages[i].createdAt} date={created} />);
     }
     dataWithDate.push(
-      <ChatMessageItem key={messages[i].id} user={3} {...messages[i]} createdAt={created} />
+      <ChatMessageItem key={messages[i].id} user={user} {...messages[i]} createdAt={created} />
     );
   }
 
