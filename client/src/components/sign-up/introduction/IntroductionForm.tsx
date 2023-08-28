@@ -20,8 +20,9 @@ export const IntroductionForm = ({ signUpAllValues, setSignUpAllValues }: Props)
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSignUpAllValues((prev) => ({ ...prev, selfIntroduction: textValue }));
-    postSignUpDataFn(signUpAllValues);
+    const updatedValues = { ...signUpAllValues, selfIntroduction: textValue };
+    setSignUpAllValues(updatedValues);
+    postSignUpDataFn(updatedValues);
   };
 
   return (
