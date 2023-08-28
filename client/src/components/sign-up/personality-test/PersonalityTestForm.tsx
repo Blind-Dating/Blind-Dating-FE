@@ -40,7 +40,7 @@ const PersonalityTestForm = ({ onNext, setSignUpAllValues }: Props) => {
               );
             })}
           </main>
-          <button className="mt-16 btn-red" disabled={collectAnswers.includes(null)}>
+          <button className="mt-14 btn-red" disabled={collectAnswers.includes(null)}>
             Continue
           </button>
         </form>

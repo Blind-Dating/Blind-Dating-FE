@@ -43,13 +43,14 @@ export const IntroductionForm = ({ signUpAllValues, setSignUpAllValues }: Props)
               cols={10}
               rows={10}
               required
+              minLength={10}
               maxLength={300}
               autoFocus
               value={textValue}
               onChange={handleChange}
             />
           </main>
-          <button className="mt-16 btn-red">Continue</button>
+          <button className="mt-14 btn-red">Continue</button>
         </form>
       </main>
     </div>
