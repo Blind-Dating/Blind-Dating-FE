@@ -1,4 +1,3 @@
-import { useQueryClient } from '@tanstack/react-query';
 import ChatForm from 'components/chat/ChatForm';
 import ChatMessages from 'components/chat/ChatMessages';
 import ChatUser from 'components/chat/ChatUser';
@@ -12,14 +11,12 @@ import { userState } from 'recoil/user/atoms';
 
 const ChatPage = () => {
   const { chatId } = useParams();
-  const { id } = useRecoilValue(userState);
+  const { userId } = useRecoilValue(userState);
   const { connectHandler, key } = useHandleChat();
   const { data, isError, isLoading } = useGetChatData(chatId, key);
-  const queryClient = useQueryClient();
 
   useEffect(() => {
     connectHandler(chatId);
-    queryClient.invalidateQueries(['chatroom', key]);
   }, []);
 
   if (isError || isLoading) {
@@ -29,7 +26,7 @@ const ChatPage = () => {
   return (
     <NoHeaderFooterLayout>
       <ChatUser user={data?.data.otherUserNickname} />
-      <ChatMessages messages={data?.data.chatList.content} user={id} />
+      <ChatMessages messages={data?.data.chatList} user={userId} />
       <ChatForm />
     </NoHeaderFooterLayout>
   );

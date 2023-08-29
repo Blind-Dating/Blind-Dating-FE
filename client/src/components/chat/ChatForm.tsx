@@ -6,8 +6,8 @@ import { userState } from 'recoil/user/atoms';
 
 const ChatForm = () => {
   const { chatId } = useParams();
-  const { id, nickname } = useRecoilValue(userState);
-  const { sendHandler } = useHandleChat({ username: nickname, roomId: chatId, userId: id });
+  const { userId } = useRecoilValue(userState);
+  const { sendHandler } = useHandleChat();
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.code === 'Enter' && !e.shiftKey) {
@@ -15,7 +15,7 @@ const ChatForm = () => {
       const target = e.target as HTMLTextAreaElement;
       const content = {
         chatRoomId: chatId,
-        writerId: id,
+        writerId: userId,
         message: target.value,
       };
       sendHandler(content);
