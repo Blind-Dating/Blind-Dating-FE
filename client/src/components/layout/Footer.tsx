@@ -24,7 +24,7 @@ function Footer() {
         <FooterBtn icon={<Likes />} />
       </Link>
 
-      <Link to="/chats">
+      <Link to="/chat-list">
         <FooterBtn icon={<Messages />} />
       </Link>
 
