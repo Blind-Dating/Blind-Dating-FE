@@ -28,7 +28,11 @@ export const usePostLogin = () => {
     postLoginFetcher,
     {
       onSuccess: (res) => {
-        setUserState({ token: res.data.accessToken, id: res.data.id, nickname: res.data.nickname });
+        setUserState({
+          token: res.data.accessToken,
+          userId: res.data.id,
+          userName: res.data.nickname,
+        });
         axiosWithAuth.defaults.headers['Authorization'] = `Bearer ${res.data.accessToken}`;
         navigate('/discover');
         alert(res.message);
