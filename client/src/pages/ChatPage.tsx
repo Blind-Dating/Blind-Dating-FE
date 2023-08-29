@@ -1,27 +1,35 @@
+import { useQueryClient } from '@tanstack/react-query';
 import ChatForm from 'components/chat/ChatForm';
 import ChatMessages from 'components/chat/ChatMessages';
 import ChatUser from 'components/chat/ChatUser';
 import NoHeaderFooterLayout from 'components/layout/NoHeaderFooterLayout';
 import { useGetChatData } from 'hooks/api/useGetChat';
 import useHandleChat from 'hooks/useHandleChat';
+import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
+import { userState } from 'recoil/user/atoms';
 
 const ChatPage = () => {
   const { chatId } = useParams();
-
+  const { id } = useRecoilValue(userState);
   const { connectHandler, key } = useHandleChat();
-  const { data, isError, isLoading } = useGetChatData(chatId, 1, key);
+  const { data, isError, isLoading } = useGetChatData(chatId, key);
+  const queryClient = useQueryClient();
+
+  useEffect(() => {
+    connectHandler(chatId);
+    queryClient.invalidateQueries(['chatroom', key]);
+  }, []);
 
   if (isError || isLoading) {
     return <></>;
   }
 
-  connectHandler('nickname', chatId, 1);
-
   return (
     <NoHeaderFooterLayout>
       <ChatUser user={data?.data.otherUserNickname} />
-      <ChatMessages messages={data?.data.chatList.content} />
+      <ChatMessages messages={data?.data.chatList.content} user={id} />
       <ChatForm />
     </NoHeaderFooterLayout>
   );

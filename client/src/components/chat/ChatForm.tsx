@@ -1,16 +1,21 @@
 import useHandleChat from 'hooks/useHandleChat';
 import React from 'react';
+import { useParams } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
+import { userState } from 'recoil/user/atoms';
 
 const ChatForm = () => {
-  const { sendHandler } = useHandleChat();
+  const { chatId } = useParams();
+  const { id, nickname } = useRecoilValue(userState);
+  const { sendHandler } = useHandleChat({ username: nickname, roomId: chatId, userId: id });
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.code === 'Enter' && !e.shiftKey) {
       e.preventDefault();
       const target = e.target as HTMLTextAreaElement;
       const content = {
-        chatRoomId: 1,
-        writerId: 3,
+        chatRoomId: chatId,
+        writerId: id,
         message: target.value,
       };
       sendHandler(content);

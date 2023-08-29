@@ -1,5 +1,4 @@
-import React from 'react';
-import { ReactComponent as Setting } from 'assets/icons/setting-config.svg';
+import ChatSettingBtn from 'components/chat-list/ChatSettingBtn';
 
 type Props = {
   title?: string;
@@ -10,14 +9,7 @@ const Navbar = (props: Props) => {
   return (
     <header className="flex items-center justify-between flex-none my-10 ml-10 mr-4 ">
       <h1 className="text-2xl font-bold font-Lora">{title}</h1>
-      {title === 'Messages' && (
-        <button
-          type="button"
-          className="w-12 h-12 p-3 border text-redAmaranth border-whiteSmoke rounded-xl"
-        >
-          <Setting />
-        </button>
-      )}
+      {title === 'Messages' && <ChatSettingBtn />}
     </header>
   );
 };

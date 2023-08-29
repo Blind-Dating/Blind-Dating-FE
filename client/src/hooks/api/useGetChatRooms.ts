@@ -6,7 +6,7 @@ const fetchChatRooms = async () => {
   return data;
 };
 
-export const useGetChatRooms = () => {
-  const { isLoading, isError, data } = useQuery(['rooms'], fetchChatRooms);
+export const useGetChatRooms = (key: boolean) => {
+  const { isLoading, isError, data } = useQuery(['rooms', key], fetchChatRooms);
   return { isLoading, isError, data };
 };

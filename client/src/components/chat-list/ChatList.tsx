@@ -1,8 +1,14 @@
+import useHandleChatList from 'hooks/useHandleChatList';
 import ChatItem from './ChatItem';
 import { useGetChatRooms } from 'hooks/api/useGetChatRooms';
+import { useEffect } from 'react';
 
 function ChatList() {
-  const { isLoading, isError, data } = useGetChatRooms();
+  const { connectHandler, key } = useHandleChatList();
+  const { isLoading, isError, data } = useGetChatRooms(key);
+  useEffect(() => {
+    connectHandler();
+  }, []);
 
   if (isLoading || isError) {
     return (
