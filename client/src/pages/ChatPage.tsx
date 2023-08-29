@@ -14,7 +14,7 @@ const ChatPage = () => {
   const { chatId } = useParams();
   const { id } = useRecoilValue(userState);
   const { connectHandler, key } = useHandleChat();
-  const { data, isError, isLoading } = useGetChatData(chatId, id, key);
+  const { data, isError, isLoading } = useGetChatData(chatId, key);
   const queryClient = useQueryClient();
 
   useEffect(() => {

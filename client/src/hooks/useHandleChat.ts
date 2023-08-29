@@ -1,4 +1,5 @@
 import { Stomp } from '@stomp/stompjs';
+import { useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
@@ -16,6 +17,7 @@ const useHandleChat = () => {
   const [key, setKey] = useState(false);
   const { id: userId, nickname: username } = useRecoilValue(userState);
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
   const connectHandler = (roomId: string | undefined) => {
     client.connect({ userId, username, roomId }, () => {
@@ -39,15 +41,23 @@ const useHandleChat = () => {
 
   const disconnectHandler = (roomId: string | undefined) => {
     if (client.connected) {
-      client.send('/pub/chat/disconnect', {}, JSON.stringify({ chatRoomId: roomId }));
+      client.send(
+        '/pub/chat/disconnect',
+        {},
+        JSON.stringify({ chatRoomId: roomId, writerId: userId })
+      );
     } else {
       client.connect({ userId, username, roomId }, () => {
-        client.send('/pub/chat/disconnect', {}, JSON.stringify({ chatRoomId: roomId }));
+        client.send(
+          '/pub/chat/disconnect',
+          {},
+          JSON.stringify({ chatRoomId: roomId, writerId: userId })
+        );
       });
     }
 
-    client.disconnect();
     navigate('/chats');
+    queryClient.invalidateQueries(['rooms']);
   };
 
   return { connectHandler, sendHandler, disconnectHandler, key };
