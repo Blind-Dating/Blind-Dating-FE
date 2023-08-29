@@ -38,7 +38,7 @@ const ChatItem = (props: Props) => {
             <span className="text-xs font-bold text-labelColor">{updated}</span>
           </div>
         </button>
-        {isClickedButton && <DeleteChatBtn />}
+        {isClickedButton && <DeleteChatBtn roomId={roomId} />}
       </li>
       <hr className="border-labelColor" />
     </>

@@ -22,7 +22,25 @@ const useHandleChatList = () => {
     });
   };
 
-  return { connectHandler, key };
+  const disconnectHandler = (roomId: string | undefined) => {
+    if (client.connected) {
+      client.send(
+        '/pub/chat/disconnect',
+        {},
+        JSON.stringify({ chatRoomId: roomId, writerId: userId })
+      );
+    } else {
+      client.connect({}, () => {
+        client.send(
+          '/pub/chat/disconnect',
+          {},
+          JSON.stringify({ chatRoomId: roomId, writerId: userId })
+        );
+      });
+    }
+  };
+
+  return { connectHandler, disconnectHandler, key };
 };
 
 export default useHandleChatList;
