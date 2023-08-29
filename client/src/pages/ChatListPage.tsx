@@ -1,7 +1,7 @@
 import Layout from 'components/layout/Layout';
 import ChatList from 'components/chat-list/ChatList';
 
-function ChatsPage() {
+function ChatListPage() {
   return (
     <Layout title="Messages">
       <ChatList />
@@ -9,4 +9,4 @@ function ChatsPage() {
   );
 }
 
-export default ChatsPage;
+export default ChatListPage;
