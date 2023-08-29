@@ -7,7 +7,7 @@ import SockJS from 'sockjs-client';
 
 const useHandleChatList = () => {
   const client = Stomp.over(() => new SockJS(`${import.meta.env.VITE_API_ADDRESS}stomp/chatroom`));
-  const { id: userId } = useRecoilValue(userState);
+  const { userId } = useRecoilValue(userState);
   const [key, setKey] = useState(false);
   const queryClient = useQueryClient();
 

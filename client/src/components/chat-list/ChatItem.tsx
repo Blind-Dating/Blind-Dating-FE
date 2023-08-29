@@ -24,7 +24,7 @@ const ChatItem = (props: Props) => {
           type="button"
           className="flex items-center w-full gap-4 text-left hover:cursor-pointer"
           onClick={() => {
-            navigate(`/chats/${roomId}`);
+            navigate(`/chat-list/${roomId}`);
           }}
         >
           <div className="flex items-center justify-center flex-none w-12 h-12 rounded-full bg-labelColor">

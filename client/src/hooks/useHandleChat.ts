@@ -15,7 +15,7 @@ type MessageContent = {
 const useHandleChat = () => {
   const client = Stomp.over(() => new SockJS(`${import.meta.env.VITE_API_ADDRESS}stomp/chat`));
   const [key, setKey] = useState(false);
-  const { id: userId, nickname: username } = useRecoilValue(userState);
+  const { userId, userName: username } = useRecoilValue(userState);
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
