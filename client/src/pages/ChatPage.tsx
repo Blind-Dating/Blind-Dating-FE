@@ -12,7 +12,7 @@ import { chatDataState } from 'recoil/chat/atoms';
 const ChatPage = () => {
   const { chatId } = useParams();
   const { connectHandler } = useHandleChat();
-  const { data, isError, isLoading } = useGetChatData(chatId);
+  const { data, isError, isLoading, isSuccess } = useGetChatData(chatId);
   const setChatData = useSetRecoilState(chatDataState);
 
   useEffect(() => {
@@ -21,9 +21,9 @@ const ChatPage = () => {
 
   useEffect(() => {
     if (data) {
-      setChatData(data?.data.chatList);
+      setChatData(data.data.chatList);
     }
-  }, [isLoading]);
+  }, [isSuccess]);
 
   if (isError || isLoading) {
     return <></>;

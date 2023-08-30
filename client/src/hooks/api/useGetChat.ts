@@ -9,11 +9,14 @@ const fetchChatData = async (roomId: string | undefined, chatId?: number | undef
 };
 
 export const useGetChatData = (roomId: string | undefined, chatId?: number | undefined) => {
-  const { isLoading, data, isError } = useQuery(['chatroom'], () => fetchChatData(roomId, chatId));
+  const { isLoading, data, isError, isSuccess } = useQuery(['chatroom'], () =>
+    fetchChatData(roomId, chatId)
+  );
 
   return {
     isLoading,
     isError,
     data,
+    isSuccess,
   };
 };
