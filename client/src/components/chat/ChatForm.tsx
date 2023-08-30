@@ -11,7 +11,7 @@ const ChatForm = () => {
   const [value, setValue] = useState<string>('');
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.code === 'Enter' && !e.shiftKey) {
+    if (e.code === 'Enter' && !e.shiftKey && !e.nativeEvent.isComposing) {
       e.preventDefault();
       const target = e.target as HTMLTextAreaElement;
       const content = {
