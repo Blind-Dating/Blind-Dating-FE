@@ -1,8 +1,7 @@
 import { Stomp } from '@stomp/stompjs';
-import { useQueryClient } from '@tanstack/react-query';
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { chatDataState } from 'recoil/chat/atoms';
 import { userState } from 'recoil/user/atoms';
 import SockJS from 'sockjs-client';
 
@@ -14,16 +13,15 @@ type MessageContent = {
 
 const useHandleChat = () => {
   const client = Stomp.over(() => new SockJS(`${import.meta.env.VITE_API_ADDRESS}stomp/chat`));
-  const [key, setKey] = useState(false);
   const { userId, userName: username } = useRecoilValue(userState);
   const navigate = useNavigate();
-  const queryClient = useQueryClient();
+  const setChatData = useSetRecoilState(chatDataState);
 
   const connectHandler = (roomId: string | undefined) => {
     client.connect({ userId, username, roomId }, () => {
       client.subscribe('/sub/chat/room/' + roomId, (content) => {
         if (content) {
-          setKey((prev) => !prev);
+          setChatData((prev) => [JSON.parse(content.body), ...prev]);
         }
       });
     });
@@ -56,11 +54,10 @@ const useHandleChat = () => {
       });
     }
 
-    navigate('/chats');
-    queryClient.invalidateQueries(['rooms']);
+    navigate('/chat-list');
   };
 
-  return { connectHandler, sendHandler, disconnectHandler, key };
+  return { connectHandler, sendHandler, disconnectHandler };
 };
 
 export default useHandleChat;

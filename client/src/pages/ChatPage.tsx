@@ -1,4 +1,3 @@
-import { useQueryClient } from '@tanstack/react-query';
 import ChatForm from 'components/chat/ChatForm';
 import ChatMessages from 'components/chat/ChatMessages';
 import ChatUser from 'components/chat/ChatUser';
@@ -7,20 +6,24 @@ import { useGetChatData } from 'hooks/api/useGetChat';
 import useHandleChat from 'hooks/useHandleChat';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { useRecoilValue } from 'recoil';
-import { userState } from 'recoil/user/atoms';
+import { useSetRecoilState } from 'recoil';
+import { chatDataState } from 'recoil/chat/atoms';
 
 const ChatPage = () => {
   const { chatId } = useParams();
-  const { id } = useRecoilValue(userState);
-  const { connectHandler, key } = useHandleChat();
-  const { data, isError, isLoading } = useGetChatData(chatId, key);
-  const queryClient = useQueryClient();
+  const { connectHandler } = useHandleChat();
+  const { data, isError, isLoading, isSuccess } = useGetChatData(chatId);
+  const setChatData = useSetRecoilState(chatDataState);
 
   useEffect(() => {
     connectHandler(chatId);
-    queryClient.invalidateQueries(['chatroom', key]);
   }, []);
+
+  useEffect(() => {
+    if (isSuccess) {
+      setChatData(data.data.chatList);
+    }
+  }, [isSuccess, isError]);
 
   if (isError || isLoading) {
     return <></>;
@@ -29,7 +32,7 @@ const ChatPage = () => {
   return (
     <NoHeaderFooterLayout>
       <ChatUser user={data?.data.otherUserNickname} />
-      <ChatMessages messages={data?.data.chatList.content} user={id} />
+      <ChatMessages />
       <ChatForm />
     </NoHeaderFooterLayout>
   );
