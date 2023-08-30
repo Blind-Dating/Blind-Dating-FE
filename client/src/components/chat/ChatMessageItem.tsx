@@ -11,12 +11,14 @@ const ChatMessageItem = (props: Props) => {
   return (
     <li
       className={`flex flex-col font-Lora max-w-[80%] ${
-        writerId === user ? 'justify-self-end ' : 'justify-self-start'
+        +writerId === +user ? 'justify-self-end ' : 'justify-self-start'
       }`}
     >
       <p
         className={`p-4 text-sm rounded-lg break-all ${
-          writerId === user ? 'bg-whiteSmoke rounded-br-none' : 'bg-redAmaranth/10 rounded-bl-none'
+          +writerId === +user
+            ? 'bg-whiteSmoke rounded-br-none'
+            : 'bg-redAmaranth/10 rounded-bl-none'
         }`}
       >
         {message}
