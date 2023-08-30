@@ -28,7 +28,7 @@ function Footer() {
         <FooterBtn icon={<Messages />} />
       </Link>
 
-      <Link to="/">
+      <Link to="/profile">
         <FooterBtn icon={<User />} />
       </Link>
     </footer>
