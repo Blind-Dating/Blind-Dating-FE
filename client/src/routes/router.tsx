@@ -5,6 +5,7 @@ import SignUpPage from 'pages/SignUpPage';
 import DiscoverPage from 'pages/DiscoverPage';
 import ChatListPage from 'pages/ChatListPage';
 import ChatPage from 'pages/ChatPage';
+import ProfilePage from 'pages/ProfilePage';
 
 const router = createBrowserRouter([
   {
@@ -16,6 +17,7 @@ const router = createBrowserRouter([
       { path: '/discover', element: <DiscoverPage /> },
       { path: '/chat-list', element: <ChatListPage /> },
       { path: '/chat-list/:chatId', element: <ChatPage /> },
+      { path: '/profile', element: <ProfilePage /> },
     ],
   },
 ]);
