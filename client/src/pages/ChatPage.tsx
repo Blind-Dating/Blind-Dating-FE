@@ -20,10 +20,10 @@ const ChatPage = () => {
   }, []);
 
   useEffect(() => {
-    if (data) {
+    if (isSuccess) {
       setChatData(data.data.chatList);
     }
-  }, [isSuccess]);
+  }, [isSuccess, isError]);
 
   if (isError || isLoading) {
     return <></>;

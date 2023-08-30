@@ -1,19 +1,17 @@
 import { useQuery } from '@tanstack/react-query';
 import { axiosWithAuth } from 'apis/axiosClient';
 
-type ChatDataParams = {
-  roomId: string | undefined;
-  chatId?: number | undefined;
-};
+type RoomId = string | undefined;
+type ChatId = number | undefined;
 
-const fetchChatData = async (roomId: ChatDataParams, chatId?: ChatDataParams) => {
+const fetchChatData = async (roomId: RoomId, chatId?: ChatId) => {
   const { data } = await axiosWithAuth.get(`api/chatroom/${roomId}`, {
     params: { chatId: chatId || 0 },
   });
   return data;
 };
 
-export const useGetChatData = (roomId: ChatDataParams, chatId?: ChatDataParams) => {
+export const useGetChatData = (roomId: RoomId, chatId?: ChatId) => {
   const { isLoading, data, isError, isSuccess } = useQuery(['chatroom'], () =>
     fetchChatData(roomId, chatId)
   );
