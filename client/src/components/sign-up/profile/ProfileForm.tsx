@@ -50,6 +50,11 @@ export const ProfileForm = ({ onNext, setSignUpAllValues }: Props) => {
       return;
     }
 
+    if (userId.length < 5) {
+      alert('아이디는 최소 5글자 이상입니다.');
+      return;
+    }
+
     if (!regex.test(userId)) {
       alert('아이디는 영문 대소문자, 글자 단위 한글, 숫자만 가능합니다.');
       return;
@@ -63,6 +68,11 @@ export const ProfileForm = ({ onNext, setSignUpAllValues }: Props) => {
 
     if (userNickname === undefined) {
       alert('아이디를 입력해주세요.');
+      return;
+    }
+
+    if (userNickname.length < 2) {
+      alert('닉네임은 최소 2글자 이상입니다.');
       return;
     }
 

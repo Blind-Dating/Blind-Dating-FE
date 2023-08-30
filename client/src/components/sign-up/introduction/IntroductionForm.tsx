@@ -10,7 +10,7 @@ type Props = {
 
 export const IntroductionForm = ({ signUpAllValues, setSignUpAllValues }: Props) => {
   const [textValue, setTextValue] = useState<string>('');
-  const { postSignUpDataFn } = usePostSignUpData();
+  const { postSignUpDataFn, isLoading } = usePostSignUpData();
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const { value } = e.currentTarget;
@@ -50,7 +50,9 @@ export const IntroductionForm = ({ signUpAllValues, setSignUpAllValues }: Props)
               onChange={handleChange}
             />
           </main>
-          <button className="mt-14 btn-red">Continue</button>
+          <button className="mt-14 btn-red" disabled={isLoading}>
+            Continue
+          </button>
         </form>
       </main>
     </div>

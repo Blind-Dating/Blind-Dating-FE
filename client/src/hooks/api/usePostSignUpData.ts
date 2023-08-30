@@ -1,9 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
-import { axiosClient, axiosWithAuth } from 'apis/axiosClient';
+import { axiosClient } from 'apis/axiosClient';
 import { SignUpAllValues } from 'pages/SignUpPage';
 import { useNavigate } from 'react-router-dom';
-import { useSetRecoilState } from 'recoil';
-import { userState } from 'recoil/user/atoms';
 
 type ApiResponse = {
   message: string;
@@ -22,20 +20,14 @@ const postSignUpFetcher = async (userData: SignUpAllValues): Promise<ApiResponse
 
 export const usePostSignUpData = () => {
   const navigate = useNavigate();
-  const setUserState = useSetRecoilState(userState);
 
   const { mutate: postSignUpDataFn, isLoading } = useMutation<ApiResponse, Error, SignUpAllValues>(
     postSignUpFetcher,
     {
       onSuccess: (res) => {
-        setUserState({
-          token: res.data.accessToken,
-          userId: res.data.id,
-          userName: res.data.nickname,
-        });
-        axiosWithAuth.defaults.headers['Authorization'] = `Bearer ${res.data.accessToken}`;
-        navigate('/discover');
+     
         alert(res.message);
+        navigate('/');
       },
       onError: (res) => {
         alert(res.message);
