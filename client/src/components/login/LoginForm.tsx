@@ -13,6 +13,14 @@ export const LoginForm = () => {
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (loginInfo.userId.length < 5) {
+      alert('아이디는 5글자 이상입니다.');
+      return;
+    }
+    if (loginInfo.userPassword.length < 5) {
+      alert('비밀번호는 5글자 이상입니다.');
+      return;
+    }
     postLoginFn(loginInfo);
   };
   return (
@@ -54,7 +62,7 @@ export const LoginForm = () => {
             className=" hover:shadow-xl transition duration-300 px-8 py-4 mt-3 text-base font-bold text-center rounded-2xl w-[295px] h-14 font-NotoSans text-whiteSmoke bg-redAmaranth"
             disabled={isLoading || !loginInfo.userId || !loginInfo.userPassword}
           >
-            {isLoading ? 'Logging in...' : 'Login'}
+            Login
           </button>
         </form>
       </div>
