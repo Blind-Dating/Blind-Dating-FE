@@ -1,6 +1,4 @@
 import { Stomp } from '@stomp/stompjs';
-import { useQueryClient } from '@tanstack/react-query';
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import { userState } from 'recoil/user/atoms';
@@ -14,16 +12,14 @@ type MessageContent = {
 
 const useHandleChat = () => {
   const client = Stomp.over(() => new SockJS(`${import.meta.env.VITE_API_ADDRESS}stomp/chat`));
-  const [key, setKey] = useState(false);
   const { userId, userName: username } = useRecoilValue(userState);
   const navigate = useNavigate();
-  const queryClient = useQueryClient();
 
   const connectHandler = (roomId: string | undefined) => {
     client.connect({ userId, username, roomId }, () => {
       client.subscribe('/sub/chat/room/' + roomId, (content) => {
         if (content) {
-          setKey((prev) => !prev);
+          // subscribe
         }
       });
     });
@@ -57,10 +53,9 @@ const useHandleChat = () => {
     }
 
     navigate('/chats');
-    queryClient.invalidateQueries(['rooms']);
   };
 
-  return { connectHandler, sendHandler, disconnectHandler, key };
+  return { connectHandler, sendHandler, disconnectHandler };
 };
 
 export default useHandleChat;
