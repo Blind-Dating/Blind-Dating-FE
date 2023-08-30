@@ -6,15 +6,24 @@ import { useGetChatData } from 'hooks/api/useGetChat';
 import useHandleChat from 'hooks/useHandleChat';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { useSetRecoilState } from 'recoil';
+import { chatDataState } from 'recoil/chat/atoms';
 
 const ChatPage = () => {
   const { chatId } = useParams();
   const { connectHandler } = useHandleChat();
-  const { otherUser, isError, isLoading } = useGetChatData(chatId);
+  const { data, isError, isLoading } = useGetChatData(chatId);
+  const setChatData = useSetRecoilState(chatDataState);
 
   useEffect(() => {
     connectHandler(chatId);
   }, []);
+
+  useEffect(() => {
+    if (data) {
+      setChatData(data?.data.chatList);
+    }
+  }, [isLoading]);
 
   if (isError || isLoading) {
     return <></>;
@@ -22,7 +31,7 @@ const ChatPage = () => {
 
   return (
     <NoHeaderFooterLayout>
-      <ChatUser user={otherUser} />
+      <ChatUser user={data?.data.otherUserNickname} />
       <ChatMessages />
       <ChatForm />
     </NoHeaderFooterLayout>
