@@ -3,11 +3,11 @@ type Props = {
   id: number;
   message: string;
   writerId: number;
-  createdAt: string;
+  created: string;
 };
 
 const ChatMessageItem = (props: Props) => {
-  const { message, writerId, user, createdAt } = props;
+  const { message, writerId, user, created } = props;
   return (
     <li
       className={`flex flex-col font-Lora max-w-[80%] ${
@@ -22,7 +22,7 @@ const ChatMessageItem = (props: Props) => {
         {message}
       </p>
       <span className={`text-xs text-labelColor ${writerId === user ? 'text-right' : ''}`}>
-        {createdAt.slice(-11, -3)}
+        {created.slice(-11, -3)}
       </span>
     </li>
   );

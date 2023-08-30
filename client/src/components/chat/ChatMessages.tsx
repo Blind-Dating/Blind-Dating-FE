@@ -1,4 +1,7 @@
+import { useRecoilValue } from 'recoil';
 import ChatMessageItem from './ChatMessageItem';
+import { chatDataState } from 'recoil/chat/atoms';
+import { userState } from 'recoil/user/atoms';
 
 const ChatMessageDate = ({ date }: { date: string }) => {
   return (
@@ -13,12 +16,9 @@ const ChatMessageDate = ({ date }: { date: string }) => {
   );
 };
 
-type Props = {
-  messages: { id: number; writerId: number; message: string; createdAt: string }[];
-  user: string | number;
-};
-
-const ChatMessages = ({ messages, user }: Props) => {
+const ChatMessages = () => {
+  const messages = useRecoilValue(chatDataState);
+  const { userId } = useRecoilValue(userState);
   const messageDates: string[] = [];
   const dataWithDate = [];
 
@@ -29,7 +29,7 @@ const ChatMessages = ({ messages, user }: Props) => {
       dataWithDate.push(<ChatMessageDate key={messages[i].createdAt} date={created} />);
     }
     dataWithDate.push(
-      <ChatMessageItem key={messages[i].id} user={user} {...messages[i]} createdAt={created} />
+      <ChatMessageItem key={messages[i].id} user={userId} created={created} {...messages[i]} />
     );
   }
 

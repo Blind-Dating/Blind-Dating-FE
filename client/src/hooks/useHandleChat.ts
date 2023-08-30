@@ -1,6 +1,7 @@
 import { Stomp } from '@stomp/stompjs';
 import { useNavigate } from 'react-router-dom';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { chatDataState } from 'recoil/chat/atoms';
 import { userState } from 'recoil/user/atoms';
 import SockJS from 'sockjs-client';
 
@@ -14,12 +15,13 @@ const useHandleChat = () => {
   const client = Stomp.over(() => new SockJS(`${import.meta.env.VITE_API_ADDRESS}stomp/chat`));
   const { userId, userName: username } = useRecoilValue(userState);
   const navigate = useNavigate();
+  const setChatData = useSetRecoilState(chatDataState);
 
   const connectHandler = (roomId: string | undefined) => {
     client.connect({ userId, username, roomId }, () => {
       client.subscribe('/sub/chat/room/' + roomId, (content) => {
         if (content) {
-          // subscribe
+          setChatData((prev) => [JSON.parse(content.body), ...prev]);
         }
       });
     });
@@ -52,7 +54,7 @@ const useHandleChat = () => {
       });
     }
 
-    navigate('/chats');
+    navigate('/chat-list');
   };
 
   return { connectHandler, sendHandler, disconnectHandler };
