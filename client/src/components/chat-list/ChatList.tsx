@@ -15,7 +15,7 @@ function ChatList() {
     if (isSuccess) {
       setChatList(data?.data);
     }
-  }, [isSuccess, isError]);
+  }, [isSuccess, isError, data]);
 
   useEffect(() => {
     connectHandler();
