@@ -6,7 +6,12 @@ export const chatsSettingBtnState = atom<boolean>({
   default: false,
 });
 
-export const chatDataState = atom<(Record<string, number> | IMessage)[]>({
+export const chatDataState = atom<Record<string | number, keyof IMessage>[]>({
   key: 'chatDataState',
+  default: [],
+});
+
+export const chatListState = atom<Record<string | number, keyof IMessage>[]>({
+  key: 'chatListState',
   default: [],
 });
