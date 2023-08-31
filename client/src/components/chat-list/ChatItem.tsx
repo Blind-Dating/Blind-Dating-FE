@@ -8,10 +8,11 @@ interface Props {
   updatedAt: string;
   roomId: string;
   recentMessage: string;
+  unReadCount: number;
 }
 
 const ChatItem = (props: Props) => {
-  const { otherUserNickname: user, updatedAt, roomId, recentMessage } = props;
+  const { otherUserNickname: user, updatedAt, roomId, recentMessage, unReadCount } = props;
   const navigate = useNavigate();
   const isClickedButton = useRecoilValue(chatsSettingBtnState);
 
@@ -36,6 +37,13 @@ const ChatItem = (props: Props) => {
           </div>
           <div className="flex flex-col items-end justify-between h-10">
             <span className="text-xs font-bold text-labelColor">{updated}</span>
+            {unReadCount ? (
+              <div className="h-4.5 py-0.5 px-1 rounded-full bg-redAmaranth">
+                <span className="block text-xs text-whiteSmoke">{unReadCount}</span>
+              </div>
+            ) : (
+              <div className="w-5 h-5" />
+            )}
           </div>
         </button>
         {isClickedButton && <DeleteChatBtn roomId={roomId} />}
