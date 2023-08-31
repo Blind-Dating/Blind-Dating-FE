@@ -27,6 +27,10 @@ const useHandleChat = () => {
     });
   };
 
+  const disconnectHandler = () => {
+    client.disconnect();
+  };
+
   const sendHandler = (content: MessageContent) => {
     if (client.connected) {
       client.send('/pub/chat/message', {}, JSON.stringify(content));
@@ -37,7 +41,7 @@ const useHandleChat = () => {
     }
   };
 
-  const disconnectHandler = (roomId: string | undefined) => {
+  const exitHandler = (roomId: string | undefined) => {
     if (client.connected) {
       client.send(
         '/pub/chat/disconnect',
@@ -54,10 +58,11 @@ const useHandleChat = () => {
       });
     }
 
+    client.disconnect();
     navigate('/chat-list');
   };
 
-  return { connectHandler, sendHandler, disconnectHandler };
+  return { connectHandler, sendHandler, disconnectHandler, exitHandler };
 };
 
 export default useHandleChat;

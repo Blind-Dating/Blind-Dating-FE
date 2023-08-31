@@ -11,12 +11,14 @@ import { chatDataState } from 'recoil/chat/atoms';
 
 const ChatPage = () => {
   const { chatId } = useParams();
-  const { connectHandler } = useHandleChat();
   const { data, isError, isLoading, isSuccess } = useGetChatData(chatId);
+  const { connectHandler, disconnectHandler } = useHandleChat();
   const setChatData = useSetRecoilState(chatDataState);
 
   useEffect(() => {
     connectHandler(chatId);
+
+    return () => disconnectHandler();
   }, []);
 
   useEffect(() => {

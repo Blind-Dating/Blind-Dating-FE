@@ -7,7 +7,7 @@ type Props = { user: string };
 const ChatUser = (props: Props) => {
   const { user } = props;
   const { chatId } = useParams();
-  const { disconnectHandler } = useHandleChat();
+  const { exitHandler } = useHandleChat();
 
   return (
     <section className="flex items-center w-full gap-2 px-10 py-8 max-h-[15%]">
@@ -21,7 +21,7 @@ const ChatUser = (props: Props) => {
       <button
         type="button"
         className="w-12 h-12 p-3 border text-redAmaranth border-whiteSmoke rounded-xl"
-        onClick={() => disconnectHandler(chatId)}
+        onClick={() => exitHandler(chatId)}
       >
         <More />
       </button>
