@@ -40,7 +40,7 @@ function ChatList() {
 
   return (
     <ul className="flex flex-col w-full gap-2 px-8 overflow-auto flex-3">
-      {chatList.length ? (
+      {chatList?.length ? (
         <>
           {chatList.map((chat) => (
             <ChatItem key={chat.roomId} {...chat} />
