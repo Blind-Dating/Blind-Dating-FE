@@ -1,4 +1,4 @@
-import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
+import { useInfiniteQuery } from '@tanstack/react-query';
 import { axiosWithAuth } from 'apis/axiosClient';
 
 type RoomId = string | undefined;

@@ -16,13 +16,12 @@ const ChatMessageDate = ({ date }: { date: string }) => {
   );
 };
 
-const ChatMessages = ({
-  scrollRef,
-  sectionRef,
-}: {
+type Props = {
   scrollRef: React.RefObject<HTMLDivElement>;
   sectionRef: React.RefObject<HTMLElement>;
-}) => {
+};
+
+const ChatMessages = ({ scrollRef, sectionRef }: Props) => {
   const messages = useRecoilValue(chatDataState);
   const { userId } = useRecoilValue(userState);
 
