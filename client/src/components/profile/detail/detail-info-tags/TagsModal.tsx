@@ -11,13 +11,13 @@ export type Tags = {
 
 type Props = {
   title: string;
-  onSubmit: (value: string | string[]) => void;
+  onChange: (value: string | string[]) => void;
   onToggleModal: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 };
 
 const DetailInfoTags = (props: Props) => {
-  const { title, onSubmit, onToggleModal } = props;
-  const [clickedValue, setClickedValue] = useState<string[]>([]);
+  const { title, onChange, onToggleModal } = props;
+  const [clickedValue, setClickedValue] = useState<string[] | string>('');
 
   const tags: Tags = {
     region: { title: '지역', data: REGIONS },
@@ -90,7 +90,7 @@ const DetailInfoTags = (props: Props) => {
             type="button"
             onClick={(e) => {
               onToggleModal(e);
-              onSubmit(clickedValue);
+              onChange(clickedValue);
             }}
             disabled={!submitBtnCondition}
           >

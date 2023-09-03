@@ -5,12 +5,15 @@ import UserLocationMBTI from './LocationMBTI';
 
 import { useState } from 'react';
 import TagsModal from './detail-info-tags/TagsModal';
+import { UserInfo } from 'pages/ProfilePage';
 
 type Props = {
-  interests: { id: number; interestName: string }[];
+  interests: string[];
   selfIntroduction: string;
   region: string;
   mbti: string;
+  values: UserInfo;
+  onChange: (field: string, value: string | string[]) => void;
 };
 
 type DetailInfo = {
@@ -20,22 +23,16 @@ type DetailInfo = {
 };
 
 const UserDetailFields = (props: Props) => {
-  const { interests, selfIntroduction, region, mbti } = props;
+  const { interests, selfIntroduction, region, mbti, onChange, values } = props;
   const { isModalOpen, handleToggleModal } = useModal();
   const [clickedField, setClickedField] = useState<string>('');
-  const [values, setValues] = useState({
-    region,
-    mbti,
-    selfIntroduction,
-    interests: interests.map((interest) => interest.interestName),
-  });
 
   const handleFocus = (name: string) => {
     setClickedField(name);
   };
 
-  const handleSubmit = (value: string | string[]) => {
-    setValues((prev) => ({ ...prev, [clickedField]: value }));
+  const handleChangeValue = (value: string | string[]) => {
+    onChange(clickedField, value);
   };
 
   const detailInfo: DetailInfo[] = [
@@ -44,7 +41,7 @@ const UserDetailFields = (props: Props) => {
       position: 'right',
       content: (
         <UserLocationMBTI
-          data={values.region}
+          data={values.region || region}
           onToggleModal={handleToggleModal}
           onClick={handleFocus}
           name="region"
@@ -56,7 +53,7 @@ const UserDetailFields = (props: Props) => {
       position: 'right',
       content: (
         <UserLocationMBTI
-          data={values.mbti}
+          data={values.mbti || mbti}
           onToggleModal={handleToggleModal}
           onClick={handleFocus}
           name="mbti"
@@ -68,7 +65,7 @@ const UserDetailFields = (props: Props) => {
       position: 'bottom',
       content: (
         <UserInterests
-          data={values.interests}
+          data={values.interests || interests}
           name="interests"
           onToggleModal={handleToggleModal}
           onClick={handleFocus}
@@ -80,10 +77,10 @@ const UserDetailFields = (props: Props) => {
       position: 'bottom',
       content: (
         <UserIntrodudction
-          data={selfIntroduction}
+          data={values.selfIntroduction || selfIntroduction}
           name="selfIntroduction"
           onFocus={handleFocus}
-          onSubmit={handleSubmit}
+          onChange={handleChangeValue}
         />
       ),
     },
@@ -95,7 +92,7 @@ const UserDetailFields = (props: Props) => {
         {isModalOpen && (
           <TagsModal
             title={clickedField}
-            onSubmit={handleSubmit}
+            onChange={handleChangeValue}
             onToggleModal={handleToggleModal}
           />
         )}
