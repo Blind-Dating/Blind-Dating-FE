@@ -11,7 +11,7 @@ const fetchChatData = async (roomId: RoomId, chatId: ChatId) => {
 
   return {
     data: data.data,
-    prevMessageId: data.data.chatList[data.data.chatList.length - 1].id - 1,
+    prevMessageId: data.data.chatList[data.data.chatList.length - 1]?.id - 1,
   };
 };
 
