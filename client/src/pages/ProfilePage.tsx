@@ -18,12 +18,7 @@ const ProfilePage = () => {
   return (
     <Layout title="My Page">
       <UserInfo nickname={data.nickname} id={data.userId} />
-      <UserDetailFields
-        interests={data.interests}
-        introduction={data.selfIntroduction}
-        region={data.region}
-        mbti={data.mbti}
-      />
+      <UserDetailFields {...data} />
       <UserInfoEditBtn />
     </Layout>
   );
