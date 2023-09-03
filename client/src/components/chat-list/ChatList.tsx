@@ -43,7 +43,7 @@ function ChatList() {
       {chatList.length ? (
         <>
           {chatList.map((chat) => (
-            <ChatItem key={chat.roomId} {...chat} />
+            <ChatItem otherUserNickname={chat.otherUserNickname} updatedAt={chat.updatedAt} roomId={chat.roomId} recentMessage={chat.recentMessage} unReadCount={+chat.unReadCount} key={chat.roomId} {...chat} />
           ))}
         </>
       ) : (
