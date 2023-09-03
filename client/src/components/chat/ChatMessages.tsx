@@ -2,8 +2,6 @@ import { useRecoilValue } from 'recoil';
 import ChatMessageItem from './ChatMessageItem';
 import { chatDataState } from 'recoil/chat/atoms';
 import { userState } from 'recoil/user/atoms';
-import useScroll from 'hooks/useScroll';
-import { useRef } from 'react';
 
 const ChatMessageDate = ({ date }: { date: string }) => {
   return (
@@ -18,11 +16,14 @@ const ChatMessageDate = ({ date }: { date: string }) => {
   );
 };
 
-const ChatMessages = () => {
+type Props = {
+  scrollRef: React.RefObject<HTMLDivElement>;
+  sectionRef: React.RefObject<HTMLElement>;
+};
+
+const ChatMessages = ({ scrollRef, sectionRef }: Props) => {
   const messages = useRecoilValue(chatDataState);
   const { userId } = useRecoilValue(userState);
-  const sectionRef = useRef<HTMLElement>(null);
-  const scrollRef = useScroll(sectionRef, messages.length);
 
   const messageDates: string[] = [];
   const dataWithDate = [];
@@ -39,7 +40,8 @@ const ChatMessages = () => {
   }
 
   return (
-    <section className="px-10 py-2.5 flex-1 w-full max-h-[70%] overflow-auto " ref={scrollRef}>
+    <section className="px-10 py-2.5 flex-1 w-full max-h-[70%] overflow-auto " ref={sectionRef}>
+      <div ref={scrollRef} />
       <ul className="grid grid-cols-1 gap-2 ">{dataWithDate}</ul>
     </section>
   );
