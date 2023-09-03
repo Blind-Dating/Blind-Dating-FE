@@ -2,57 +2,27 @@ import Layout from 'components/layout/Layout';
 import UserDetailFields from 'components/profile/detail/DetailFields';
 import UserInfo from 'components/profile/UserInfo';
 import UserInfoEditBtn from 'components/profile/UserInfoEditBtn';
+import { useGetProfile } from 'hooks/api/useGetProfile';
 
 const ProfilePage = () => {
-  const user = {
-    userId: '1',
-    nickname: 'nickname',
-    region: '경상북도',
-    mbti: 'ISTP',
-    gender: 'M',
-    interests: [
-      {
-        id: 0,
-        interestName: '축구',
-      },
-      {
-        id: 1,
-        interestName: '야구',
-      },
-      {
-        id: 2,
-        interestName: '농구',
-      },
-    ],
-    questions: [
-      {
-        id: 1,
-        status: true,
-      },
-      {
-        id: 2,
-        status: true,
-      },
-      {
-        id: 3,
-        status: false,
-      },
-      {
-        id: 4,
-        status: true,
-      },
-    ],
-    selfIntroduction:
-      '자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개',
-  };
+  const { data, isError, isLoading } = useGetProfile();
+
+  if (isError || isLoading) {
+    return (
+      <Layout title="My Page">
+        <></>
+      </Layout>
+    );
+  }
+
   return (
     <Layout title="My Page">
-      <UserInfo nickname={user.nickname} id={'qwe123'} />
+      <UserInfo nickname={data.nickname} id={data.userId} />
       <UserDetailFields
-        interests={user.interests}
-        introduction={user.selfIntroduction}
-        region={user.region}
-        mbti={user.mbti}
+        interests={data.interests}
+        introduction={data.selfIntroduction}
+        region={data.region}
+        mbti={data.mbti}
       />
       <UserInfoEditBtn />
     </Layout>
