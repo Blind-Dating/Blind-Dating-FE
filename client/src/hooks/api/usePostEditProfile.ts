@@ -5,7 +5,6 @@ import { UserInfo } from 'pages/ProfilePage';
 const postEditProfile = async (userInfo: UserInfo) => {
   const { data } = await axiosWithAuth.put('api/user', userInfo);
 
-  console.log(data);
   return data;
 };
 
