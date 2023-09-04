@@ -17,7 +17,7 @@ type Props = {
 
 const DetailInfoTags = (props: Props) => {
   const { title, onChange, onToggleModal } = props;
-  const [clickedValue, setClickedValue] = useState<string[] | string>('');
+  const [clickedValue, setClickedValue] = useState<string[]>([]);
 
   const tags: Tags = {
     region: { title: '지역', data: REGIONS },
@@ -37,7 +37,11 @@ const DetailInfoTags = (props: Props) => {
     const { value } = e.currentTarget;
 
     if (selectableCount > 1) {
-      setClickedValue((prev) => [...prev, value]);
+      if (clickedValue.includes(value)) {
+        setClickedValue((prev) => prev.filter((prevValue) => prevValue !== value));
+      } else {
+        setClickedValue((prev) => [...prev, value]);
+      }
     } else setClickedValue([value]);
   };
 
