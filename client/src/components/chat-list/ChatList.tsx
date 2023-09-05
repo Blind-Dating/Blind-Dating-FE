@@ -6,7 +6,7 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { chatListState } from 'recoil/chat/atoms';
 
 function ChatList() {
-  const { connectHandler, disconnectHandler } = useHandleChatList();
+  const { connectHandler, disconnectHandler, exitHandler } = useHandleChatList();
   const { isLoading, isError, data } = useGetChatRooms();
   const setChatList = useSetRecoilState(chatListState);
   const chatList = useRecoilValue(chatListState);
@@ -43,7 +43,7 @@ function ChatList() {
       {chatList?.length ? (
         <>
           {chatList.map((chat) => (
-            <ChatItem key={chat.roomId} {...chat} />
+            <ChatItem key={chat.roomId} onClick={() => exitHandler(chat.roomId)} {...chat} />
           ))}
         </>
       ) : (

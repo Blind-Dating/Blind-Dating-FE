@@ -4,7 +4,7 @@ import { useRecoilValue } from 'recoil';
 import { chatsSettingBtnState } from 'recoil/chat/atoms';
 
 const ChatItem = ({ ...props }) => {
-  const { otherUserNickname: user, updatedAt, roomId, recentMessage, unReadCount } = props;
+  const { otherUserNickname: user, updatedAt, roomId, recentMessage, unReadCount, onClick } = props;
   const navigate = useNavigate();
   const isClickedButton = useRecoilValue(chatsSettingBtnState);
 
@@ -38,7 +38,7 @@ const ChatItem = ({ ...props }) => {
             )}
           </div>
         </button>
-        {isClickedButton && <DeleteChatBtn roomId={roomId} />}
+        {isClickedButton && <DeleteChatBtn onClick={onClick} />}
       </li>
       <hr className="border-labelColor" />
     </>

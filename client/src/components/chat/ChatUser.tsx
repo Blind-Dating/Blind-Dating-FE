@@ -1,13 +1,9 @@
 import { ReactComponent as More } from 'assets/icons/more.svg';
-import useHandleChat from 'hooks/useHandleChat';
-import { useParams } from 'react-router-dom';
 
-type Props = { user: string };
+type Props = { user: string; onExit: () => void };
 
 const ChatUser = (props: Props) => {
-  const { user } = props;
-  const { chatId } = useParams();
-  const { exitHandler } = useHandleChat();
+  const { user, onExit } = props;
 
   return (
     <section className="flex items-center w-full gap-2 px-10 py-8 max-h-[15%]">
@@ -21,7 +17,7 @@ const ChatUser = (props: Props) => {
       <button
         type="button"
         className="w-12 h-12 p-3 border text-redAmaranth border-whiteSmoke rounded-xl"
-        onClick={() => exitHandler(chatId)}
+        onClick={onExit}
       >
         <More />
       </button>
