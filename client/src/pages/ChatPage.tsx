@@ -63,7 +63,7 @@ const ChatPage = () => {
     <NoHeaderFooterLayout>
       <ChatUser user={data?.pages[0].data.otherUserNickname} />
       <ChatMessages scrollRef={top} sectionRef={section} />
-      <ChatForm onMessage={handleMessage} />
+      <ChatForm onMessage={handleMessage} roomStatus={data?.pages[0].data.roomStatus} />
     </NoHeaderFooterLayout>
   );
 };
