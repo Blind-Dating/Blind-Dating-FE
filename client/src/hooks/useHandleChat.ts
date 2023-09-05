@@ -21,6 +21,10 @@ const useHandleChat = () => {
     client.connect({ userId, username, roomId }, () => {
       client.subscribe('/sub/chat/room/' + roomId, (content) => {
         if (content) {
+          const data = JSON.parse(content.body);
+          if (data.status === false && userId === data.writerId) {
+            navigate('/chat-list');
+          }
           setChatData((prev) => [JSON.parse(content.body), ...prev]);
         }
       });
@@ -57,9 +61,6 @@ const useHandleChat = () => {
         );
       });
     }
-
-    client.disconnect();
-    navigate('/chat-list');
   };
 
   return { connectHandler, sendHandler, disconnectHandler, exitHandler };
