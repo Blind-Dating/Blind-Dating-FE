@@ -15,7 +15,7 @@ function ChatList() {
     if (data) {
       setChatList(data?.data);
     }
-  }, [data]);
+  }, [data, setChatList]);
 
   useEffect(() => {
     connectHandler();
