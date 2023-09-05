@@ -1,7 +1,7 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { axiosWithAuth } from 'apis/axiosClient';
 
-const paginationDataFetcher = async (page) => {
+const paginationDataFetcher = async (page: number) => {
   const { data } = await axiosWithAuth.get(`api/user-list?page=${page}`);
   return data;
 };
