@@ -23,6 +23,11 @@ function ChatList() {
     return () => disconnectHandler();
   }, []);
 
+  const handleExit = (chatRoomId: string) => {
+    exitHandler(chatRoomId);
+    setChatList((prev) => prev.filter((room) => room.roomId !== chatRoomId));
+  };
+
   if (isLoading || isError) {
     return (
       <ul className="flex flex-col flex-1 w-full h-8 gap-2 px-8 overflow-auto">
@@ -43,7 +48,7 @@ function ChatList() {
       {chatList?.length ? (
         <>
           {chatList.map((chat) => (
-            <ChatItem key={chat.roomId} onClick={() => exitHandler(chat.roomId)} {...chat} />
+            <ChatItem key={chat.roomId} onClick={() => handleExit(chat.roomId)} {...chat} />
           ))}
         </>
       ) : (
