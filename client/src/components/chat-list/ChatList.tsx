@@ -7,15 +7,15 @@ import { chatListState } from 'recoil/chat/atoms';
 
 function ChatList() {
   const { connectHandler, disconnectHandler } = useHandleChatList();
-  const { isLoading, isError, data, isSuccess } = useGetChatRooms();
+  const { isLoading, isError, data } = useGetChatRooms();
   const setChatList = useSetRecoilState(chatListState);
   const chatList = useRecoilValue(chatListState);
 
   useEffect(() => {
-    if (isSuccess) {
+    if (data) {
       setChatList(data?.data);
     }
-  }, [isSuccess, isError, data]);
+  }, [data]);
 
   useEffect(() => {
     connectHandler();
@@ -40,7 +40,7 @@ function ChatList() {
 
   return (
     <ul className="flex flex-col w-full gap-2 px-8 overflow-auto flex-3">
-      {chatList.length ? (
+      {chatList?.length ? (
         <>
           {chatList.map((chat) => (
             <ChatItem otherUserNickname={chat.otherUserNickname} updatedAt={chat.updatedAt} roomId={chat.roomId} recentMessage={chat.recentMessage} unReadCount={+chat.unReadCount} key={chat.roomId} {...chat} />

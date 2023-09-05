@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
 
-const ChatForm = ({ onMessage }: { onMessage: (message: string) => void }) => {
+type Props = {
+  onMessage: (message: string) => void;
+  roomStatus: boolean;
+};
+
+const ChatForm = (props: Props) => {
+  const { onMessage, roomStatus } = props;
   const [value, setValue] = useState<string>('');
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -20,6 +26,7 @@ const ChatForm = ({ onMessage }: { onMessage: (message: string) => void }) => {
         onKeyDown={handleKeyDown}
         value={value}
         onChange={(e) => setValue(e.target.value)}
+        disabled={!roomStatus}
       />
     </section>
   );

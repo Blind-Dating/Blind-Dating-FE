@@ -3,15 +3,7 @@ import DeleteChatBtn from './DeleteChatBtn';
 import { useRecoilValue } from 'recoil';
 import { chatsSettingBtnState } from 'recoil/chat/atoms';
 
-interface Props {
-  otherUserNickname: string;
-  updatedAt: string;
-  roomId: string;
-  recentMessage: string;
-  unReadCount: number;
-}
-
-const ChatItem = (props: Props) => {
+const ChatItem = ({ ...props }) => {
   const { otherUserNickname: user, updatedAt, roomId, recentMessage, unReadCount } = props;
   const navigate = useNavigate();
   const isClickedButton = useRecoilValue(chatsSettingBtnState);

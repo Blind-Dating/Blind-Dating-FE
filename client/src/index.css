@@ -17,7 +17,7 @@
 
 @layer components {
   .input-md {
-    @apply w-56 py-4 pl-4 text-sm border border-solid h-14 rounded-2xl border-whiteLilac text-graySlate font-NotoSans hover:border-redAmaranth focus:border-redAmaranth focus:outline-none;
+    @apply w-56 py-1 pl-4 text-sm border border-solid h-14 rounded-2xl border-whiteLilac text-graySlate font-NotoSans hover:border-redAmaranth focus:border-redAmaranth focus:outline-none;
   }
 
   .input-lg {

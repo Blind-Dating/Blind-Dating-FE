@@ -10,6 +10,7 @@ type InputProps<T extends FieldValues> = {
   rules?: RegisterOptions;
   error?: string;
   autoFocus?: boolean;
+  message?: string;
 };
 
 const InputField = <T extends FieldValues>({
@@ -22,10 +23,11 @@ const InputField = <T extends FieldValues>({
   rules,
   error,
   autoFocus,
+  message,
 }: InputProps<T>) => {
   return (
-    <div className="flex flex-col mb-2.5">
-      <label className="mb-1.5 pl-2 label" htmlFor={id}>
+    <div className="flex flex-col mb-1.5">
+      <label className="mb-1.5 pl-2  text-black/60 label font-medium" htmlFor={id}>
         {label}
       </label>
       <input
@@ -36,7 +38,11 @@ const InputField = <T extends FieldValues>({
         autoFocus={autoFocus}
         {...register(id, rules)}
       />
-      {error && <p className="pt-2 pl-2 text-s font-NotoSans text-redAmaranth">{error}</p>}
+      {error ? (
+        <p className="pt-1.5 pl-2 text-ss font-NotoSans text-redAmaranth">{error}</p>
+      ) : (
+        <p className="pt-1.5 pl-2 text-ss font-NotoSans text-labelColor">{message}</p>
+      )}
     </div>
   );
 };

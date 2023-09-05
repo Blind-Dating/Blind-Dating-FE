@@ -1,7 +1,9 @@
+import { useQueryClient } from '@tanstack/react-query';
 import ChatForm from 'components/chat/ChatForm';
 import ChatMessages from 'components/chat/ChatMessages';
 import ChatUser from 'components/chat/ChatUser';
 import NoHeaderFooterLayout from 'components/layout/NoHeaderFooterLayout';
+import useInfiniteScroll from 'hooks/UseInfiniteScroll';
 import { useGetChatData } from 'hooks/api/useGetChat';
 import useHandleChat from 'hooks/useHandleChat';
 import { useEffect } from 'react';
@@ -13,21 +15,36 @@ import { userState } from 'recoil/user/atoms';
 const ChatPage = () => {
   const { chatId } = useParams();
   const { userId } = useRecoilValue(userState);
-  const { data, isError, isLoading, isSuccess } = useGetChatData(chatId);
+  const { data, isError, isLoading, fetchNextPage } = useGetChatData(chatId);
   const { connectHandler, disconnectHandler, sendHandler } = useHandleChat();
   const setChatData = useSetRecoilState(chatDataState);
+  const queryClient = useQueryClient();
 
   useEffect(() => {
     connectHandler(chatId);
 
-    return () => disconnectHandler();
+    return () => {
+      disconnectHandler();
+      queryClient.clear();
+      setChatData([]);
+    };
   }, []);
 
   useEffect(() => {
-    if (isSuccess) {
-      setChatData(data.data.chatList);
+    if (data) {
+      const prevChatData = data.pages[data.pages.length - 1].data.chatList;
+      setChatData((prev) => [...prev, ...prevChatData]);
     }
-  }, [isSuccess, isError, data]);
+  }, [data, setChatData]);
+
+  const onIntersect = async (entry: IntersectionObserverEntry, observer: IntersectionObserver) => {
+    observer.unobserve(entry.target);
+    if (entry.isIntersecting) {
+      fetchNextPage();
+    }
+  };
+
+  const { top, section } = useInfiniteScroll(onIntersect);
 
   if (isError || isLoading) {
     return <></>;
@@ -44,9 +61,9 @@ const ChatPage = () => {
 
   return (
     <NoHeaderFooterLayout>
-      <ChatUser user={data?.data.otherUserNickname} />
-      <ChatMessages />
-      <ChatForm onMessage={handleMessage} />
+      <ChatUser user={data?.pages[0].data.otherUserNickname} />
+      <ChatMessages scrollRef={top} sectionRef={section} />
+      <ChatForm onMessage={handleMessage} roomStatus={data?.pages[0].data.roomStatus} />
     </NoHeaderFooterLayout>
   );
 };
