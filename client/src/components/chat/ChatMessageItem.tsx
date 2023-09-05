@@ -1,12 +1,4 @@
-type Props = {
-  user: string | number;
-  id: number;
-  message: string;
-  writerId: number;
-  created: string;
-};
-
-const ChatMessageItem = (props: Props) => {
+const ChatMessageItem = ({ ...props }) => {
   const { message, writerId, user, created } = props;
   return (
     <li
