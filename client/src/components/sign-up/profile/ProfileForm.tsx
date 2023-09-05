@@ -20,7 +20,9 @@ export type SignUpFormValues = {
 };
 
 export const ProfileForm = ({ onNext, setSignUpAllValues }: Props) => {
+  const [duplicatedId, setDuplicatedId] = useState<string>('');
   const [isDuplicatedId, setIsDuplicatedId] = useState<boolean>(false);
+  const [duplicatedNickname, setDuplicatedNickname] = useState<string>('');
   const [isDuplicatedNickname, setIsDuplicatedNickname] = useState<boolean>(false);
 
   const { register, handleSubmit, errors, watch } = useHookForm<SignUpFormValues>();
@@ -34,6 +36,14 @@ export const ProfileForm = ({ onNext, setSignUpAllValues }: Props) => {
   const onSubmit: SubmitHandler<SignUpFormValues> = (signUpFormValues) => {
     if (!isDuplicatedId) return alert('아이디 중복체크를 해주세요');
     if (!isDuplicatedNickname) return alert('닉네임 중복체크를 해주세요');
+    if (duplicatedId !== userId) {
+      setIsDuplicatedId(false);
+      return alert('아이디를 다시 중복체크를 해주세요');
+    }
+    if (duplicatedNickname !== userNickname) {
+      setIsDuplicatedNickname(false);
+      return alert('닉네임을 다시 중복체크를 해주세요');
+    }
 
     delete signUpFormValues.passwordCheck;
 
@@ -59,6 +69,7 @@ export const ProfileForm = ({ onNext, setSignUpAllValues }: Props) => {
       alert('아이디는 영문 대소문자, 글자 단위 한글, 숫자만 가능합니다.');
       return;
     }
+    setDuplicatedId(userId);
     postCheckIdFn(userId);
   };
 
@@ -81,6 +92,7 @@ export const ProfileForm = ({ onNext, setSignUpAllValues }: Props) => {
       return;
     }
 
+    setDuplicatedNickname(userNickname);
     postCheckNicknameFn(userNickname);
   };
 
@@ -107,6 +119,7 @@ export const ProfileForm = ({ onNext, setSignUpAllValues }: Props) => {
                 placeholder="id"
                 autoFocus={true}
                 error={errors.userId?.message}
+                message="5~20글자, 영문 대소문자, 한글, 숫자"
                 register={register}
                 rules={{
                   required: '아이디를 입력해주세요',
@@ -122,9 +135,7 @@ export const ProfileForm = ({ onNext, setSignUpAllValues }: Props) => {
                 }}
               />
               <button
-                className={`mt-3 btn-check ${isDuplicatedId ? 'btn-checkSuccess' : ''} ${
-                  errors.userId ? 'mb-5' : ''
-                }`}
+                className={`mt-3 mb-6 btn-check ${isDuplicatedId ? 'btn-checkSuccess' : ''}`}
                 onClick={handleCheckId}
                 disabled={!!errors?.userId}
               >
@@ -141,6 +152,7 @@ export const ProfileForm = ({ onNext, setSignUpAllValues }: Props) => {
                 register={register}
                 placeholder="nickname"
                 error={errors.nickname?.message}
+                message="2~20글자, 영문 대소문자, 한글, 숫자"
                 rules={{
                   required: '닉네임을 입력해주세요',
                   maxLength: { value: 20, message: '20글자 이하 입력해주세요' },
@@ -156,9 +168,7 @@ export const ProfileForm = ({ onNext, setSignUpAllValues }: Props) => {
               />
 
               <button
-                className={`mt-3 btn-check ${isDuplicatedNickname ? 'btn-checkSuccess' : ''} ${
-                  errors.nickname ? 'mb-5' : ''
-                }`}
+                className={`mt-3 mb-6  btn-check ${isDuplicatedNickname ? 'btn-checkSuccess' : ''}`}
                 onClick={handleNickname}
                 disabled={!!errors?.nickname}
               >
@@ -173,19 +183,20 @@ export const ProfileForm = ({ onNext, setSignUpAllValues }: Props) => {
                   type="password"
                   id="userPassword"
                   label="비밀번호"
-                  placeholder="*****"
+                  placeholder="********"
                   error={errors.userPassword?.message}
+                  message="8~20글자, 모든 문자 가능"
                   register={register}
                   rules={{
-                    required: '아이디를 입력해주세요',
+                    required: '비밀번호를 입력해주세요',
                     maxLength: { value: 20, message: '20글자 이하 입력해주세요' },
                     minLength: {
                       value: 8,
                       message: '8글자 이상 입력해주세요',
                     },
                     pattern: {
-                      value: /^[A-za-z0-9가-힣]{8,20}$/,
-                      message: '가능한 문자: 영문 대소문자, 글자 단위 한글, 숫자',
+                      value: /^[A-Za-z0-9가-힣!@#$%^&*()\-_=+\\|[\]{};:'",.<>?/]{8,20}$/,
+                      message: '가능한 문자: 특수문자, 영문 대소문자, 한글, 숫자',
                     },
                   }}
                 />
@@ -199,7 +210,7 @@ export const ProfileForm = ({ onNext, setSignUpAllValues }: Props) => {
                   label="비밀번호 확인"
                   register={register}
                   error={errors.passwordCheck?.message}
-                  placeholder="*****"
+                  placeholder="********"
                   rules={{
                     required: '비밀번호를 다시 입력해주세요',
                     validate: (passwordCheck) =>
