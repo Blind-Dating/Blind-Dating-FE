@@ -15,3 +15,8 @@ export const chatListState = atom<Record<string | number, keyof IMessage>[]>({
   key: 'chatListState',
   default: [],
 });
+
+export const updatedChatState = atom<boolean>({
+  key: 'updatedChatState',
+  default: false,
+});
