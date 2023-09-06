@@ -35,7 +35,7 @@ const ChatMessages = ({ scrollRef, sectionRef }: Props) => {
       dataWithDate.push(<ChatMessageDate key={messages[i].createdAt} date={created} />);
     }
     dataWithDate.push(
-      <ChatMessageItem key={messages[i].id} user={userId} created={created} {...messages[i]} />
+      <ChatMessageItem id={+messages[i].id} message={messages[i].message} writerId={+messages[i].writerId} key={messages[i].id} user={userId} created={created} {...messages[i]} />
     );
   }
 
