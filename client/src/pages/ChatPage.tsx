@@ -35,7 +35,6 @@ const ChatPage = () => {
   useEffect(() => {
     if (data) {
       const prevChatData = data.pages[data.pages.length - 1].data.chatList;
-      console.log(prevChatData);
 
       if (!chatData.find((chat) => chat.id === prevChatData[0].id)) {
         setChatData((prev) => [...prev, ...prevChatData]);
