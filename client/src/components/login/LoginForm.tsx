@@ -17,8 +17,8 @@ export const LoginForm = () => {
       alert('아이디는 5글자 이상입니다.');
       return;
     }
-    if (loginInfo.userPassword.length < 5) {
-      alert('비밀번호는 5글자 이상입니다.');
+    if (loginInfo.userPassword.length < 8) {
+      alert('비밀번호는 8글자 이상입니다.');
       return;
     }
     postLoginFn(loginInfo);
