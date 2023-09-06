@@ -3,7 +3,7 @@ import { axiosClient, axiosWithAuth } from 'apis/axiosClient';
 import { LoginFormValues } from 'components/login/LoginForm';
 import { useNavigate } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
-import { userState } from 'recoil/user/atoms';
+import { Question, userState } from 'recoil/user/atoms';
 
 type ApiResponse = {
   message: string;
@@ -12,6 +12,12 @@ type ApiResponse = {
     accessToken: string;
     id: number;
     nickname: string;
+    region: string;
+    mbti: string;
+    gender: string;
+    interests: string[];
+    questions: Question[];
+    selfIntroduction: string;
   };
 };
 
@@ -29,16 +35,21 @@ export const usePostLogin = () => {
     {
       onSuccess: (res) => {
         setUserState({
-          token: res.data.accessToken,
+          hasToken: true,
           userId: res.data.id,
           userName: res.data.nickname,
+          region: res.data.region,
+          mbti: res.data.mbti,
+          gender: res.data.gender,
+          interests: res.data.interests,
+          questions: res.data.questions,
+          selfIntroduction: res.data.selfIntroduction,
         });
         axiosWithAuth.defaults.headers['Authorization'] = `Bearer ${res.data.accessToken}`;
         navigate('/discover');
-        alert(res.message);
       },
-      onError: (res) => {
-        alert(res.message);
+      onError: () => {
+        alert('아이디 및 비밀번호를 다시 확인해주세요.');
       },
     }
   );
