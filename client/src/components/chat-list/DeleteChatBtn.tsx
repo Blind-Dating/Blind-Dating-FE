@@ -1,14 +1,8 @@
 import { ReactComponent as Trash } from 'assets/icons/trash.svg';
-import useHandleChatList from 'hooks/useHandleChatList';
 
-const DeleteChatBtn = ({ roomId }: { roomId: string }) => {
-  const { exitHandler } = useHandleChatList();
-  const handler = (e: React.MouseEvent) => {
-    e.preventDefault();
-    exitHandler(roomId);
-  };
+const DeleteChatBtn = ({ onClick }: { onClick: () => void }) => {
   return (
-    <button type="button" className="w-8 h-12 pl-2 text-redAmaranth " onClick={handler}>
+    <button type="button" className="min-w-[28px] h-12 pl-2 text-redAmaranth " onClick={onClick}>
       <Trash />
     </button>
   );
