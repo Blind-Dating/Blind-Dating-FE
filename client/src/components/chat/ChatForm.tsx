@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { ReactComponent as Send } from 'assets/icons/send.svg';
 
 type Props = {
   onMessage: (message: string) => void;
@@ -31,7 +32,7 @@ const ChatForm = (props: Props) => {
     <section className="w-full max-h-[15%] px-10 py-8">
       <form className="flex gap-2">
         <textarea
-          className="w-full p-2 text-sm border rounded resize-none border-whiteLilac focus:outline-redAmaranth/70"
+          className="w-full p-2 text-sm border rounded resize-none border-whiteLilac"
           placeholder="your message"
           onKeyDown={handleKeyDown}
           value={value}
@@ -40,11 +41,11 @@ const ChatForm = (props: Props) => {
         />
         <button
           type="button"
-          className="flex-none px-3 text-white rounded text-s disabled:bg-whiteLilac bg-redAmaranth"
+          className="flex-none px-3 text-white border rounded border-redAmaranth bg-redAmaranth text-s disabled:border-whiteLilac disabled:text-labelColor disabled:bg-white"
           onClick={handleClick}
-          disabled={!value.length}
+          disabled={!value.length || !roomStatus}
         >
-          전송
+          <Send />
         </button>
       </form>
     </section>

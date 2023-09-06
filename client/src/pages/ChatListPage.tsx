@@ -4,7 +4,7 @@ import ChatList from 'components/chat-list/ChatList';
 function ChatListPage() {
   return (
     <Layout title="Messages">
-      <main className="flex flex-auto">
+      <main className="flex-auto">
         <ChatList />
       </main>
     </Layout>
