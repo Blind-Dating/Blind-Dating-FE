@@ -35,23 +35,25 @@ const ProfilePage = () => {
   if (isError || isLoading) {
     return (
       <Layout title="My Page">
-        <></>
+        <main className="flex-auto"></main>
       </Layout>
     );
   }
 
   return (
     <Layout title="My Page">
-      <UserInfo nickname={data.nickname} id={data.userId} />
-      <UserDetailFields
-        onChange={handleValueChange}
-        values={values}
-        {...data}
-        interests={data.interests.map(
-          (interest: { id: number; interestName: string }) => interest.interestName
-        )}
-      />
-      <UserInfoEditBtn onSubmit={handleSubmit} />
+      <main className="flex-auto">
+        <UserInfo nickname={data.nickname} id={data.userId} />
+        <UserDetailFields
+          onChange={handleValueChange}
+          values={values}
+          {...data}
+          interests={data.interests.map(
+            (interest: { id: number; interestName: string }) => interest.interestName
+          )}
+        />
+        <UserInfoEditBtn onSubmit={handleSubmit} />
+      </main>
     </Layout>
   );
 };
