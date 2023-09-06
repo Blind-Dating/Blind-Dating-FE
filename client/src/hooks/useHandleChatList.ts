@@ -40,7 +40,6 @@ const useHandleChatList = () => {
         );
       });
     }
-    client.disconnect();
   };
 
   return { connectHandler, disconnectHandler, exitHandler };

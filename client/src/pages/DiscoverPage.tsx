@@ -60,7 +60,7 @@ function DiscoverPage() {
 
   return (
     <Layout title="Discover">
-      <main className="flex flex-auto justify-center items-center flex-col">
+      <main className="flex flex-col items-center justify-center flex-auto">
         {dataPath.content[currentUserIndex] && (
           <>
             <RecommendedUserCard {...dataPath.content[currentUserIndex]} />
