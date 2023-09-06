@@ -6,11 +6,7 @@ import { useNavigate } from 'react-router-dom';
 type ApiResponse = {
   message: string;
   status: string;
-  data: {
-    accessToken: string;
-    id: number;
-    nickname: string;
-  };
+  data: null;
 };
 
 const postSignUpFetcher = async (userData: SignUpAllValues): Promise<ApiResponse> => {
@@ -25,7 +21,6 @@ export const usePostSignUpData = () => {
     postSignUpFetcher,
     {
       onSuccess: (res) => {
-     
         alert(res.message);
         navigate('/');
       },
