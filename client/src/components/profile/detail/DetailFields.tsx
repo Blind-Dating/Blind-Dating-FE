@@ -12,6 +12,12 @@ type Props = {
   region: string;
   mbti: string;
   onChange: (field: string, value: string | string[]) => void;
+  values: {
+    interests: string[];
+    selfIntroduction: string;
+    region: string;
+    mbti: string;
+  };
 };
 
 type DetailInfo = {
@@ -21,7 +27,7 @@ type DetailInfo = {
 };
 
 const UserDetailFields = (props: Props) => {
-  const { interests, selfIntroduction, region, mbti, onChange } = props;
+  const { interests, selfIntroduction, region, mbti, values, onChange } = props;
   const { isModalOpen, handleToggleModal } = useModal();
   const [clickedField, setClickedField] = useState<string>('');
 
@@ -39,7 +45,7 @@ const UserDetailFields = (props: Props) => {
       position: 'right',
       content: (
         <UserLocationMBTI
-          data={region}
+          data={region || values.region}
           onToggleModal={handleToggleModal}
           onClick={handleFocus}
           name="region"
@@ -51,7 +57,7 @@ const UserDetailFields = (props: Props) => {
       position: 'right',
       content: (
         <UserLocationMBTI
-          data={mbti}
+          data={mbti || values.mbti}
           onToggleModal={handleToggleModal}
           onClick={handleFocus}
           name="mbti"
@@ -63,7 +69,7 @@ const UserDetailFields = (props: Props) => {
       position: 'bottom',
       content: (
         <UserInterests
-          data={interests}
+          data={interests || values.interests}
           name="interests"
           onToggleModal={handleToggleModal}
           onClick={handleFocus}
@@ -75,7 +81,7 @@ const UserDetailFields = (props: Props) => {
       position: 'bottom',
       content: (
         <UserIntrodudction
-          data={selfIntroduction}
+          data={selfIntroduction || values.selfIntroduction}
           name="selfIntroduction"
           onFocus={handleFocus}
           onChange={handleChangeValue}
