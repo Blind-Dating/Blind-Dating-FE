@@ -22,12 +22,12 @@ export const DetailField = ({ answer }: Props) => {
 
             <main className="flex justify-center gap-2">
               <button
-                className={`${answerSort[index].status ? 'btn-YesOrNo-selected' : 'btn-YesOrNo'}`}
+                className={`${answerSort[index]?.status ? 'btn-YesOrNo-selected' : 'btn-YesOrNo'}`}
               >
                 Yes
               </button>
               <button
-                className={`${answerSort[index].status ? 'btn-YesOrNo' : 'btn-YesOrNo-selected'}`}
+                className={`${answerSort[index]?.status ? 'btn-YesOrNo' : 'btn-YesOrNo-selected'}`}
               >
                 No
               </button>
