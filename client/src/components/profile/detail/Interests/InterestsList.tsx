@@ -14,7 +14,7 @@ const UserInterests = (props: Props) => {
       {data?.map((interestName) => <InterestItem key={interestName} name={interestName} />)}
       <button
         type="button"
-        className="flex block h-8 p-2 border rounded text-s text-redAmaranth border-whiteLilac"
+        className="flex block h-8 p-2 border rounded text-s text-redAmaranth border-whiteLilac hover:border-redAmaranth"
         onClick={(e) => {
           onToggleModal(e);
           onClick(name);

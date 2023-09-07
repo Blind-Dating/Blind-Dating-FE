@@ -16,7 +16,7 @@ const ChatUser = (props: Props) => {
       </div>
       <button
         type="button"
-        className="flex-none w-12 h-12 p-3 border text-s text-labelColor border-whiteSmoke rounded-xl hover:text-redAmaranth"
+        className="flex-none w-12 h-12 p-3 border text-s text-labelColor border-whiteSmoke rounded-xl hover:text-redAmaranth hover:border-whiteLilac"
         onClick={onExit}
       >
         <Exit />

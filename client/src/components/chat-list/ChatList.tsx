@@ -44,7 +44,7 @@ function ChatList() {
   }
 
   return (
-    <ul className="flex flex-col w-full h-full gap-2 px-8 overflow-auto flex-3">
+    <ul className="flex flex-col w-full h-full px-8 overflow-auto flex-3">
       {chatList?.length ? (
         <>
           {chatList.map((chat) => (
