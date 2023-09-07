@@ -7,7 +7,7 @@ const UserInfoEditBtn = ({ onSubmit }: Props) => {
     <section className="w-full px-8">
       <button
         type="button"
-        className="w-full h-12 text-sm font-bold border rounded-xl border-whiteLilac text-redAmaranth"
+        className="w-full h-12 text-sm font-bold border rounded-xl border-whiteLilac text-redAmaranth hover:border-redAmaranth"
         onClick={onSubmit}
       >
         수정하기

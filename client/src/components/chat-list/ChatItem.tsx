@@ -12,7 +12,7 @@ const ChatItem = ({ ...props }) => {
 
   return (
     <>
-      <li className="flex">
+      <li className="flex py-2 hover:bg-redAmaranth/10">
         <button
           type="button"
           className="flex items-center w-full gap-4 overflow-hidden text-left hover:cursor-pointer"
@@ -20,7 +20,7 @@ const ChatItem = ({ ...props }) => {
             navigate(`/chat-list/${roomId}`);
           }}
         >
-          <div className="flex items-center justify-center flex-none w-12 h-12 rounded-full bg-labelColor">
+          <div className="flex items-center justify-center flex-none w-12 h-12 text-xl font-bold rounded-full text-white/90 bg-grayLignt">
             {user ? user.slice(0, 1) : '?'}
           </div>
           <div className={`h-10 text-sm truncate  basis-${isClickedButton ? '36' : '40'} flex-1 `}>
