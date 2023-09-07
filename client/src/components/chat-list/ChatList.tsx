@@ -3,13 +3,14 @@ import ChatItem from './ChatItem';
 import { useGetChatRooms } from 'hooks/api/useGetChatRooms';
 import { useEffect } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { chatListState } from 'recoil/chat/atoms';
+import { chatListState, chatsSettingBtnState } from 'recoil/chat/atoms';
 
 function ChatList() {
   const { connectHandler, disconnectHandler, exitHandler } = useHandleChatList();
   const { isLoading, isError, data } = useGetChatRooms();
   const setChatList = useSetRecoilState(chatListState);
   const chatList = useRecoilValue(chatListState);
+  const setIsClicked = useSetRecoilState(chatsSettingBtnState);
 
   useEffect(() => {
     if (data) {
@@ -20,7 +21,10 @@ function ChatList() {
   useEffect(() => {
     connectHandler();
 
-    return () => disconnectHandler();
+    return () => {
+      disconnectHandler();
+      setIsClicked(false);
+    };
   }, []);
 
   const handleExit = (chatRoomId: string) => {
@@ -30,9 +34,9 @@ function ChatList() {
 
   if (isLoading || isError) {
     return (
-      <ul className="flex flex-col flex-1 w-full h-8 gap-2 px-8 overflow-auto">
+      <ul className="flex flex-col items-center flex-1 w-full h-8 gap-2 px-8 overflow-auto">
         <div
-          className="flex-1 inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-white align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+          className="flex-1 inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-labelColor border-r-white align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
           role="status"
         >
           <span className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">
@@ -44,7 +48,7 @@ function ChatList() {
   }
 
   return (
-    <ul className="flex flex-col w-full gap-2 px-8 overflow-auto flex-3">
+    <ul className="flex flex-col w-full h-full px-8 overflow-auto flex-3">
       {chatList?.length ? (
         <>
           {chatList.map((chat) => (

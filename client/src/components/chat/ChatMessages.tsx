@@ -40,7 +40,7 @@ const ChatMessages = ({ scrollRef, sectionRef }: Props) => {
   }
 
   return (
-    <section className="px-10 py-2.5 flex-1 w-full max-h-[70%] overflow-auto " ref={sectionRef}>
+    <section className="px-10 py-2.5 flex-1 w-full h-[70%] overflow-auto" ref={sectionRef}>
       <div ref={scrollRef} />
       <ul className="grid grid-cols-1 gap-2 ">{dataWithDate}</ul>
     </section>

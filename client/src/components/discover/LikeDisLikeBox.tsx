@@ -56,11 +56,11 @@ export const LikeDisLikeBox = ({
     }
   };
   return (
-    <div className="flex gap-8 justify-center mt-8">
-      <button className="flex justify-center items-center w-14 h-14 rounded-full bg-white shadow-2xl">
+    <div className="flex justify-center gap-8 mt-8">
+      <button className="flex items-center justify-center bg-white rounded-full shadow-3xl w-14 h-14">
         <ThumbDown onClick={handleDisLike} />
       </button>
-      <button className="flex justify-center items-center w-14 h-14 rounded-full bg-white shadow-2xl ">
+      <button className="flex items-center justify-center bg-white rounded-full shadow-3xl w-14 h-14 ">
         <ThumbUp onClick={handleLike} />
       </button>
     </div>
