@@ -1,45 +1,57 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { useRecoilValue } from 'recoil';
+import { updatedChatState } from 'recoil/chat/atoms';
 
 const useInfiniteScroll = (
-  onIntersect: (entry: IntersectionObserverEntry, observer: IntersectionObserver) => Promise<void>
+  onIntersect: (entry: IntersectionObserverEntry, observer: IntersectionObserver) => Promise<void>,
+  dataLength: number
 ) => {
-  const section = useRef<HTMLElement>(null);
   const top = useRef<HTMLDivElement>(null);
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  useEffect(() => {
-    if (section.current) {
-      section.current.scrollTop = section.current.scrollHeight;
-    }
-  }, [section.current]);
+  const sectionRef = useRef<HTMLElement>(null);
+  const [scrollHeight, setScrollHeight] = useState(0);
+  const isUpdatedChat = useRecoilValue(updatedChatState);
 
   const opt = {
-    rootMargin: '30px 0px',
-    threshold: 0.8,
+    root: sectionRef.current,
+    rootMargin: '50px',
+    threshold: 0.5,
   };
 
-  const callback = useCallback(
-    (entries: IntersectionObserverEntry[], observer: IntersectionObserver) => {
-      entries.forEach((e) => {
-        if (e.isIntersecting && section.current) {
-          onIntersect(e, observer);
-          if (isMounted) {
-            section.current.scrollTop = 150;
-          } else {
-            section.current.scrollTop = section.current.scrollHeight;
-          }
-        }
-      });
-    },
-    [isMounted, onIntersect]
-  );
+  const callback = (entries: IntersectionObserverEntry[], observer: IntersectionObserver) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting && sectionRef.current) {
+        setScrollHeight(sectionRef.current.clientHeight - 200);
+        onIntersect(e, observer);
+      }
+    });
+  };
+  useEffect(() => {
+    if (sectionRef.current) {
+      sectionRef.current.scrollTop = sectionRef.current.scrollHeight;
+    }
+  }, [sectionRef.current]);
 
   useEffect(() => {
-    if (!top.current || !section.current) {
+    if (sectionRef.current) {
+      if (scrollHeight && !isUpdatedChat) {
+        sectionRef.current.scrollTop = scrollHeight;
+
+        return setScrollHeight(0);
+      }
+      if (isUpdatedChat) {
+        handleScroll(sectionRef.current.scrollHeight - sectionRef.current.clientHeight);
+      }
+    }
+  }, [dataLength, scrollHeight, isUpdatedChat]);
+
+  const handleScroll = (height: number) => {
+    if (sectionRef.current) {
+      sectionRef.current.scrollTop = height;
+    }
+  };
+
+  useEffect(() => {
+    if (!top.current) {
       return;
     }
 
@@ -47,9 +59,9 @@ const useInfiniteScroll = (
     observer.observe(top.current);
 
     return () => observer.disconnect();
-  }, [top.current, section.current, onIntersect, callback]);
+  }, [dataLength]);
 
-  return { top, section };
+  return { top, section: sectionRef };
 };
 
 export default useInfiniteScroll;

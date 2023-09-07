@@ -3,7 +3,8 @@ import { axiosClient, axiosWithAuth } from 'apis/axiosClient';
 import { LoginFormValues } from 'components/login/LoginForm';
 import { useNavigate } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
-import { Interest, Question, userState } from 'recoil/user/atoms';
+import { Interests, Question, userState } from 'recoil/user/atoms';
+
 
 type ApiResponse = {
   message: string;
@@ -15,7 +16,7 @@ type ApiResponse = {
     region: string;
     mbti: string;
     gender: string;
-    interests: Interest[];
+    interests: Interests[];
     questions: Question[];
     selfIntroduction: string;
   };

@@ -16,7 +16,7 @@ const fetchChatData = async (roomId: RoomId, chatId: ChatId) => {
 };
 
 export const useGetChatData = (roomId: RoomId) => {
-  const { isLoading, data, isError, fetchNextPage } = useInfiniteQuery(
+  const { isLoading, data, isError, fetchNextPage, hasNextPage } = useInfiniteQuery(
     ['chatroom', roomId],
     ({ pageParam }) => fetchChatData(roomId, pageParam),
     {
@@ -28,5 +28,5 @@ export const useGetChatData = (roomId: RoomId) => {
       },
     }
   );
-  return { isLoading, data, isError, fetchNextPage };
+  return { isLoading, data, isError, fetchNextPage, hasNextPage };
 };

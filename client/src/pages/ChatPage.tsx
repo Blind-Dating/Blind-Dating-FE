@@ -9,16 +9,18 @@ import useHandleChat from 'hooks/useHandleChat';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { chatDataState } from 'recoil/chat/atoms';
+import { chatDataState, updatedChatState } from 'recoil/chat/atoms';
 import { userState } from 'recoil/user/atoms';
 
 const ChatPage = () => {
   const { chatId } = useParams();
   const { userId } = useRecoilValue(userState);
-  const { data, isError, isLoading, fetchNextPage } = useGetChatData(chatId);
+  const { data, isError, isLoading, fetchNextPage, hasNextPage } = useGetChatData(chatId);
   const { connectHandler, disconnectHandler, sendHandler, exitHandler } = useHandleChat();
   const setChatData = useSetRecoilState(chatDataState);
   const queryClient = useQueryClient();
+  const chatData = useRecoilValue(chatDataState);
+  const setUpdatedChatState = useSetRecoilState(updatedChatState);
 
   useEffect(() => {
     connectHandler(chatId);
@@ -33,18 +35,22 @@ const ChatPage = () => {
   useEffect(() => {
     if (data) {
       const prevChatData = data.pages[data.pages.length - 1].data.chatList;
-      setChatData((prev) => [...prev, ...prevChatData]);
+
+      if (!chatData.find((chat) => chat.id === prevChatData[0].id)) {
+        setChatData((prev) => [...prev, ...prevChatData]);
+      }
     }
   }, [data, setChatData]);
 
   const onIntersect = async (entry: IntersectionObserverEntry, observer: IntersectionObserver) => {
     observer.unobserve(entry.target);
-    if (entry.isIntersecting) {
+    if (entry.isIntersecting && hasNextPage) {
+      setUpdatedChatState(false);
       fetchNextPage();
     }
   };
 
-  const { top, section } = useInfiniteScroll(onIntersect);
+  const { top, section } = useInfiniteScroll(onIntersect, chatData.length);
 
   if (isError || isLoading) {
     return <></>;
