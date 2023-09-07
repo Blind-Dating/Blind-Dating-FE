@@ -2,9 +2,10 @@ import Layout from 'components/layout/Layout';
 import UserDetailFields from 'components/profile/detail/DetailFields';
 import UserInfo from 'components/profile/UserInfo';
 import UserInfoEditBtn from 'components/profile/UserInfoEditBtn';
-import { useGetProfile } from 'hooks/api/useGetProfile';
 import { usePostEditProfile } from 'hooks/api/usePostEditProfile';
 import { useState } from 'react';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { userState } from 'recoil/user/atoms';
 
 export type UserInfo = {
   region: string;
@@ -14,14 +15,15 @@ export type UserInfo = {
 };
 
 const ProfilePage = () => {
-  const { data, isError, isLoading } = useGetProfile();
+  const { region, mbti, selfIntroduction, interests, userName, userId } = useRecoilValue(userState);
   const { mutate } = usePostEditProfile();
   const [values, setValues] = useState<UserInfo>({
-    region: data?.region,
-    mbti: data?.mbti,
-    selfIntroduction: data?.selfIntroduction,
-    interests: data?.interests.map((interest: { interestName: string }) => interest.interestName),
+    region,
+    mbti,
+    selfIntroduction,
+    interests: interests.map((interest) => interest.interestName),
   });
+  const setUserState = useSetRecoilState(userState);
 
   const handleValueChange = (field: string, value: string | string[]) => {
     const selectedValue = value.length === 1 ? value[0] : value;
@@ -30,30 +32,15 @@ const ProfilePage = () => {
 
   const handleSubmit = () => {
     mutate(values);
+    const convertInterests = values.interests.map((name, id) => ({ id, interestName: name }));
+    setUserState((prev) => ({ ...prev, ...values, interests: convertInterests }));
   };
-
-  if (isError || isLoading) {
-    return (
-      <Layout title="My Page">
-        <main className="flex-auto"></main>
-      </Layout>
-    );
-  }
 
   return (
     <Layout title="My Page">
-      <main className="flex-auto">
-        <UserInfo nickname={data.nickname} id={data.userId} />
-        <UserDetailFields
-          onChange={handleValueChange}
-          values={values}
-          {...data}
-          interests={data.interests.map(
-            (interest: { id: number; interestName: string }) => interest.interestName
-          )}
-        />
-        <UserInfoEditBtn onSubmit={handleSubmit} />
-      </main>
+      <UserInfo nickname={userName} id={userId} />
+      <UserDetailFields onChange={handleValueChange} {...values} />
+      <UserInfoEditBtn onSubmit={handleSubmit} />
     </Layout>
   );
 };

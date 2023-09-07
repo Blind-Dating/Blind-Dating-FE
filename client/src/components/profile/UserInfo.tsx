@@ -1,4 +1,4 @@
-type Props = { nickname: string; id: string };
+type Props = { nickname: string; id: number };
 
 const UserInfo = (props: Props) => {
   const { nickname, id } = props;

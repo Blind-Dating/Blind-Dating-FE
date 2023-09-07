@@ -5,6 +5,11 @@ export type Question = {
   status: boolean;
 };
 
+export type Interests = {
+  id: number;
+  interestName: string;
+};
+
 export type UserState = {
   hasToken: boolean;
   userId: number;
@@ -12,7 +17,7 @@ export type UserState = {
   region: string;
   mbti: string;
   gender: string;
-  interests: string[];
+  interests: Interests[];
   questions: Question[];
   selfIntroduction: string;
 };
