@@ -1,5 +1,10 @@
 import { atom } from 'recoil';
 
+export type Interest = {
+  id: number;
+  interestName: string;
+};
+
 export type Question = {
   id: number;
   status: boolean;
@@ -12,7 +17,7 @@ export type UserState = {
   region: string;
   mbti: string;
   gender: string;
-  interests: string[];
+  interests: Interest[];
   questions: Question[];
   selfIntroduction: string;
 };
