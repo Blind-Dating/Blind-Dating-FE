@@ -38,9 +38,11 @@ const ProfilePage = () => {
 
   return (
     <Layout title="My Page">
-      <UserInfo nickname={userName} id={userId} />
-      <UserDetailFields onChange={handleValueChange} {...values} />
-      <UserInfoEditBtn onSubmit={handleSubmit} />
+      <main className="flex-auto">
+        <UserInfo nickname={userName} id={userId} />
+        <UserDetailFields onChange={handleValueChange} {...values} />
+        <UserInfoEditBtn onSubmit={handleSubmit} />
+      </main>
     </Layout>
   );
 };

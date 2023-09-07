@@ -8,7 +8,7 @@ const ChatSettingBtn = () => {
   return (
     <button
       type="button"
-      className="w-12 h-12 p-3.5 border text-redAmaranth border-whiteSmoke rounded-xl hover:border-redAmaranth"
+      className="w-12 h-12 p-3 border text-redAmaranth border-whiteLilac rounded-xl hover:border-redAmaranth"
       onClick={() => setIsClicked((prev) => !prev)}
     >
       <Setting />
