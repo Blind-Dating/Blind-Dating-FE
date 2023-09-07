@@ -3,13 +3,14 @@ import ChatItem from './ChatItem';
 import { useGetChatRooms } from 'hooks/api/useGetChatRooms';
 import { useEffect } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { chatListState } from 'recoil/chat/atoms';
+import { chatListState, chatsSettingBtnState } from 'recoil/chat/atoms';
 
 function ChatList() {
   const { connectHandler, disconnectHandler, exitHandler } = useHandleChatList();
   const { isLoading, isError, data } = useGetChatRooms();
   const setChatList = useSetRecoilState(chatListState);
   const chatList = useRecoilValue(chatListState);
+  const setIsClicked = useSetRecoilState(chatsSettingBtnState);
 
   useEffect(() => {
     if (data) {
@@ -20,7 +21,10 @@ function ChatList() {
   useEffect(() => {
     connectHandler();
 
-    return () => disconnectHandler();
+    return () => {
+      disconnectHandler();
+      setIsClicked(false);
+    };
   }, []);
 
   const handleExit = (chatRoomId: string) => {
