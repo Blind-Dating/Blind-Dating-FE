@@ -1,6 +1,6 @@
 import { useModal } from 'hooks/useModal';
 import { DetailField } from './DetailField';
-import { Interest, Question } from 'recoil/user/atoms';
+import { Interests, Question } from 'recoil/user/atoms';
 import { ReactComponent as ArrowRight } from 'assets/icons/Arrow_Right.svg';
 
 type Props = {
@@ -10,7 +10,7 @@ type Props = {
   region: string;
   mbti: string;
   gender: string;
-  interests: Interest[];
+  interests: Interests[];
   questions: Question[];
   selfIntroduction: string;
 };

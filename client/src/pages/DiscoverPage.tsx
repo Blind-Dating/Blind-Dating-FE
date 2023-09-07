@@ -3,16 +3,7 @@ import { LikeDisLikeBox } from 'components/discover/LikeDisLikeBox';
 import { RecommendedUserCard } from 'components/discover/RecommendedUserCard';
 import { useGetRecommendedUserList } from 'hooks/api/useGetRecommendedUserList';
 import { useEffect, useState } from 'react';
-
-type Interest = {
-  id: number;
-  interestName: string;
-};
-
-type Question = {
-  id: number;
-  status: boolean;
-};
+import { Interests, Question } from 'recoil/user/atoms';
 
 type UserInfo = {
   id: number;
@@ -21,7 +12,7 @@ type UserInfo = {
   region: string;
   mbti: string;
   gender: string;
-  interests: Interest[];
+  interests: Interests[];
   questions: Question[];
   selfIntroduction: string;
 };
