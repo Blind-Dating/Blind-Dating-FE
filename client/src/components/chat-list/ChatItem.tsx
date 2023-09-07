@@ -23,7 +23,7 @@ const ChatItem = ({ ...props }) => {
           <div className="flex items-center justify-center flex-none w-12 h-12 rounded-full bg-labelColor">
             {user ? user.slice(0, 1) : '?'}
           </div>
-          <div className={`h-10 text-sm truncate  basis-${isClickedButton ? '36' : '40'} `}>
+          <div className={`h-10 text-sm truncate  basis-${isClickedButton ? '36' : '40'} flex-1 `}>
             <b>{user || '(알 수 없음)'}</b>
             <p className="mt-0.5">{recentMessage}</p>
           </div>

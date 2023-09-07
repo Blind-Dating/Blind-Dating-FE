@@ -1,7 +1,7 @@
 import { Stomp } from '@stomp/stompjs';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { chatDataState } from 'recoil/chat/atoms';
+import { chatDataState, updatedChatState } from 'recoil/chat/atoms';
 import { userState } from 'recoil/user/atoms';
 import SockJS from 'sockjs-client';
 
@@ -16,6 +16,7 @@ const useHandleChat = () => {
   const { userId, userName: username } = useRecoilValue(userState);
   const navigate = useNavigate();
   const setChatData = useSetRecoilState(chatDataState);
+  const setUpdatedChatState = useSetRecoilState(updatedChatState);
 
   const connectHandler = (roomId: string | undefined) => {
     client.connect({ userId, username, roomId }, () => {
@@ -26,6 +27,7 @@ const useHandleChat = () => {
             navigate('/chat-list');
           }
           setChatData((prev) => [JSON.parse(content.body), ...prev]);
+          setUpdatedChatState(true);
         }
       });
     });
