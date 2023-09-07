@@ -3,7 +3,8 @@ import { LikeDisLikeBox } from 'components/discover/LikeDisLikeBox';
 import { RecommendedUserCard } from 'components/discover/RecommendedUserCard';
 import { useGetRecommendedUserList } from 'hooks/api/useGetRecommendedUserList';
 import { useEffect, useState } from 'react';
-import { Interests, Question } from 'recoil/user/atoms';
+import { Interests, Question, userState } from 'recoil/user/atoms';
+import { useRecoilValue } from 'recoil';
 
 type UserInfo = {
   id: number;
@@ -24,6 +25,8 @@ export type UserList = {
 };
 
 function DiscoverPage() {
+  const userInfo = useRecoilValue(userState);
+  console.log(userInfo);
   const [currentUserIndex, setCurrentUserIndex] = useState<number>(0);
   const { data, isLoading, isSuccess, hasNextPage, refetch } = useGetRecommendedUserList();
 
