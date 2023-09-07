@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 import { Interests, Question, userState } from 'recoil/user/atoms';
 
+
 type ApiResponse = {
   message: string;
   status: string;

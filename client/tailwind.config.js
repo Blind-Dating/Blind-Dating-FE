@@ -4,6 +4,7 @@ export default {
   theme: {
     colors: {
       black: '#000000',
+      nightRider: '#353131',
       white: '#FFFFFF',
       whiteSmoke: '#F3F3F3' /* */,
       whiteLilac: '#E8E6EA' /* input border, */,
@@ -43,6 +44,9 @@ export default {
         DEFAULT: '.25rem',
         lg: '.5rem',
         full: '9999px',
+      },
+      boxShadow: {
+        '3xl': '0px 4px 4px rgba(0, 0, 0, 0.25)',
       },
     },
   },
