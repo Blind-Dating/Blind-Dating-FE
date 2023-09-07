@@ -7,7 +7,7 @@ const ChatUser = (props: Props) => {
 
   return (
     <section className="flex items-center w-full gap-2 px-10 py-8 max-h-[15%]">
-      <div className="flex items-center justify-center w-12 h-12 rounded-full bg-labelColor">
+      <div className="flex items-center justify-center flex-none w-12 h-12 text-xl font-bold rounded-full text-white/90 bg-grayLignt">
         {user.slice(0, 1)}
       </div>
       <div className="flex flex-col flex-1">
