@@ -21,7 +21,7 @@ const ProfilePage = () => {
     region,
     mbti,
     selfIntroduction,
-    interests: interests.map((interest) => interest.interestName),
+    interests: interests?.map((interest) => interest.interestName),
   });
   const setUserState = useSetRecoilState(userState);
 
