@@ -16,7 +16,6 @@ export type UserInfo = {
 
 const ProfilePage = () => {
   const userInfo = useRecoilValue(userState);
-  console.log(userInfo);
   const { mutate } = usePostEditProfile();
   const [values, setValues] = useState<UserInfo>({
     region: userInfo.region,
