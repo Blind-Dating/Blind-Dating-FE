@@ -1,3 +1,5 @@
+import { ReactComponent as ChevronRight } from 'assets/icons/chevron-right.svg';
+
 type Props = {
   data: string;
   onToggleModal: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
@@ -17,7 +19,9 @@ const UserLocationMBTI = (props: Props) => {
       }}
     >
       <div>{data}</div>
-      <div>{`>`}</div>
+      <div className="text-labelColor">
+        <ChevronRight />
+      </div>
     </button>
   );
 };
