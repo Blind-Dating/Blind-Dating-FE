@@ -20,9 +20,7 @@ function Footer() {
         <FooterBtn icon={<Cards />} />
       </Link>
 
-      <Link to="/">
-        <FooterBtn icon={<Likes />} />
-      </Link>
+      <FooterBtn icon={<Likes />} />
 
       <Link to="/chat-list">
         <FooterBtn icon={<Messages />} />

@@ -38,6 +38,7 @@ const ProfilePage = () => {
 
   return (
     <Layout title="My Page">
+      <main className="flex-auto">
       <UserInfo nickname={userInfo.userName} id={userInfo.userId} />
       <UserDetailFields
         onChange={handleValueChange}
@@ -47,6 +48,7 @@ const ProfilePage = () => {
         mbti={userInfo.mbti}
       />
       <UserInfoEditBtn onSubmit={handleSubmit} />
+      </main>
     </Layout>
   );
 };

@@ -6,6 +6,7 @@ import DiscoverPage from 'pages/DiscoverPage';
 import ChatListPage from 'pages/ChatListPage';
 import ChatPage from 'pages/ChatPage';
 import ProfilePage from 'pages/ProfilePage';
+import { ProtectedRouter } from './ProtectedRouter';
 
 const router = createBrowserRouter([
   {
@@ -14,10 +15,15 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <LoginPage /> },
       { path: '/signup', element: <SignUpPage /> },
-      { path: '/discover', element: <DiscoverPage /> },
-      { path: '/chat-list', element: <ChatListPage /> },
-      { path: '/chat-list/:chatId', element: <ChatPage /> },
-      { path: '/profile', element: <ProfilePage /> },
+      {
+        element: <ProtectedRouter />,
+        children: [
+          { path: '/discover', element: <DiscoverPage /> },
+          { path: '/chat-list', element: <ChatListPage /> },
+          { path: '/chat-list/:chatId', element: <ChatPage /> },
+          { path: '/profile', element: <ProfilePage /> },
+        ],
+      },
     ],
   },
 ]);
