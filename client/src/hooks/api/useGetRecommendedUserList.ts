@@ -7,19 +7,17 @@ const paginationDataFetcher = async (page: number) => {
 };
 
 export const useGetRecommendedUserList = () => {
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading, isSuccess, refetch } =
-    useInfiniteQuery(
-      ['recommendedUserList'],
-      ({ pageParam = 0 }) => paginationDataFetcher(pageParam),
-      {
-        getNextPageParam: (currentPage) => {
-          const nextPage = currentPage.data.pageNumber + 1;
+  const { data, hasNextPage, isLoading, isSuccess, refetch } = useInfiniteQuery(
+    ['recommendedUserList'],
+    ({ pageParam = 0 }) => paginationDataFetcher(pageParam),
+    {
+      getNextPageParam: (currentPage) => {
+        const nextPage = currentPage.data.pageNumber + 1;
 
-          return nextPage === currentPage.data.totalPages ? null : nextPage;
-        },
-        onSuccess: () => {},
-      }
-    );
+        return nextPage === currentPage.data.totalPages ? null : nextPage;
+      },
+    }
+  );
 
-  return { data, fetchNextPage, refetch, hasNextPage, isFetchingNextPage, isLoading, isSuccess };
+  return { data, refetch, hasNextPage, isLoading, isSuccess };
 };
