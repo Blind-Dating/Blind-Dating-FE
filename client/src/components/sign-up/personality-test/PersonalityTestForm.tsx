@@ -11,6 +11,7 @@ type Props = {
 
 const PersonalityTestForm = ({ onNext, setSignUpAllValues }: Props) => {
   const [collectAnswers, setCollectAnswers] = useState<(boolean | null)[]>(Array(8).fill(null));
+  const [collectAnswersCount, setCollectAnswersCount] = useState<number>(0);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -36,12 +37,16 @@ const PersonalityTestForm = ({ onNext, setSignUpAllValues }: Props) => {
                   question={question}
                   index={index + 1}
                   setCollectAnswers={setCollectAnswers}
+                  setCollectAnswersCount={setCollectAnswersCount}
                 />
               );
             })}
           </main>
-          <button className="mt-14 btn-red" disabled={collectAnswers.includes(null)}>
-            Continue
+          <button
+            className={`mt-14 ${collectAnswersCount === 8 ? 'btn-red-checkSuccess' : 'btn-red'}`}
+            disabled={collectAnswersCount !== 8}
+          >
+            {`Continue ( ${collectAnswersCount} / 8 ) `}
           </button>
         </form>
       </main>
