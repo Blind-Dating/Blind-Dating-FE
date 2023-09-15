@@ -27,9 +27,9 @@ const PersonalityTestForm = ({ onNext, setSignUpAllValues }: Props) => {
         질문에 대한 답변은 상대방에게 내가 어떤 사람인지 알리는데 많은 도움이 됩니다.
       </p>
 
-      <main className="mt-10 px-9">
+      <main className="px-6 mt-10">
         <form className="flex flex-col items-center justify-center w-full " onSubmit={handleSubmit}>
-          <main className="space-y-10 h-[480px] overflow-y-auto no-scrollbar">
+          <main className="space-y-10 pl-1 h-[480px] overflow-y-auto scrollbar">
             {QUESTIONS.map((question, index) => {
               return (
                 <QuestionField
