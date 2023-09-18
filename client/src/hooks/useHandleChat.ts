@@ -26,6 +26,7 @@ const useHandleChat = () => {
           if (data.status === false && userId === data.writerId) {
             navigate('/chat-list');
           }
+
           setChatData((prev) => [JSON.parse(content.body), ...prev]);
           setUpdatedChatState(true);
         }
