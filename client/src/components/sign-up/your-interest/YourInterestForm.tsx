@@ -10,6 +10,7 @@ type Props = {
 };
 
 export const YourInterestForm = ({ onNext, setSignUpAllValues }: Props) => {
+
   const [collectAnswers, setCollectAnswers] = useState<string[]>([]);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -17,6 +18,7 @@ export const YourInterestForm = ({ onNext, setSignUpAllValues }: Props) => {
     setSignUpAllValues((prev) => ({ ...prev, interests: collectAnswers }));
     onNext();
   };
+  
   return (
     <div className="w-full h-full">
       <Header progressWidth="4/5" title="Your interests" />
