@@ -15,7 +15,8 @@ export type UserInfo = {
 };
 
 const ProfilePage = () => {
-  const { region, mbti, selfIntroduction, interests, userName, userId } = useRecoilValue(userState);
+  const { region, mbti, selfIntroduction, interests, userName, userAccount } =
+    useRecoilValue(userState);
   const { mutate } = usePostEditProfile();
   const [values, setValues] = useState<UserInfo>({
     region,

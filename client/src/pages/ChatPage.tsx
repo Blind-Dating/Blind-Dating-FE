@@ -16,7 +16,7 @@ const ChatPage = () => {
   const { chatId } = useParams();
   const { userId } = useRecoilValue(userState);
   const { data, isError, isLoading, fetchNextPage, hasNextPage } = useGetChatData(chatId);
-  const { connectHandler, disconnectHandler, sendHandler, exitHandler } = useHandleChat();
+  const { connectHandler, disconnectHandler, sendHandler } = useHandleChat();
   const setChatData = useSetRecoilState(chatDataState);
   const queryClient = useQueryClient();
   const chatData = useRecoilValue(chatDataState);
@@ -63,10 +63,6 @@ const ChatPage = () => {
       message,
     };
     sendHandler(content);
-  };
-
-  const handleExit = () => {
-    exitHandler(chatId);
   };
 
   return (
