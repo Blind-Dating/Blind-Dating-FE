@@ -26,8 +26,10 @@ const ProfilePage = () => {
   });
   const setUserState = useSetRecoilState(userState);
   const [isTextareaActive, setIsTextareaActive] = useState<boolean>(false);
+  const [isSubmitActive, setIsSubmitActive] = useState<boolean>(false);
 
   const handleValueChange = (field: string, value: string | string[]) => {
+    setIsSubmitActive(true);
     const selectedValue = value.length === 1 ? value[0] : value;
     setValues((prev) => ({ ...prev, [field]: selectedValue }));
   };
@@ -36,6 +38,7 @@ const ProfilePage = () => {
     mutate(values);
     const convertInterests = values.interests.map((name, id) => ({ id, interestName: name }));
     setUserState((prev) => ({ ...prev, ...values, interests: convertInterests }));
+    setIsSubmitActive(false);
   };
 
   const handleTextArea = () => {
@@ -58,6 +61,7 @@ const ProfilePage = () => {
             setIsTextareaActive(false);
             handleSubmit();
           }}
+          isSubmitActive={isSubmitActive}
         />
       </main>
     </>
