@@ -1,5 +1,6 @@
-import { INTERESTINGS_CULTURE, INTERESTINGS_SPORTS, MBTIS, REGIONS } from 'assets/config';
 import React, { useState } from 'react';
+import { INTERESTINGS_CULTURE, INTERESTINGS_SPORTS, MBTIS, REGIONS } from 'assets/config';
+import { ReactComponent as Close } from 'assets/icons/close.svg';
 import TagList from './TagList';
 
 export type Tags = {
@@ -13,10 +14,11 @@ type Props = {
   title: string;
   onChange: (value: string | string[]) => void;
   onToggleModal: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+  onToggleBtn: () => void;
 };
 
 const DetailInfoTags = (props: Props) => {
-  const { title, onChange, onToggleModal } = props;
+  const { title, onChange, onToggleModal, onToggleBtn } = props;
   const [clickedValue, setClickedValue] = useState<string[]>([]);
 
   const tags: Tags = {
@@ -55,6 +57,14 @@ const DetailInfoTags = (props: Props) => {
           <header>
             <h1 className="text-lg font-bold font-Lora">{tags[title].title}</h1>
           </header>
+
+          <button
+            type="button"
+            className="absolute w-6 h-6 top-3 right-3 text-black/80 z-3"
+            onClick={onToggleBtn}
+          >
+            <Close />
+          </button>
 
           <main className="flex flex-wrap justify-center overflow-auto max-h-[400px]">
             {tags[title].data.length > 2 ? (
