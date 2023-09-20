@@ -43,7 +43,9 @@ const DetailInfoTags = (props: Props) => {
       if (clickedValue.includes(value)) {
         setClickedValue((prev) => prev.filter((prevValue) => prevValue !== value));
       } else {
-        setClickedValue((prev) => [...prev, value]);
+        if (clickedValue.length < 5) {
+          setClickedValue((prev) => [...prev, value]);
+        }
       }
     } else setClickedValue([value]);
   };
