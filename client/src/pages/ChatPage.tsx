@@ -16,7 +16,7 @@ const ChatPage = () => {
   const { chatId } = useParams();
   const { userId } = useRecoilValue(userState);
   const { data, isError, isLoading, fetchNextPage, hasNextPage } = useGetChatData(chatId);
-  const { connectHandler, disconnectHandler, sendHandler } = useHandleChat();
+  const { connectHandler, disconnectHandler, sendHandler, exitHandler } = useHandleChat();
   const setChatData = useSetRecoilState(chatDataState);
   const queryClient = useQueryClient();
   const chatData = useRecoilValue(chatDataState);
@@ -65,9 +65,13 @@ const ChatPage = () => {
     sendHandler(content);
   };
 
+  const onDeleteChat = () => {
+    exitHandler(chatId);
+  };
+
   return (
     <AuthLayout>
-      <ChatUser user={data?.pages[0].data.otherUserNickname} />
+      <ChatUser user={data?.pages[0].data.otherUserNickname} onDelete={onDeleteChat} />
       <ChatMessages scrollRef={top} sectionRef={section} />
       <ChatForm onMessage={handleMessage} roomStatus={data?.pages[0].data.roomStatus} />
     </AuthLayout>
