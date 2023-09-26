@@ -29,7 +29,7 @@ export const RecommendedUserCard = (userInfo: Props) => {
   return (
     <>
       {isModalOpen ? (
-        <main className="h-[27rem] sm:h-[30rem] w-full space-y-4 overflow-auto rounded-lg border-2 px-2 pt-2 pb-4 border-redAmaranth/90  bg-white shadow-3xl">
+        <article className="h-[27rem] sm:h-[30rem] w-full space-y-4 overflow-auto rounded-lg border-2 px-2 pt-2 pb-4 border-redAmaranth/90  bg-white shadow-3xl">
           <section className="flex justify-end ">
             <button type="button" className="flex items-center" onClick={handleToggleBtn}>
               <div className="text-xs font-medium text-nightRider font-NotoSans">{`<< Back`}</div>
@@ -39,9 +39,9 @@ export const RecommendedUserCard = (userInfo: Props) => {
           <section className="h-[90%] px-5 overflow-auto scrollbar">
             <DetailField answer={questions} />
           </section>
-        </main>
+        </article>
       ) : (
-        <main className="h-[27rem] sm:h-[30rem] w-full rounded-lg border-2 px-2 pt-2 pb-4 border-redAmaranth/90  bg-redAmaranth/90 shadow-3xl">
+        <article className="h-[27rem] sm:h-[30rem] w-full rounded-lg border-2 px-2 pt-2 pb-4 border-redAmaranth/90  bg-redAmaranth/90 shadow-3xl">
           <section className="flex justify-end ">
             <button type="button" onClick={handleToggleBtn}>
               <div className="text-xs font-medium text-whiteLilac/80 font-NotoSans">{`More >>`}</div>
@@ -78,7 +78,7 @@ export const RecommendedUserCard = (userInfo: Props) => {
             })}
             <span className="text-sm font-bold text-white font-Lora ">입니다.</span>
           </section>
-        </main>
+        </article>
       )}
     </>
   );
