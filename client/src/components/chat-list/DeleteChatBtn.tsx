@@ -6,7 +6,7 @@ const DeleteChatBtn = ({ onClick }: { onClick: () => void }) => {
       type="button"
       className="min-w-[28px] h-12 pl-2 text-redAmaranth "
       onClick={onClick}
-      aria-label="delete-chat-button"
+      aria-label="채팅 삭제"
     >
       <Trash />
     </button>

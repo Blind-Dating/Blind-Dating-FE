@@ -20,7 +20,7 @@ const ChatUser = (props: Props) => {
 
       <button
         type="button"
-        aria-label="delete-chat-button"
+        aria-label="채팅 삭제"
         className="flex-none w-12 h-12 p-3 border text-s text-labelColor border-whiteSmoke rounded-xl hover:text-redAmaranth hover:border-redAmaranth sm:hidden"
         onClick={onDelete}
       >
@@ -29,7 +29,7 @@ const ChatUser = (props: Props) => {
       <button
         type="button"
         className="flex-none w-12 h-12 p-3 border text-s text-labelColor border-whiteSmoke rounded-xl hover:text-redAmaranth hover:border-redAmaranth"
-        aria-label="exit-chat-button"
+        aria-label="채팅 나가기"
         onClick={() => {
           navigate('/chat-list');
         }}
