@@ -12,6 +12,7 @@ const ChatSettingBtn = () => {
       type="button"
       className="w-12 h-12 p-3 border text-redAmaranth border-whiteLilac rounded-xl hover:border-redAmaranth"
       onClick={() => setIsClicked((prev) => !prev)}
+      aria-label="setting-button"
     >
       {isClicked ? <Close /> : <Setting />}
     </button>
