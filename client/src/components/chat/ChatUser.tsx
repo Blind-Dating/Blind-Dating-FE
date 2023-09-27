@@ -17,6 +17,14 @@ const ChatUser = (props: Props) => {
         <h2 className="text-lg font-bold font-Lora">{user}</h2>
         {/* <b className="mx-1 text-xs text-labelColor">{status}</b> */}
       </div>
+
+      <button
+        type="button"
+        className="flex-none w-12 h-12 p-3 border text-s text-labelColor border-whiteSmoke rounded-xl hover:text-redAmaranth hover:border-redAmaranth sm:hidden"
+        onClick={onDelete}
+      >
+        <Trash />
+      </button>
       <button
         type="button"
         className="flex-none w-12 h-12 p-3 border text-s text-labelColor border-whiteSmoke rounded-xl hover:text-redAmaranth hover:border-redAmaranth"
@@ -25,13 +33,6 @@ const ChatUser = (props: Props) => {
         }}
       >
         <Exit />
-      </button>
-      <button
-        type="button"
-        className="flex-none w-12 h-12 p-3 border text-s text-labelColor border-whiteSmoke rounded-xl hover:text-redAmaranth hover:border-redAmaranth sm:hidden"
-        onClick={onDelete}
-      >
-        <Trash />
       </button>
     </section>
   );
