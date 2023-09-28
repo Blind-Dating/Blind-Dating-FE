@@ -8,7 +8,7 @@ import { FooterBtn } from './FooterBtn';
 function Footer() {
   const { pathname } = useLocation();
 
-  const btns = [
+  const FOOTER_BTNS = [
     { page: 'discover', icon: <Cards /> },
     { page: 'likes', icon: <Likes /> },
     { page: 'chat-list', icon: <Messages /> },
@@ -17,7 +17,7 @@ function Footer() {
 
   return (
     <footer className="flex justify-around pb-5 bg-whiteLilac">
-      {btns.map((btn) => (
+      {FOOTER_BTNS.map((btn) => (
         <Link to={`/${btn.page}`}>
           <FooterBtn
             icon={btn.icon}
