@@ -33,7 +33,7 @@ export const NavBar = () => {
             onClick={handleToggleBtn}
           >
             {PAGE_LIST.map((page) => (
-              <Link to={page.to}>
+              <Link key={page.to} to={page.to}>
                 <li>{page.name}</li>
               </Link>
             ))}
